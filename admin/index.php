@@ -19,9 +19,14 @@ if (isset($_POST['submit'])) {
 
     //optimize image using TinyPNG
     $source = \Tinify\fromFile(getcwd().'/uploads/'.$src_file_name);
-    $source->toFile(getcwd().'/uploads/'.$src_file_name);
+    $resized = $source->resize(array(
+      'method' => 'fit',
+      'width' => 1000,
+      'height' => 1000
+    ));
+    $resized->toFile(getcwd().'/uploads/'.$src_file_name);
 
-    echo "File uploaded successfully.";
+    echo '<div class="msg">File uploaded successfully.</div>';
 }
  ?>
 <!DOCTYPE HTML>
