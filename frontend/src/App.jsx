@@ -3,6 +3,8 @@ import HomePage from "./pages/HomePage";
 import ArtList from "./pages/ArtList";
 import "./App.css";
 import RootLayout from "./pages/RootLayout";
+import ArtRoot from "./pages/ArtRoot";
+import ArtSingle from "./pages/ArtSingle";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +17,11 @@ const router = createBrowserRouter([
       },
       {
         path: "art",
-        element: <ArtList />,
+        element: <ArtRoot />,
+        children: [
+          { index: true, element: <ArtList /> },
+          { path: ":artId", element: <ArtSingle /> },
+        ],
       },
     ],
   },
