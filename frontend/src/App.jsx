@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import ArtList from "./pages/ArtList";
+import { ArtList, artLoader } from "./pages/ArtList";
 import "./App.css";
 import RootLayout from "./pages/RootLayout";
 import ArtRoot from "./pages/ArtRoot";
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         path: "art",
         element: <ArtRoot />,
         children: [
-          { index: true, element: <ArtList /> },
+          { index: true, element: <ArtList />, loader: artLoader },
           { path: ":artId", element: <ArtSingle /> },
         ],
       },

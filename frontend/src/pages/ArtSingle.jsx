@@ -1,3 +1,10 @@
+import { useParams } from "react-router";
 export default function ArtSingle() {
-  return <div>ART!</div>;
+  const params = useParams();
+
+  return (
+    <div>
+      <h2>{params.artId}</h2>
+    </div>
+  );
 }
