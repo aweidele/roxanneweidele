@@ -3,7 +3,7 @@ use \Firebase\JWT\JWT;
 
 $stored_pin_hash = '$2y$10$7kRPNv2OD.gHESvJpAadpeU7yFtrWkcXMhqAD2/RbWZCsQIITRasO';
 $input = json_decode(file_get_contents('php://input'), true);
-$pin = $input['pin'] ?? '';
+$pin = $input['newPin'] ?? '';
 
 if(!password_verify($pin, $stored_pin_hash)) {
   echo json_encode([
