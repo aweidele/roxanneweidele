@@ -8,7 +8,7 @@ $pin = $input['newPin'] ?? '';
 if(!password_verify($pin, $stored_pin_hash)) {
   echo json_encode([
     "success" => false,
-    "message" => "Invalid Passcode"
+    "message" => "Incorrect Passcode"
   ]);
   exit;
 }

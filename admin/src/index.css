@@ -5,6 +5,14 @@
   --font-sans: omnes-pro, sans-serif;
 
   --spacing-page: calc(100vh - 72px);
+
+  --color-sage: #a8b587ff;
+  --color-rose-quartz: #af90a9ff;
+  --color-china-rose: #a05c7bff;
+  --color-cordovan: #944654ff;
+  --color-uranian-blue: #b9e6ffff;
+
+  --shadow-form: 0 0 5px #944654ff;
 }
 
 h1 {

@@ -1,12 +1,19 @@
 import { useRef, useState, useEffect } from "react";
 import { isNumeric } from "../functions/functions";
 
+const bg = ["bg-sage", "bg-rose-quartz", "bg-china-rose", "bg-cordovan", "bg-uranian-blue"];
+
+// --color-sage: #a8b587ff;
+// --color-rose-quartz: #af90a9ff;
+// --color-china-rose: #a05c7bff;
+// --color-cordovan: #944654ff;
+// --color-uranian-blue: #b9e6ffff;
+
 export const Login = () => {
   const [pin, setPin] = useState(Array(6).fill(""));
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  console.log(pin);
 
   const inputRefs = useRef([]);
 
@@ -37,7 +44,6 @@ export const Login = () => {
   };
 
   const handleLogin = async (newPin) => {
-    console.log("New Pin: ", newPin);
     const response = await fetch("https://rw-api.lndo.site/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -54,7 +60,7 @@ export const Login = () => {
       setToken(data.token);
       setError("");
     } else {
-      setError("Invalid PIN");
+      setError(data.message);
       setPin(Array(6).fill(""));
       inputRefs.current[0]?.focus();
     }
@@ -68,11 +74,11 @@ export const Login = () => {
 
         <div className="flex gap-2 items-center">
           {pin.map((d, i) => (
-            <input key={i} maxLength="1" type="password" className="border w-12 h-12 text-center text-lg" value={d} ref={(ref) => (inputRefs.current[i] = ref)} onChange={(e) => handleChange(i, e.target.value)} onKeyDown={(e) => handleKeyDown(i, e)} />
+            <input key={i} maxLength="1" type="password" className={`border w-12 h-12 text-center text-lg ${bg[i % 5]} focus:shadow-form outline-0`} value={d} ref={(ref) => (inputRefs.current[i] = ref)} onChange={(e) => handleChange(i, e.target.value)} onKeyDown={(e) => handleKeyDown(i, e)} />
           ))}
         </div>
         {isLoading && <p className="text-center absolute top-full pt-2.5">Submitting</p>}
-        {error && <p className="text-red-700 absolute top-full pt-2.5">{error}</p>}
+        {error && <p className="text-china-rose absolute top-full pt-2.5">{error}</p>}
       </div>
     </div>
   );
