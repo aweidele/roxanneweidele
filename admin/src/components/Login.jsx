@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { isNumeric } from "../functions/functions";
 
+const border = ["border-sage", "border-rose-quartz", "border-china-rose", "border-cordovan", "border-uranian-blue"];
 const bg = ["bg-sage", "bg-rose-quartz", "bg-china-rose", "bg-cordovan", "bg-uranian-blue"];
 
 // --color-sage: #a8b587ff;
@@ -74,7 +75,7 @@ export const Login = () => {
 
         <div className="flex gap-2 items-center">
           {pin.map((d, i) => (
-            <input key={i} maxLength="1" type="password" className={`border w-12 h-12 text-center text-lg ${bg[i % 5]} focus:shadow-form outline-0`} value={d} ref={(ref) => (inputRefs.current[i] = ref)} onChange={(e) => handleChange(i, e.target.value)} onKeyDown={(e) => handleKeyDown(i, e)} />
+            <input key={i} maxLength="1" type="password" className={`border-b-4 w-12 h-12 text-center text-lg ${border[i % 5]} ${d ? "opacity-50" : ""} focus:shadow-form outline-0 transition-all duration-500`} value={d} ref={(ref) => (inputRefs.current[i] = ref)} onChange={(e) => handleChange(i, e.target.value)} onKeyDown={(e) => handleKeyDown(i, e)} />
           ))}
         </div>
         {isLoading && <p className="text-center absolute top-full pt-2.5">Submitting</p>}

@@ -6,13 +6,13 @@
 
   --spacing-page: calc(100vh - 72px);
 
-  --color-sage: #a8b587ff;
-  --color-rose-quartz: #af90a9ff;
-  --color-china-rose: #a05c7bff;
-  --color-cordovan: #944654ff;
-  --color-uranian-blue: #b9e6ffff;
+  --color-sage: oklch(0.75 0.0648 120.79);
+  --color-rose-quartz: oklch(0.69 0.0508 332.81);
+  --color-china-rose: oklch(0.56 0.0968 351.88);
+  --color-cordovan: oklch(0.5 0.1056 10.44);
+  --color-uranian-blue: oklch(0.9 0.0579 232.56);
 
-  --shadow-form: 0 0 5px #944654ff;
+  --shadow-form: 0 0 5px oklch(0.5 0.1056 10.44);
 }
 
 h1 {
