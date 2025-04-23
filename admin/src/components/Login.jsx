@@ -24,16 +24,18 @@ export const Login = () => {
   };
 
   return (
-    <div className="p-32">
-      {token && <p>you are logged in</p>}
-      <h2>Login</h2>
-      <div className=" flex gap-2 items-center">
-        <input className="border p-1 border-amber-500" type="password" value={pin} onChange={(e) => setPin(e.target.value)} />
-        <button className="border p-1 border-amber-500" onClick={handleLogin}>
-          Log In
-        </button>
+    <div className="p-32 h-page flex justify-center items-center">
+      <div>
+        {token && <p>you are logged in</p>}
+        <h2>Login</h2>
+        <div className=" flex gap-2 items-center">
+          <input className="border p-1 border-amber-500" type="password" value={pin} onChange={(e) => setPin(e.target.value)} />
+          <button className="border p-1 border-amber-500" onClick={handleLogin}>
+            Log In
+          </button>
+        </div>
+        {error && <p>{error}</p>}
       </div>
-      {error && <p>{error}</p>}
     </div>
   );
 };
