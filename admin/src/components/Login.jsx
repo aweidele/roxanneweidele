@@ -5,9 +5,8 @@ export const Login = () => {
   const [pin, setPin] = useState(Array(6).fill(""));
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   console.log(pin);
-
-  const [msg, setMsg] = useState("");
 
   const inputRefs = useRef([]);
 
@@ -26,7 +25,6 @@ export const Login = () => {
       }
 
       if (newPin.every((digit) => digit !== "")) {
-        setMsg(`The PIN you entered is: ${newPin.join("")}`);
         handleLogin(newPin.join(""));
       }
     }
@@ -46,8 +44,11 @@ export const Login = () => {
       body: JSON.stringify({ newPin }),
     });
 
+    setIsLoading(true);
+
     const data = await response.json();
-    console.log(data);
+    setIsLoading(false);
+
     if (data.success) {
       localStorage.setItem("token", data.token);
       setToken(data.token);
@@ -61,16 +62,17 @@ export const Login = () => {
 
   return (
     <div className="p-32 h-page flex justify-center items-center">
-      <div>
+      <div className="relative">
         {/* {token && <p>you are logged in</p>} */}
-        <h2 className="text-center mb-6">Login</h2>
+        <h2 className="text-center mb-6">Please enter your passcode</h2>
 
         <div className="flex gap-2 items-center">
           {pin.map((d, i) => (
             <input key={i} maxLength="1" type="password" className="border w-12 h-12 text-center text-lg" value={d} ref={(ref) => (inputRefs.current[i] = ref)} onChange={(e) => handleChange(i, e.target.value)} onKeyDown={(e) => handleKeyDown(i, e)} />
           ))}
         </div>
-        {error && <p className="text-red-700">{error}</p>}
+        {isLoading && <p className="text-center absolute top-full pt-2.5">Submitting</p>}
+        {error && <p className="text-red-700 absolute top-full pt-2.5">{error}</p>}
       </div>
     </div>
   );
