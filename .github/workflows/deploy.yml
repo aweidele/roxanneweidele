@@ -21,7 +21,7 @@ jobs:
 
       - name: 📦 Install Composer Dependencies
         run: |
-          cd admin
+          cd backend
           composer install --no-dev --optimize-autoloader
 
       - name: 🚀 Deploy via FTP
@@ -30,7 +30,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./admin/ # Ensure this is correct
+          local-dir: ./backend/ # Ensure this is correct
           server-dir: /public_html/website_6568a1f7/api # Adjust your deployment path
           exclude: |
             config.php
