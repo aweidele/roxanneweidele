@@ -68,7 +68,7 @@ export const ImageDropzone = () => {
       <div className="my-5">
         <h4 className="text-bold">Uploaded Files</h4>
         {files.map((file) => (
-          <div className="w-100" key={file.name}>
+          <div className="w-100" key={`${file.name}-${Math.random()}`}>
             <img src={file.preview} alt={file.name} className="w-full rounded" />
           </div>
         ))}
