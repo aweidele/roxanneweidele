@@ -21,7 +21,7 @@ jobs:
 
       - name: 📦 Install Composer Dependencies
         run: |
-          cd docroot
+          cd admin
           composer install --no-dev --optimize-autoloader
 
       - name: 🚀 Deploy via FTP
