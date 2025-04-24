@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { isNumeric } from "../functions/functions";
-import { useNavigate } from "react-router-dom";
 import { Template } from "./layout/Template";
+import { AppContext } from "./AppContext";
 
 const border = ["border-sage", "border-rose-quartz", "border-china-rose", "border-cordovan", "border-uranian-blue"];
 const bg = ["bg-sage", "bg-rose-quartz", "bg-china-rose", "bg-cordovan", "bg-uranian-blue"];
@@ -14,13 +14,12 @@ const bg = ["bg-sage", "bg-rose-quartz", "bg-china-rose", "bg-cordovan", "bg-ura
 
 export const Login = () => {
   const [pin, setPin] = useState(Array(6).fill(""));
-  const [token, setToken] = useState(localStorage.getItem("token"));
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+
+  const { setToken } = useContext(AppContext);
 
   const inputRefs = useRef([]);
-  console.log(token);
 
   useEffect(() => {
     inputRefs.current[0]?.focus();
@@ -64,7 +63,6 @@ export const Login = () => {
       localStorage.setItem("token", data.token);
       setToken(data.token);
       setError("");
-      navigate("/");
     } else {
       setError(data.message);
       setPin(Array(6).fill(""));
@@ -74,7 +72,7 @@ export const Login = () => {
 
   return (
     <Template>
-      <div className="p-32 h-page flex justify-center items-center">
+      <div className="p-32 min-h-page flex justify-center items-center">
         <div className="relative">
           {/* {token && <p>you are logged in</p>} */}
           <h2 className="text-center mb-6">Please enter your passcode</h2>

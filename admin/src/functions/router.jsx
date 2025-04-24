@@ -1,16 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
-import { getIsAuthenticated } from "./functions";
-import { Login } from "../components/Login";
-import { RootLayout } from "../pages/RootLayout";
+import { AuthGate } from "../components/AuthGate";
+import { HomePage } from "../pages/HomePage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: getIsAuthenticated() ? <RootLayout /> : <Login />,
+    element: <AuthGate />,
     children: [
       {
         index: true,
-        element: <div>PicklePickle!!</div>,
+        element: <HomePage />,
       },
     ],
   },
