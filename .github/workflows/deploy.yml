@@ -17,16 +17,14 @@ jobs:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Clear npm cache
-        run: npm cache clean --force
-
       - name: 📦 Install Node.js and Dependencies
         uses: actions/setup-node@v4
         with:
           node-version: 20 # Use your Node.js version
+      - run: npm install
 
-      - name: 🔨 Build
-        run: npm run build
+      - name: 🔨 Build React App
+        run: npm run build # Change this if your build command is different
 
       - name: 🚀 Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
