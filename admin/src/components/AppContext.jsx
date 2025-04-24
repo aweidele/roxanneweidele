@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { getIsAuthenticated } from "../functions/functions";
 
 export const AppContext = createContext();
@@ -8,3 +8,5 @@ export const AppProvider = ({ children }) => {
 
   return <AppContext.Provider value={{ token, setToken, isAuthenticated }}>{children}</AppContext.Provider>;
 };
+
+export const useAppContext = () => useContext(AppContext);

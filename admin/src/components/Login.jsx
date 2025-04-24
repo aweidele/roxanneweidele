@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect, useContext } from "react";
+import { useRef, useState, useEffect } from "react";
 import { isNumeric } from "../functions/functions";
 import { Template } from "./layout/Template";
-import { AppContext } from "./AppContext";
+import { useAppContext } from "./AppContext";
 
 const border = ["border-sage", "border-rose-quartz", "border-china-rose", "border-cordovan", "border-uranian-blue"];
 const bg = ["bg-sage", "bg-rose-quartz", "bg-china-rose", "bg-cordovan", "bg-uranian-blue"];
@@ -17,7 +17,7 @@ export const Login = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { setToken } = useContext(AppContext);
+  const { setToken } = useAppContext();
 
   const inputRefs = useRef([]);
 
