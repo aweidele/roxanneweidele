@@ -11,6 +11,8 @@ import { border } from "../functions/vars";
 // --color-cordovan: #944654ff;
 // --color-uranian-blue: #b9e6ffff;
 
+const apiURL = import.meta.env.VITE_API_URL || "https://api.roxanneweidele.com/";
+
 export const Login = () => {
   const [pin, setPin] = useState(Array(6).fill(""));
   const [error, setError] = useState("");
@@ -47,7 +49,7 @@ export const Login = () => {
   };
 
   const handleLogin = async (newPin) => {
-    const response = await fetch("https://rw-api.lndo.site/login", {
+    const response = await fetch(`${apiURL}login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ newPin }),
@@ -71,6 +73,7 @@ export const Login = () => {
 
   return (
     <Template>
+      {apiURL}
       <div className="p-32 min-h-page flex justify-center items-center">
         <div className="relative">
           {/* {token && <p>you are logged in</p>} */}
