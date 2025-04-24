@@ -1,7 +1,9 @@
+import { ImageDropzone } from "../components/ImageDropzone";
+
 export const HomePage = () => {
   return (
     <div className="">
-      <h2>PICKLES!!</h2>
+      <ImageDropzone />
     </div>
   );
 };

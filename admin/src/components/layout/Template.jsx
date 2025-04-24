@@ -16,7 +16,7 @@ export const Template = ({ children }) => {
             </ul>
           </nav>
         )} */}
-        <main className="py-5 grow">{children}</main>
+        <main className="p-5 grow">{children}</main>
       </div>
     </>
   );
