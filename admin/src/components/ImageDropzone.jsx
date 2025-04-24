@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { Section } from "./Section";
 
@@ -21,6 +21,13 @@ export const ImageDropzone = () => {
     },
     multiple: true,
   });
+
+  useEffect(() => {
+    return () => {
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
+    };
+  }, [files]);
+
   return (
     <>
       <Section className="sticky top-18">
