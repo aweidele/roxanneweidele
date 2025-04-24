@@ -1,15 +1,14 @@
+import { RouterProvider } from "react-router-dom";
 import { Login } from "./components/Login";
+import { router } from "./functions/router";
+import { Template } from "./components/layout/Template";
+import { AppProvider } from "./components/AppContext";
 
 function App() {
   return (
-    <>
-      <header className="fixed top-0 w-full text-center p-5 h-18 bg-white">
-        <h1>Roxanne Weidele</h1>
-      </header>
-      <main className="pt-10">
-        <Login />
-      </main>
-    </>
+    <AppProvider>
+      <RouterProvider router={router} />
+    </AppProvider>
   );
 }
 

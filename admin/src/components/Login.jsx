@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { isNumeric } from "../functions/functions";
+import { useNavigate } from "react-router-dom";
+import { Template } from "./layout/Template";
 
 const border = ["border-sage", "border-rose-quartz", "border-china-rose", "border-cordovan", "border-uranian-blue"];
 const bg = ["bg-sage", "bg-rose-quartz", "bg-china-rose", "bg-cordovan", "bg-uranian-blue"];
@@ -15,8 +17,10 @@ export const Login = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const inputRefs = useRef([]);
+  console.log(token);
 
   useEffect(() => {
     inputRefs.current[0]?.focus();
@@ -60,6 +64,7 @@ export const Login = () => {
       localStorage.setItem("token", data.token);
       setToken(data.token);
       setError("");
+      navigate("/");
     } else {
       setError(data.message);
       setPin(Array(6).fill(""));
@@ -68,19 +73,21 @@ export const Login = () => {
   };
 
   return (
-    <div className="p-32 h-page flex justify-center items-center">
-      <div className="relative">
-        {/* {token && <p>you are logged in</p>} */}
-        <h2 className="text-center mb-6">Please enter your passcode</h2>
+    <Template>
+      <div className="p-32 h-page flex justify-center items-center">
+        <div className="relative">
+          {/* {token && <p>you are logged in</p>} */}
+          <h2 className="text-center mb-6">Please enter your passcode</h2>
 
-        <div className="flex gap-2 items-center">
-          {pin.map((d, i) => (
-            <input key={i} maxLength="1" type="password" className={`border-b-4 w-12 h-12 text-center text-lg ${border[i % 5]} ${d ? "opacity-50" : ""} focus:shadow-form outline-0 transition-all duration-500`} value={d} ref={(ref) => (inputRefs.current[i] = ref)} onChange={(e) => handleChange(i, e.target.value)} onKeyDown={(e) => handleKeyDown(i, e)} />
-          ))}
+          <div className="flex gap-2 items-center">
+            {pin.map((d, i) => (
+              <input key={i} maxLength="1" type="password" className={`border-b-4 w-12 h-12 text-center text-lg ${border[i % 5]} ${d ? "opacity-50" : ""} focus:shadow-form outline-0 transition-all duration-500`} value={d} ref={(ref) => (inputRefs.current[i] = ref)} onChange={(e) => handleChange(i, e.target.value)} onKeyDown={(e) => handleKeyDown(i, e)} />
+            ))}
+          </div>
+          {isLoading && <p className="text-center absolute top-full pt-2.5">Submitting</p>}
+          {error && <p className="text-china-rose absolute top-full pt-2.5">{error}</p>}
         </div>
-        {isLoading && <p className="text-center absolute top-full pt-2.5">Submitting</p>}
-        {error && <p className="text-china-rose absolute top-full pt-2.5">{error}</p>}
       </div>
-    </div>
+    </Template>
   );
 };
