@@ -2,8 +2,18 @@ import { useCallback, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { Section } from "./Section";
 
+import { TinyPNG } from "tinypng";
+const client = new TinyPNG("R3LwY9JNJFZ1Ky1FCsFdNScMLFTdSq2D");
+
 export const ImageDropzone = () => {
   const [files, setFiles] = useState([]);
+
+  const compress = async (lgFile) => {
+    const file = await client.compress(lgFile);
+    console.log(file);
+    setFiles((prev) => [file, ...prev]);
+  };
+
   const onDrop = useCallback((acceptedFiles) => {
     const imageFiles = acceptedFiles.map((file) =>
       Object.assign(file, {
@@ -11,7 +21,8 @@ export const ImageDropzone = () => {
       })
     );
     console.log(imageFiles);
-    setFiles((prev) => [...imageFiles, ...prev]);
+    imageFiles.forEach((file) => compress(file));
+    // setFiles((prev) => [...imageFiles, ...prev]);
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
