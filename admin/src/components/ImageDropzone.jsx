@@ -2,28 +2,46 @@ import { useCallback, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { Section } from "./Section";
 
-import { TinyPNG } from "tinypng";
-const client = new TinyPNG("R3LwY9JNJFZ1Ky1FCsFdNScMLFTdSq2D");
+import { useAppContext } from "./AppContext";
+import { apiURL } from "../functions/vars";
 
 export const ImageDropzone = () => {
   const [files, setFiles] = useState([]);
+  const { token } = useAppContext();
 
-  const compress = async (lgFile) => {
-    const file = await client.compress(lgFile);
-    console.log(file);
-    setFiles((prev) => [file, ...prev]);
+  const uploadFile = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch(`${apiURL}upload`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Upload failed");
+      console.log("success", result);
+    } catch (err) {
+      console.error("Upload Error", err.message);
+    }
   };
 
-  const onDrop = useCallback((acceptedFiles) => {
-    const imageFiles = acceptedFiles.map((file) =>
-      Object.assign(file, {
-        preview: URL.createObjectURL(file),
-      })
-    );
-    console.log(imageFiles);
-    imageFiles.forEach((file) => compress(file));
-    // setFiles((prev) => [...imageFiles, ...prev]);
-  }, []);
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      const imageFiles = acceptedFiles.map((file) => {
+        uploadFile(file);
+        return Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        });
+      });
+      console.log(imageFiles);
+      setFiles((prev) => [...imageFiles, ...prev]);
+    },
+    [token]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -50,8 +68,8 @@ export const ImageDropzone = () => {
       <div className="my-5">
         <h4 className="text-bold">Uploaded Files</h4>
         {files.map((file) => (
-          <div className="w-100">
-            <img key={file.name} src={file.preview} alt={file.name} className="w-full rounded" />
+          <div className="w-100" key={file.name}>
+            <img src={file.preview} alt={file.name} className="w-full rounded" />
           </div>
         ))}
       </div>

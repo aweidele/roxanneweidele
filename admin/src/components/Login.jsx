@@ -3,15 +3,13 @@ import { isNumeric } from "../functions/functions";
 import { Template } from "./layout/Template";
 import { useAppContext } from "./AppContext";
 
-import { border } from "../functions/vars";
+import { border, apiURL } from "../functions/vars";
 
 // --color-sage: #a8b587ff;
 // --color-rose-quartz: #af90a9ff;
 // --color-china-rose: #a05c7bff;
 // --color-cordovan: #944654ff;
 // --color-uranian-blue: #b9e6ffff;
-
-const apiURL = import.meta.env.VITE_API_URL || "https://api.roxanneweidele.com/";
 
 export const Login = () => {
   const [pin, setPin] = useState(Array(6).fill(""));
@@ -55,10 +53,10 @@ export const Login = () => {
       body: JSON.stringify({ newPin }),
     });
 
-    setIsLoading(true);
+    // setIsLoading(true);
 
     const data = await response.json();
-    setIsLoading(false);
+    // setIsLoading(false);
 
     if (data.success) {
       localStorage.setItem("token", data.token);
