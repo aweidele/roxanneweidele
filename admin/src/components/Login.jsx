@@ -3,8 +3,7 @@ import { isNumeric } from "../functions/functions";
 import { Template } from "./layout/Template";
 import { useAppContext } from "./AppContext";
 
-const border = ["border-sage", "border-rose-quartz", "border-china-rose", "border-cordovan", "border-uranian-blue"];
-const bg = ["bg-sage", "bg-rose-quartz", "bg-china-rose", "bg-cordovan", "bg-uranian-blue"];
+import { border } from "../functions/vars";
 
 // --color-sage: #a8b587ff;
 // --color-rose-quartz: #af90a9ff;

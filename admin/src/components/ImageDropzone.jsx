@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { Section } from "./Section";
 
 export const ImageDropzone = () => {
   const [files, setFiles] = useState([]);
@@ -22,10 +23,12 @@ export const ImageDropzone = () => {
   });
   return (
     <>
-      <div {...getRootProps()} className={`sticky top-18 bg-white border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition ${isDragActive ? "border-blue-400 bg-blue-50" : "border-gray-300"}`}>
-        <input {...getInputProps()} />
-        Image dropzone here!!
-      </div>
+      <Section className="sticky top-18">
+        <div {...getRootProps()} className={`flex items-center justify-center border-2 border-dashed rounded-xl aspect-[4/3] max-w-md m-auto text-center cursor-pointer transition ${isDragActive ? "border-china-rose bg-rose-quartz" : "border-gray-300"}`}>
+          <input {...getInputProps()} />
+          <div>Drop images here to upload</div>
+        </div>
+      </Section>
       <div className="my-5">
         <h4 className="text-bold">Uploaded Files</h4>
         {files.map((file) => (
