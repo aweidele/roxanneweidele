@@ -6,6 +6,46 @@ on:
       - dev
 
 jobs:
+  build-and-deploy-admin:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Clear npm cache
+        run: npm cache clean --force
+
+      - name: 📦 Install Node.js and Dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # Use your Node.js version
+
+      - name: 🔨 Build
+        run: |
+          cd admin
+          npm run build # Change this if your build command is different
+
+      - name: 🚀 Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./admin/dist/ # Ensure this is correct
+          server-dir: /public_html/website_6568a1f7/admin/ # Adjust your deployment path
+
+      # - name: 📚 Build Storybook
+      #   run: npm run build-storybook # Change this if your build command is different
+
+      # - name: 📚🚀 Deploy Storybook via FTP
+      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     local-dir: ./storybook-static/ # Ensure this is correct
+      #     server-dir: /storybook.aaronweidele.com/ # Adjust your deployment path
   deploy-api:
     runs-on: ubuntu-latest
 
