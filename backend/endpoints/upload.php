@@ -52,8 +52,21 @@ try {
     mkdir($uploadPath, 0777, true);
   }
 
-  file_put_contents($uploadPath."{$baseName}.{$ext}", $buffer);
-  $outputFiles = [];
+  $originalFilename = "{$baseName}.{$ext}";
+  file_put_contents($uploadPath . $originalFilename, $buffer);
+  $outputFiles['original'] = $originalFilename;
+
+  foreach ($sizes as $label => $sz) {
+    $resized = \Tinify\fromBuffer($buffer)->resize([
+      "method" => $sz['method'] ?? 'fit',
+      "width" => $sz['width'],
+      "height" => $sz['height']
+    ]);
+  
+    $filename = "{$baseName}-{$label}.{$ext}";
+    $resized->toFile($uploadPath . $filename);
+    $outputFiles[$label] = $filename;
+  }
 
   echo json_encode([
     'success' => true,
