@@ -1,6 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 require 'jwt-auth.php';
+require_once 'config.php';
 
 \Tinify\setKey($_ENV['TINYPNG_KEY']);
 
@@ -25,20 +26,56 @@ if (!in_array($file['type'], ['image/jpeg', 'image/png'])) {
   exit;
 }
 
-$filename = uniqid() . '-' . basename($file['name']);
-
 try {
   // Compress with TinyPNG
   $source = \Tinify\fromFile($file['tmp_name']);
-  $uploadPath = __DIR__ . "/../uploads/";
+  $buffer = $source->toBuffer();
+
+  $compressed = \Tinify\fromBuffer($buffer);
+
+  $baseName = pathinfo($file['name'], PATHINFO_FILENAME);
+  $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+
+  $uploadPathRoot = __DIR__ . "/../uploads/";
+
+  if (!file_exists($uploadPathRoot)) {
+    mkdir($uploadPathRoot, 0777, true);
+  }
+
+  $yearFolder = $uploadPathRoot.date('Y')."/";
+
+  if (!file_exists($yearFolder)) {
+    mkdir($yearFolder, 0777, true);
+  }
+
+  $uploadPath = $yearFolder.date('m')."/";
 
   if (!file_exists($uploadPath)) {
     mkdir($uploadPath, 0777, true);
-}
+  }
 
-  $source->toFile($uploadPath.$filename);
+  // \Tinify\fromBuffer($buffer)->toFile($uploadPath.uniqid() . "-{$baseName}-original.{$ext}");
+  // copy($file['tmp_name'], $uploadPath . uniqid() . "-{$baseName}-original.{$ext}");
 
-  echo json_encode(['success' => true, 'file' => $source, 'uploadPath' => $uploadPath]);
+
+  $outputFiles = [];
+
+  foreach ($sizes as $label => $sz) {
+    $resized = $compressed->resize([
+      "method" => isset($sz["method"]) ? $sz["method"] : "fit",
+      "width" => $sz['width'],
+      "height" => $sz['height']
+    ]);
+
+    $filename = uniqid() . "-{$baseName}-{$label}.{$ext}";
+    $resized->toFile($uploadPath . $filename);
+    $outputFiles[$label] = $filename;
+  }
+
+  echo json_encode([
+    'success' => true,
+    'files' => $outputFiles
+  ]);
   exit;
 } catch (\Tinify\Exception $e) {
   http_response_code(500);
