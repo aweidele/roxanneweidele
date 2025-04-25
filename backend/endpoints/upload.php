@@ -28,8 +28,7 @@ if (!in_array($file['type'], ['image/jpeg', 'image/png'])) {
 
 try {
   // Compress with TinyPNG
-  $source = file_get_contents($file['tmp_name']);
-  $buffer = \Tinify\fromBuffer($source)->toBuffer();
+  $source = \Tinify\fromFile($file['tmp_name']);
 
   $baseName = pathinfo($file['name'], PATHINFO_FILENAME);
   $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
@@ -53,11 +52,11 @@ try {
   }
 
   $originalFilename = "{$baseName}.{$ext}";
-  file_put_contents($uploadPath . $originalFilename, $buffer);
+  $source->toFile($uploadPath.$originalFilename);
   $outputFiles['original'] = $originalFilename;
 
   foreach ($sizes as $label => $sz) {
-    $resized = \Tinify\fromBuffer($buffer)->resize([
+    $resized = $source->resize([
       "method" => $sz['method'] ?? 'fit',
       "width" => $sz['width'],
       "height" => $sz['height']
