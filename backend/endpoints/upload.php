@@ -28,10 +28,8 @@ if (!in_array($file['type'], ['image/jpeg', 'image/png'])) {
 
 try {
   // Compress with TinyPNG
-  $source = \Tinify\fromFile($file['tmp_name']);
-  $buffer = $source->toBuffer();
-
-  $compressed = \Tinify\fromBuffer($buffer);
+  $source = file_get_contents($file['tmp_name']);
+  $buffer = \Tinify\fromBuffer($source)->toBuffer();
 
   $baseName = pathinfo($file['name'], PATHINFO_FILENAME);
   $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
@@ -54,31 +52,17 @@ try {
     mkdir($uploadPath, 0777, true);
   }
 
-  // \Tinify\fromBuffer($buffer)->toFile($uploadPath.uniqid() . "-{$baseName}-original.{$ext}");
-  // copy($file['tmp_name'], $uploadPath . uniqid() . "-{$baseName}-original.{$ext}");
-
-
+  file_put_contents($uploadPath."{$baseName}.{$ext}", $buffer);
   $outputFiles = [];
-
-  foreach ($sizes as $label => $sz) {
-    $resized = $compressed->resize([
-      "method" => isset($sz["method"]) ? $sz["method"] : "fit",
-      "width" => $sz['width'],
-      "height" => $sz['height']
-    ]);
-
-    $filename = uniqid() . "-{$baseName}-{$label}.{$ext}";
-    $resized->toFile($uploadPath . $filename);
-    $outputFiles[$label] = $filename;
-  }
 
   echo json_encode([
     'success' => true,
-    'files' => $outputFiles
+    'files' => $outputFiles,
+    'file'=>$file
   ]);
   exit;
 } catch (\Tinify\Exception $e) {
   http_response_code(500);
-  echo json_encode(['error' => 'TinyPNG compression failed']);
+  echo json_encode(['error' => ['TinyPNG compression failed' , json_encode($e)]]);
   exit;
 }
