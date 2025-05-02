@@ -14,9 +14,9 @@ if (!$user) {
 $uploadedImage =  processUploadedImage($_FILES['file'], $sizes);
 [
   'filename' => $filename, 
-  'height' => $height,
-  'width' => $width,
-  'url' => $url,
+  'img_height' => $img_height,
+  'img_width' => $img_width,
+  'img_url' => $img_url,
   'sizes' => $sizes,
   'urls' => $urls,
 ] = $uploadedImage;
@@ -26,16 +26,16 @@ $img_urls = json_encode($urls);
 
 $pdo = getPDOConnection();
 $sql = "
-  INSERT INTO artwork (image, img_width, img_height, img_url, img_sizes, img_urls)
-  VALUES (:image, :img_width, :img_height, :img_url, :img_sizes, :img_urls)
+  INSERT INTO artwork (image, img_width, img_height, img_url, img_sizes, img_urls, sold, published)
+  VALUES (:image, :img_width, :img_height, :img_url, :img_sizes, :img_urls, 0, 0)
 ";
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute([
   ':image'     => $filename,
-  ':img_width' => $width,
-  ':img_height'=> $height,
-  ':img_url'   => $url,
+  ':img_width' => $img_width,
+  ':img_height'=> $img_height,
+  ':img_url'   => $img_url,
   ':img_sizes' => $img_sizes,
   ':img_urls'  => $img_urls,
 ]);

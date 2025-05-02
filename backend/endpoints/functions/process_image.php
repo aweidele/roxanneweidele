@@ -39,11 +39,11 @@ function processUploadedImage(array $file, array $sizes): array {
 
   $response = [
     'filename' => "$baseFilename.$ext",
-    'url' => $baseUrl . "$baseFilename.$ext",
+    'img_url' => $baseUrl . "$baseFilename.$ext",
     'uploadAbsPath' => $uploadAbsPath,
-    'width' => $srcWidth,
-    'height' => $srcHeight,
-    'ratio' => $srcRatio,
+    'img_width' => $srcWidth,
+    'img_height' => $srcHeight,
+    'img_ratio' => $srcRatio,
     'sizes' => [],
     'urls' => [],
   ];
@@ -96,8 +96,8 @@ function processUploadedImage(array $file, array $sizes): array {
     imagejpeg($resized, $jpgPath, 90);
     $response['sizes'][$key] = [
       'filename' => "$filenameBase.jpg",
-      'width' => imagesx($resized),
-      'height' => imagesy($resized),
+      'img_width' => imagesx($resized),
+      'img_height' => imagesy($resized),
     ];
     $response['urls'][$key]['jpg'] = "$urlBase.jpg";
 
