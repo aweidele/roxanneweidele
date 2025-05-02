@@ -5,8 +5,7 @@ import { Section } from "./Section";
 import { useAppContext } from "./AppContext";
 import { apiURL } from "../functions/vars";
 
-export const ImageDropzone = () => {
-  const [files, setFiles] = useState([]);
+export const ImageDropzone = ({ files, setFiles, setHasUploads }) => {
   const { token } = useAppContext();
 
   const uploadFile = async (file) => {
@@ -31,6 +30,7 @@ export const ImageDropzone = () => {
 
   const onDrop = useCallback(
     (acceptedFiles) => {
+      setHasUploads(true);
       const imageFiles = acceptedFiles.map((file) => {
         uploadFile(file);
         return Object.assign(file, {
@@ -58,21 +58,9 @@ export const ImageDropzone = () => {
   }, [files]);
 
   return (
-    <>
-      <Section className="sticky top-18">
-        <div {...getRootProps()} className={`flex items-center justify-center border-2 border-dashed rounded-xl aspect-[4/3] max-w-md m-auto text-center cursor-pointer transition ${isDragActive ? "border-china-rose bg-rose-quartz" : "border-gray-300"}`}>
-          <input {...getInputProps()} />
-          <div>Drop images here to upload</div>
-        </div>
-      </Section>
-      <div className="my-5">
-        <h4 className="text-bold">Uploaded Files</h4>
-        {files.map((file) => (
-          <div className="w-100" key={`${file.name}-${Math.random()}`}>
-            <img src={file.preview} alt={file.name} className="w-full rounded" />
-          </div>
-        ))}
-      </div>
-    </>
+    <div {...getRootProps()} className={`flex items-center justify-center border-2 border-dashed rounded-xl aspect-[4/3] w-full max-w-md m-auto text-center cursor-pointer transition ${isDragActive ? "border-china-rose bg-rose-quartz" : "border-gray-300"}`}>
+      <input {...getInputProps()} />
+      <div>Drop images here to upload</div>
+    </div>
   );
 };

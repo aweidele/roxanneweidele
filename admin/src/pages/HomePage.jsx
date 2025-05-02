@@ -1,9 +1,6 @@
-import { ImageDropzone } from "../components/ImageDropzone";
+import { useState } from "react";
+import { NewImage } from "../components/NewImage";
 
 export const HomePage = () => {
-  return (
-    <div className="">
-      <ImageDropzone />
-    </div>
-  );
+  return <NewImage />;
 };
