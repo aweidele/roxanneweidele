@@ -8,7 +8,7 @@ import { apiURL } from "../functions/vars";
 export const ImageDropzone = ({ files, setFiles, setHasUploads }) => {
   const { token } = useAppContext();
 
-  const uploadFile = async (file) => {
+  const uploadFile = async (file, index) => {
     const formData = new FormData();
     formData.append("file", file);
 
@@ -23,6 +23,11 @@ export const ImageDropzone = ({ files, setFiles, setHasUploads }) => {
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Upload failed");
       console.log("success", result);
+      setFiles((prev) => {
+        const updated = [...prev];
+        updated[index] = { ...result, loading: false };
+        return updated;
+      });
     } catch (err) {
       console.error("Upload Error", err.message);
     }
@@ -31,10 +36,11 @@ export const ImageDropzone = ({ files, setFiles, setHasUploads }) => {
   const onDrop = useCallback(
     (acceptedFiles) => {
       setHasUploads(true);
-      const imageFiles = acceptedFiles.map((file) => {
-        uploadFile(file);
+      const imageFiles = acceptedFiles.map((file, index) => {
+        uploadFile(file, index);
         return Object.assign(file, {
           preview: URL.createObjectURL(file),
+          loading: true,
         });
       });
       console.log(imageFiles);
