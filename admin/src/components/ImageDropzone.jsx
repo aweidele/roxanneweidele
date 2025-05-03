@@ -1,12 +1,13 @@
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
-import { Section } from "./Section";
 
 import { useAppContext } from "./AppContext";
 import { apiURL } from "../functions/vars";
+import { useNewImageContext } from "./NewImageContext";
 
-export const ImageDropzone = ({ files, setFiles, setHasUploads }) => {
+export const ImageDropzone = () => {
   const { token } = useAppContext();
+  const { files, setFiles, setHasUploads } = useNewImageContext();
 
   const uploadFile = async (file, index) => {
     const formData = new FormData();

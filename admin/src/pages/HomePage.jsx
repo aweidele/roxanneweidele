@@ -1,6 +1,10 @@
-import { useState } from "react";
 import { NewImage } from "../components/NewImage";
+import { NewImageProvider } from "../components/NewImageContext";
 
 export const HomePage = () => {
-  return <NewImage />;
+  return (
+    <NewImageProvider>
+      <NewImage />
+    </NewImageProvider>
+  );
 };
