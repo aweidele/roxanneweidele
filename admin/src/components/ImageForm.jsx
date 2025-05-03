@@ -1,3 +1,3 @@
-export const ImageForm = () => {
-  return <div>lalala</div>;
+export const ImageForm = ({ artworkId }) => {
+  return <form></form>;
 };

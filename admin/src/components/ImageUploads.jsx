@@ -12,7 +12,7 @@ export const ImageUploads = () => {
           <div className="w-50 aspect-[533/300] shrink-0">
             <img src={file.loading ? file.preview : file.urls.thumb.jpg} alt={file.name} className={`w-full h-full object-cover ${file.loading ? " opacity-50" : ""} transition-all duration-500`} />
           </div>
-          {!file.loading ? <ImageForm /> : <div className="w-full h-full flex justify-center items-center">Uploading</div>}
+          <div className="grow-1">{!file.loading ? <ImageForm artworkId={file.insertID} /> : <div className="w-full h-full flex justify-center items-center">Uploading</div>}</div>
         </div>
       ))}
     </>
