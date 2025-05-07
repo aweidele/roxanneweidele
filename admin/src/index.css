@@ -5,6 +5,7 @@
   --font-sans: omnes-pro, sans-serif;
 
   --spacing-page: calc(100vh - 72px);
+  --spacing-toggle-on: calc(100% - 0.75rem - 1px);
 
   --color-sage: oklch(0.75 0.0648 120.79);
   --color-rose-quartz: oklch(0.69 0.0508 332.81);

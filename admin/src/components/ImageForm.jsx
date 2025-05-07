@@ -1,4 +1,5 @@
 import { Input } from "./elements/Input";
+import { Toggle } from "./elements/Toggle";
 
 export const ImageForm = ({ artworkId }) => {
   return (
@@ -12,7 +13,10 @@ export const ImageForm = ({ artworkId }) => {
           </div>
         </div>
         <div className="flex-1">
-          <Input type="textarea" label="Description" outerClass="flex flex-col h-full" innerClass="grow-1" />
+          <Input type="textarea" name="description" label="Description" outerClass="flex flex-col h-full" innerClass="grow-1" />
+        </div>
+        <div>
+          <Toggle label="Sold" name="sold" />
         </div>
       </div>
     </form>
