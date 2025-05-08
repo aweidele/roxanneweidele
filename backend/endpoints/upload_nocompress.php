@@ -1,6 +1,6 @@
 <?php
-require 'vendor/autoload.php';
-require 'jwt-auth.php';
+require_once 'vendor/autoload.php';
+require_once 'jwt-auth.php';
 require_once __DIR__ . '/../config.php';
 require_once 'functions/process_image.php';
 

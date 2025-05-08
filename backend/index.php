@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 require_once 'vendor/autoload.php';
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, UPDATE");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header('Content-Type: application/json; charset=utf-8');
 
@@ -28,7 +28,8 @@ set_exception_handler(function($e) {
 });
 
 $method = $_SERVER["REQUEST_METHOD"];
-$endpoint = isset($_REQUEST["endpoint"]) ? $_REQUEST["endpoint"] : null;
+$endpoint = isset($_REQUEST["endpoint"]) ? $_REQUEST["endpoint"] : [];
+$route = explode("/", trim($endpoint, '/'));
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -41,6 +42,12 @@ switch ($method) {
     } elseif($endpoint === "upload") {
       require_once("endpoints/upload_nocompress.php");
     }
+    break;
+  case "UPDATE":
+    if($route[0] === "artwork" && $route[2] === "edit") {
+      require_once("endpoints/edit_artwork.php");
+    }
+    break;
 }
 
 

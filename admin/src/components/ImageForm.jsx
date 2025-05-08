@@ -2,8 +2,12 @@ import { useActionState, useState } from "react";
 import { Button } from "./elements/Button";
 import { Input } from "./elements/Input";
 import { Toggle } from "./elements/Toggle";
+import { useAppContext } from "./AppContext";
+import { apiURL } from "../functions/vars";
 
 export const ImageForm = ({ artworkId }) => {
+  const { token } = useAppContext();
+
   const [title, setTitle] = useState("");
   const [width, setWidth] = useState("");
   const [height, setHeight] = useState("");
@@ -11,6 +15,23 @@ export const ImageForm = ({ artworkId }) => {
   const [price, setPrice] = useState("");
 
   const editArtworkAction = async (prevFormState, formData) => {
+    const sold = formData.get("sold") === "on" ? 1 : 0;
+    const data = { ...Object.fromEntries(formData.entries()), sold, published: 1 };
+
+    const response = await fetch(`${apiURL}artwork/${artworkId}/edit`, {
+      method: "UPDATE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || "Upload failed");
+    console.log("success", result);
+    console.log(result.inputs);
+
     return { errors: null };
   };
 
