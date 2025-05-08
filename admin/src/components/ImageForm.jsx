@@ -11,7 +11,6 @@ export const ImageForm = ({ artworkId }) => {
   const [price, setPrice] = useState("");
 
   const editArtworkAction = async (prevFormState, formData) => {
-    alert("hi!");
     return { errors: null };
   };
 
