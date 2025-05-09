@@ -5,7 +5,8 @@ import { useNewImageContext } from "./NewImageContext";
 export const ImageUploads = () => {
   const { files } = useNewImageContext();
 
-  console.log("ImageUploads", files);
+  console.log("ImageUploads");
+  console.log(files);
   return (
     <>
       <h2>Uploaded Images</h2>

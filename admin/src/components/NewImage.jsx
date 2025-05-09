@@ -5,7 +5,6 @@ import { useNewImageContext } from "./NewImageContext";
 
 export const NewImage = () => {
   const { files } = useNewImageContext();
-  console.log(files);
   return (
     <div>
       <Section>

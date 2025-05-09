@@ -24,11 +24,6 @@ export const ImageDropzone = () => {
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Upload failed");
       console.log("success", result);
-      // setFiles((prev) => {
-      //   const updated = [...prev];
-      //   updated[index] = { ...result, loading: false };
-      //   return updated;
-      // });
       setFiles({ type: "update_file", index, result });
     } catch (err) {
       console.error("Upload Error", err.message);
@@ -45,7 +40,6 @@ export const ImageDropzone = () => {
         });
       });
       console.log(imageFiles);
-      // setFiles((prev) => [...imageFiles, ...prev]);
       setFiles({ type: "add_file", newFile: imageFiles });
     },
     [token]
