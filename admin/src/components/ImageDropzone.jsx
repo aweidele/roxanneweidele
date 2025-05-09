@@ -7,7 +7,7 @@ import { useNewImageContext } from "./NewImageContext";
 
 export const ImageDropzone = () => {
   const { token } = useAppContext();
-  const { files, setFiles, setHasUploads } = useNewImageContext();
+  const { files, setFiles } = useNewImageContext();
 
   const uploadFile = async (file, index) => {
     const formData = new FormData();
@@ -24,11 +24,12 @@ export const ImageDropzone = () => {
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Upload failed");
       console.log("success", result);
-      setFiles((prev) => {
-        const updated = [...prev];
-        updated[index] = { ...result, loading: false };
-        return updated;
-      });
+      // setFiles((prev) => {
+      //   const updated = [...prev];
+      //   updated[index] = { ...result, loading: false };
+      //   return updated;
+      // });
+      setFiles({ type: "update_file", index, result });
     } catch (err) {
       console.error("Upload Error", err.message);
     }
@@ -36,7 +37,6 @@ export const ImageDropzone = () => {
 
   const onDrop = useCallback(
     (acceptedFiles) => {
-      setHasUploads(true);
       const imageFiles = acceptedFiles.map((file, index) => {
         uploadFile(file, index);
         return Object.assign(file, {
@@ -45,7 +45,8 @@ export const ImageDropzone = () => {
         });
       });
       console.log(imageFiles);
-      setFiles((prev) => [...imageFiles, ...prev]);
+      // setFiles((prev) => [...imageFiles, ...prev]);
+      setFiles({ type: "add_file", newFile: imageFiles });
     },
     [token]
   );
