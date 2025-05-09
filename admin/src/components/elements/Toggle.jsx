@@ -4,7 +4,7 @@ import { Label } from "./Label";
 export const Toggle = ({ label, name, outerClass = "", checked }) => {
   const [isChecked, setIsChecked] = useState(checked);
   const handleCheck = () => {
-    setIsChecked((prev) => setIsChecked(!prev));
+    setIsChecked((prev) => setIsChecked(prev ? null : true));
   };
 
   return (
