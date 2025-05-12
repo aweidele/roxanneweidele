@@ -20,3 +20,5 @@ export const getIsAuthenticated = () => {
     return false;
   }
 };
+
+export const uniqid = (prefix = "") => prefix + Date.now().toString(36) + Math.random().toString(36).substring(2, 8);

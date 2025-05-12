@@ -5,16 +5,12 @@ export const NewImageContext = createContext();
 const filesReducer = (state, action) => {
   switch (action.type) {
     case "add_file": {
-      console.log("add_file");
-      console.log(action);
       const newFile = {
-        ...action.newFile[0],
+        ...action.newFile,
       };
       return [newFile, ...state];
     }
     case "update_file": {
-      console.log("update_file");
-      console.log(action.result);
       const newImages = [...state];
       const newFile = {
         ...newImages[action.index],

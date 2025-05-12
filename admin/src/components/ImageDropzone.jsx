@@ -4,6 +4,7 @@ import { useDropzone } from "react-dropzone";
 import { useAppContext } from "./AppContext";
 import { apiURL } from "../functions/vars";
 import { useNewImageContext } from "./NewImageContext";
+import { uniqid } from "../functions/functions";
 
 export const ImageDropzone = () => {
   const { token } = useAppContext();
@@ -33,12 +34,17 @@ export const ImageDropzone = () => {
     (acceptedFiles) => {
       const imageFiles = acceptedFiles.map((file, index) => {
         uploadFile(file, index);
-        return Object.assign(file, {
+        const newFile = Object.assign(file, {
           preview: URL.createObjectURL(file),
           loading: true,
+          uniqid: uniqid(),
         });
+        setFiles({ type: "add_file", newFile: newFile });
+        return newFile;
       });
-      setFiles({ type: "add_file", newFile: imageFiles });
+      console.log("onDrop");
+      console.log(imageFiles);
+      // setFiles({ type: "add_file", newFile: imageFiles });
     },
     [token]
   );
