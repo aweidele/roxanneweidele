@@ -28,8 +28,9 @@ set_exception_handler(function($e) {
 });
 
 $method = $_SERVER["REQUEST_METHOD"];
-$endpoint = isset($_REQUEST["endpoint"]) ? $_REQUEST["endpoint"] : [];
+$endpoint = isset($_REQUEST["endpoint"]) ? $_REQUEST["endpoint"] : "";
 $route = explode("/", trim($endpoint, '/'));
+
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -48,7 +49,7 @@ switch ($method) {
       require_once("endpoints/edit_artwork.php");
     }
     break;
+  default:
+    require_once("endpoints/test.php");
+    break;
 }
-
-
-// require_once("endpoints/login.php");
