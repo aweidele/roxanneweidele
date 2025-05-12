@@ -42,14 +42,17 @@ switch ($method) {
       require_once("endpoints/login.php");
     } elseif($endpoint === "upload") {
       require_once("endpoints/upload_nocompress.php");
+    } elseif($endpoint === "artwork/add") {
+      require_once("endpoints/add_artwork.php");
     }
     break;
-  case "UPDATE":
+  case "PUT":
     if($route[0] === "artwork" && $route[2] === "edit") {
       require_once("endpoints/edit_artwork.php");
     }
     break;
   default:
-    require_once("endpoints/test.php");
+    // require_once("endpoints/test.php");
+    echo json_encode($route);
     break;
 }

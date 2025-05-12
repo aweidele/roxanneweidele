@@ -4,8 +4,8 @@ import { useNewImageContext } from "./NewImageContext";
 /* BUG: Form fields are being cleared when new <ImageForm> is added */
 export const ImageUploads = () => {
   const { files } = useNewImageContext();
-  console.log("ImageUploads");
-  console.log(files);
+  // console.log("ImageUploads");
+  // console.log(files);
 
   return (
     <>

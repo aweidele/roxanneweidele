@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ImageForm } from "./ImageForm";
 export const ImageUploadCard = ({ file }) => {
-  console.log("ImageUploadCard");
-  console.log(file);
+  // console.log("ImageUploadCard");
+  // console.log(file);
   const [submitting, setSubmitting] = useState({});
   const handleDoneSubmit = () => {
     setSubmitting({ transformX: "50%" });

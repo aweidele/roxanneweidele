@@ -10,6 +10,29 @@ export const ImageDropzone = () => {
   const { token } = useAppContext();
   const { files, setFiles } = useNewImageContext();
 
+  const addNewArt = async (args) => {
+    console.log("addNewArt", args);
+    try {
+      const response = await fetch(`${apiURL}artwork/add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ ...args, published: 0 }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log("API response:", result);
+    } catch (err) {
+      console.error("Error adding new artwork", err.message);
+    }
+  };
+
   const uploadFile = async (file, index) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -22,9 +45,14 @@ export const ImageDropzone = () => {
         },
         body: formData,
       });
-      const result = await response.json();
+
       if (!response.ok) throw new Error(result.error || "Upload failed");
+
+      const result = await response.json();
       setFiles({ type: "update_file", index, result });
+
+      const parentMedia = result.find((item) => item.media === item.id || item.media === null);
+      addNewArt({ media: parentMedia.id });
     } catch (err) {
       console.error("Upload Error", err.message);
     }
@@ -42,9 +70,8 @@ export const ImageDropzone = () => {
         setFiles({ type: "add_file", newFile: newFile });
         return newFile;
       });
-      console.log("onDrop");
-      console.log(imageFiles);
-      // setFiles({ type: "add_file", newFile: imageFiles });
+      // console.log("onDrop");
+      // console.log(imageFiles);
     },
     [token]
   );

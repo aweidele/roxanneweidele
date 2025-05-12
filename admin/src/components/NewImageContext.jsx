@@ -20,6 +20,8 @@ const filesReducer = (state, action) => {
       newImages[action.index] = newFile;
       return newImages;
     }
+    case "update_artwork": {
+    }
   }
 };
 
