@@ -12,29 +12,43 @@ if (!$user) {
   exit;
 }
 $uploadedImage =  processUploadedImage($_FILES['file'], $sizes);
-// [
-//   'filename' => $filename, 
-//   'img_height' => $img_height,
-//   'img_width' => $img_width,
-//   'img_url' => $img_url
-// ] = $uploadedImage;
 
-// $pdo = getPDOConnection();
-// $sql = "
-//   INSERT INTO artwork (image, img_width, img_height, img_url, img_sizes, img_urls, sold, published)
-//   VALUES (:image, :img_width, :img_height, :img_url, :img_sizes, :img_urls, 0, 0)
-// ";
+$pdo = getPDOConnection();
+$parent_id = null;
+foreach($uploadedImage as $key => $img) {
+  [
+    'filename' => $filename, 
+    'upload_path' => $upload_path,
+    'url' => $url,
+    'size_key' => $size_key,
+    'width' => $width,
+    'height' => $height,
+    'ratio' => $ratio
+  ] = $img;
 
-// $stmt = $pdo->prepare($sql);
-// $stmt->execute([
-//   ':image'     => $filename,
-//   ':img_width' => $img_width,
-//   ':img_height'=> $img_height,
-//   ':img_url'   => $img_url,
-//   ':img_sizes' => $img_sizes,
-//   ':img_urls'  => $img_urls,
-// ]);
-// $insertId = $pdo->lastInsertId();
-// $uploadedImage["insertID"] = $insertId;
+  $sql = "
+    INSERT INTO media (filename, upload_path, url, size_key, width, height, ratio, media)
+    VALUES (:filename, :upload_path, :url, :size_key, :width, :height, :ratio, :media)
+  ";
+
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute([
+    ':filename' => $filename, 
+    ':upload_path' => $upload_path,
+    ':url' => $url,
+    ':size_key' => $size_key,
+    ':width' => $width,
+    ':height' => $height,
+    ':ratio' => $ratio,
+    ':media' => $parent_id
+  ]);
+
+  $insertId = $pdo->lastInsertId();
+  if($parent_id === null) {
+    $parent_id = $insertId;
+  }
+  $uploadedImage[$key]["media"] = $parent_id;
+  $uploadedImage[$key]["id"] = $insertId;
+}
 
 echo json_encode($uploadedImage);
