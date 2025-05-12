@@ -38,14 +38,15 @@ function processUploadedImage(array $file, array $sizes): array {
   $baseFilename = "{$originalName}_{$randomTag}";
 
   $response = [
-    'filename' => "$baseFilename.$ext",
-    'img_url' => $baseUrl . "$baseFilename.$ext",
-    'uploadAbsPath' => $uploadAbsPath,
-    'img_width' => $srcWidth,
-    'img_height' => $srcHeight,
-    'img_ratio' => $srcRatio,
-    'sizes' => [],
-    'urls' => [],
+    [
+      'filename' => "$baseFilename.$ext",
+      'upload_path' => $uploadAbsPath,
+      'url' => $baseUrl . "$baseFilename.$ext",
+      'size_key' => "original",
+      'width' => $srcWidth,
+      'height' => $srcHeight,
+      'ratio' => $srcRatio
+    ]
   ];
 
   // Save original
@@ -88,31 +89,41 @@ function processUploadedImage(array $file, array $sizes): array {
       imagecopyresampled($resized, $srcImage, 0, 0, 0, 0, $newWidth, $newHeight, $srcWidth, $srcHeight);
     }
 
-    $filenameBase = "{$baseFilename}_$key";
+    $filenameBase = "{$baseFilename}_$key.$ext";
     $urlBase = $baseUrl . $filenameBase;
+    $width = imagesx($resized);
+    $height = imagesy($resized);
 
-    // Save JPEG
-    $jpgPath = $uploadAbsPath . "$filenameBase.jpg";
-    imagejpeg($resized, $jpgPath, 90);
-    $response['sizes'][$key] = [
-      'filename' => "$filenameBase.jpg",
-      'img_width' => imagesx($resized),
-      'img_height' => imagesy($resized),
+    $response[] = [
+      'filename' => "$filenameBase",
+      'upload_path' => $uploadAbsPath,
+      'url' => $urlBase,
+      'size_key' => $key,
+      'width' => $width,
+      'height' => $height,
+      'ratio' => $width / $height
     ];
-    $response['urls'][$key]['jpg'] = "$urlBase.jpg";
 
-    // Save PNG
-    $pngPath = $uploadAbsPath . "$filenameBase.png";
-    imagepng($resized, $pngPath);
-    $response['urls'][$key]['png'] = "$urlBase.png";
+    $destinationPath = $uploadAbsPath.$filenameBase;
+    $extension = strtolower(pathinfo($destinationPath, PATHINFO_EXTENSION));
 
-    // Save WebP
-    if (function_exists('imagewebp')) {
-      $webpPath = $uploadAbsPath . "$filenameBase.webp";
-      imagewebp($resized, $webpPath);
-      $response['urls'][$key]['webp'] = "$urlBase.webp";
+    switch ($extension) {
+      case 'jpg':
+      case 'jpeg':
+        imagejpeg($resized, $destinationPath, 85); // 85 = quality
+        break;
+
+      case 'png':
+        imagepng($resized, $destinationPath, 6); // Compression level: 0 (no compression) to 9
+        break;
+
+      case 'webp':
+        imagewebp($resized, $destinationPath, 85); // 85 = quality
+        break;
+
+      default:
+        throw new Exception("Unsupported image format: $extension");
     }
-
     imagedestroy($resized);
   }
 
