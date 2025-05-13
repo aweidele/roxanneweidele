@@ -31,7 +31,7 @@ export const useApi = () => {
       }
 
       setData(responseData);
-      return options;
+      return responseData;
     } catch (err) {
       setError(err);
       return null;
