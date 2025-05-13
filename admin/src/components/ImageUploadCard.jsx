@@ -2,19 +2,25 @@ import { useState } from "react";
 import { ImageForm } from "./ImageForm";
 import { useNewImageContext } from "./NewImageContext";
 import { useApi } from "../functions/useApi";
+import { useAppContext } from "./AppContext";
 
 export const ImageUploadCard = ({ file }) => {
   const { files, setFiles } = useNewImageContext();
-  const { hello } = useApi();
-  console.log(hello);
+  const { data, loading, error, request } = useApi();
+
+  const { token } = useAppContext();
 
   const [submitting, setSubmitting] = useState({});
-  const handleDoneSubmit = (event) => {
+  const handleDoneSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const values = Object.fromEntries(formData.entries());
-    const submitValues = { ...values, sold: values.sold && values.sold === "on" ? 1 : 0 };
+    const submitValues = { ...values, sold: values.sold && values.sold === "on" ? 1 : 0, published: 1 };
+
+    await request(`artwork/${file.id}/edit`, "PUT", submitValues, token);
+
     const index = files.findIndex((item) => item.uniqid === file.uniqid);
+
     setFiles({ type: "update_artwork", index, data: submitValues });
   };
 

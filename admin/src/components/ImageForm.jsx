@@ -9,8 +9,6 @@ import { useNewImageContext } from "./NewImageContext";
 export const ImageForm = ({ artwork, submitAction }) => {
   const { token } = useAppContext();
   const [slug, setSlug] = useState(artwork.slug);
-  console.log("Image Form");
-  console.log(artwork);
 
   const handleTitleChange = (event) => {
     const newSlug = event.target.value

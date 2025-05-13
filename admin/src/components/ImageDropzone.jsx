@@ -26,7 +26,6 @@ export const ImageDropzone = () => {
       }
 
       const result = await response.json();
-      // console.log("API response:", result);
       setFiles({ type: "update_artwork", index, data: result.data });
     } catch (err) {
       console.error("Error adding new artwork", err.message);
@@ -46,9 +45,8 @@ export const ImageDropzone = () => {
         body: formData,
       });
 
-      if (!response.ok) throw new Error(result.error || "Upload failed");
-
       const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Upload failed");
       setFiles({ type: "update_file", index, result });
 
       const parentMedia = result.find((item) => item.media === item.id || item.media === null);
@@ -70,8 +68,6 @@ export const ImageDropzone = () => {
         setFiles({ type: "add_file", newFile: newFile });
         return newFile;
       });
-      // console.log("onDrop");
-      // console.log(imageFiles);
     },
     [token]
   );

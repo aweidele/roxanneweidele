@@ -11,15 +11,7 @@ export const Temp = () => {
   if (error) return <p>Error: {error.message}</p>;
   if (!data) return null;
 
-  const lg = data.media.filter((item) => item.size_key === "lg");
+  const lg = data.media.filter((item) => item.size_key === "thumb");
   console.log(lg);
-  return (
-    <div className="flex flex-wrap">
-      {lg.map((img) => (
-        <div className="max-w-[300px]">
-          <img src={img.url} />
-        </div>
-      ))}
-    </div>
-  );
+  return <div>temp</div>;
 };
