@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { ImageForm } from "./ImageForm";
 import { useNewImageContext } from "./NewImageContext";
+import { useApi } from "../functions/useApi";
+
 export const ImageUploadCard = ({ file }) => {
   const { files, setFiles } = useNewImageContext();
-  // console.log("ImageUploadCard");
-  // console.log(file);
+  const { hello } = useApi();
+  console.log(hello);
+
   const [submitting, setSubmitting] = useState({});
   const handleDoneSubmit = (event) => {
     event.preventDefault();
