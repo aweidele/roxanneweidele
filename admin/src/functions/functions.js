@@ -22,3 +22,19 @@ export const getIsAuthenticated = () => {
 };
 
 export const uniqid = (prefix = "") => prefix + Date.now().toString(36) + Math.random().toString(36).substring(2, 8);
+
+export const sortGallery = (galleryData) => {
+  console.log(galleryData);
+  const gallery = galleryData.artwork.map((item) => {
+    const files = galleryData.media.filter((media) => media.id === item.media || media.media === item.media);
+    const fileObject = files.reduce((acc, { size_key, ...rest }) => {
+      acc[size_key] = rest;
+      return acc;
+    }, {});
+    return { ...item, files: fileObject };
+  });
+
+  return {
+    gallery,
+  };
+};

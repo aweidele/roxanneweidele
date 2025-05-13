@@ -1,8 +1,14 @@
 import { HomePageContainer } from "../components/HomePageContainer";
 import { NewImageProvider } from "../components/NewImageContext";
+import { sortGallery } from "../functions/functions";
 import { apiRequest } from "../functions/useApi";
+import { Await, useLoaderData } from "react-router-dom";
 
 export const HomePage = () => {
+  const { published, unpublished, gallery } = useLoaderData();
+  console.log(published);
+  console.log(unpublished);
+  console.log(gallery);
   return (
     <NewImageProvider>
       <HomePageContainer />
@@ -11,7 +17,6 @@ export const HomePage = () => {
 };
 
 export const galleryLoader = async () => {
-  // const { data, loading, error, request } = useApi();
-  const response = await apiRequest();
-  console.log("galleryLoader", response);
+  const galleryData = await apiRequest();
+  return sortGallery(galleryData);
 };
