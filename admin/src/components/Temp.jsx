@@ -12,6 +12,5 @@ export const Temp = () => {
   if (!data) return null;
 
   const lg = data.media.filter((item) => item.size_key === "thumb");
-  console.log(lg);
   return <div>temp</div>;
 };

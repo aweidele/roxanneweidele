@@ -1,6 +1,29 @@
 import { apiURL } from "./vars";
 import { useCallback, useState } from "react";
 
+export const apiRequest = async (url = "", method = "GET", payload = null, token = null) => {
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  if (token) headers.Authorization = `Bearer ${token}`;
+
+  const options = {
+    method,
+    headers,
+  };
+
+  if (payload && method !== "GET") options.body = JSON.stringify(payload);
+
+  const response = await fetch(apiURL + url, options);
+  const responseData = await response.json();
+
+  if (!response.ok) {
+    throw new Error(responseData.message || "Request failed");
+  }
+
+  return responseData;
+};
+
 export const useApi = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -11,27 +34,9 @@ export const useApi = () => {
     setError(null);
 
     try {
-      const headers = {
-        "Content-Type": "application/json",
-      };
-      if (token) headers.Authorization = `Bearer ${token}`;
-
-      const options = {
-        method,
-        headers,
-      };
-
-      if (payload) options.body = JSON.stringify(payload);
-
-      const response = await fetch(apiURL + url, options);
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        throw new Error(responseData.message || "Request failed");
-      }
-
-      setData(responseData);
-      return responseData;
+      const result = await apiRequest(url, method, payload, token);
+      setData(result);
+      return result;
     } catch (err) {
       setError(err);
       return null;

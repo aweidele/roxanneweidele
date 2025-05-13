@@ -52,7 +52,7 @@ switch ($method) {
     }
     break;
   default:
-    // require_once("endpoints/test.php");
-    echo json_encode($route);
+    require_once("endpoints/get_artwork.php");
+    // echo json_encode($route);
     break;
 }

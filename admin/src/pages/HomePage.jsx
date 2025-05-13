@@ -1,12 +1,17 @@
-import { NewImage } from "../components/NewImage";
+import { HomePageContainer } from "../components/HomePageContainer";
 import { NewImageProvider } from "../components/NewImageContext";
-import { Temp } from "../components/Temp";
+import { apiRequest } from "../functions/useApi";
 
 export const HomePage = () => {
   return (
     <NewImageProvider>
-      <NewImage />
-      {/* <Temp /> */}
+      <HomePageContainer />
     </NewImageProvider>
   );
+};
+
+export const galleryLoader = async () => {
+  // const { data, loading, error, request } = useApi();
+  const response = await apiRequest();
+  console.log("galleryLoader", response);
 };

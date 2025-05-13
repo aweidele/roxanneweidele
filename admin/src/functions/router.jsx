@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { AuthGate } from "../components/AuthGate";
-import { HomePage } from "../pages/HomePage";
+import { HomePage, galleryLoader } from "../pages/HomePage";
 
 const basename = import.meta.env.VITE_BASENAME || "/";
 
@@ -13,6 +13,7 @@ export const router = createBrowserRouter(
         {
           index: true,
           element: <HomePage />,
+          loader: galleryLoader,
         },
       ],
     },
