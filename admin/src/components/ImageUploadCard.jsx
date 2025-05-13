@@ -9,7 +9,7 @@ export const ImageUploadCard = ({ file }) => {
   const { data, loading, error, request } = useApi();
   const cardRef = useRef(null);
 
-  console.log(data, loading, error);
+  // console.log(data, loading, error);
 
   const { token } = useAppContext();
 
@@ -22,16 +22,18 @@ export const ImageUploadCard = ({ file }) => {
     const submitValues = { ...values, sold: values.sold && values.sold === "on" ? 1 : 0, published: 1 };
 
     const index = files.findIndex((item) => item.uniqid === file.uniqid);
-    setFiles({ type: "update_artwork", index, data: submitValues });
+    setFiles({ type: "update_new_artwork", index, data: submitValues });
 
     const result = await request(`artwork/${file.id}/edit`, "PUT", submitValues, token);
-    console.log("Result", result);
     if (result.success) {
       const cardHeight = cardRef.current.offsetHeight;
       const computedStyle = window.getComputedStyle(cardRef.current);
       const marginTopValue = parseFloat(computedStyle.marginTop);
 
       setTransitionStyle({ marginBottom: `-${cardHeight + marginTopValue}px`, opacity: 0, transform: "translateX(50%)" });
+      setTimeout(() => {
+        setFiles({ type: "delete_file", index });
+      }, 400);
     }
   };
 
@@ -42,11 +44,18 @@ export const ImageUploadCard = ({ file }) => {
   };
 
   return (
-    <div ref={cardRef} className="w-full mt-2 mb-9 p-4 border border-rose-quartz flex gap-2 transition-all duration-300" style={transitionStyle}>
-      <div className="w-50 aspect-[533/300] shrink-0">
-        <img src={thumbnail()} alt={file.name} className={`w-full h-full object-cover ${file.loading ? " opacity-50" : ""} transition-all duration-500`} />
+    <>
+      <div ref={cardRef} className="w-full mt-2 mb-9 p-4 border border-rose-quartz flex gap-2 transition-all duration-300" style={transitionStyle}>
+        <div className="w-50 aspect-[533/300] shrink-0">
+          <img src={thumbnail()} alt={file.name} className={`w-full h-full object-cover ${file.loading ? " opacity-50" : ""} transition-all duration-500`} />
+        </div>
+        <div className="grow-1">{!file.loading ? <ImageForm artwork={file} submitAction={handleDoneSubmit} /> : <div className="w-full h-full flex justify-center items-center">Uploading</div>}</div>
       </div>
-      <div className="grow-1">{!file.loading ? <ImageForm artwork={file} submitAction={handleDoneSubmit} /> : <div className="w-full h-full flex justify-center items-center">Uploading</div>}</div>
-    </div>
+      {!!Object.keys(transitionStyle).length && (
+        <button className="border p-3" onClick={() => setTransitionStyle({})}>
+          reset style
+        </button>
+      )}
+    </>
   );
 };

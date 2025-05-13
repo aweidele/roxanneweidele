@@ -19,7 +19,7 @@ const filesReducer = (state, action) => {
       newImages[action.index] = newFile;
       return newImages;
     }
-    case "update_artwork": {
+    case "update_new_artwork": {
       const { index, data } = action;
       const newArtworkData = Object.fromEntries(Object.entries(data).map(([KeyboardEvent, value]) => [KeyboardEvent, value === null ? "" : value]));
 
@@ -31,6 +31,10 @@ const filesReducer = (state, action) => {
       };
 
       return newArtworkState;
+    }
+    case "delete_file": {
+      const { index } = action;
+      return [...state.slice(0, index), ...state.slice(index + 1)];
     }
   }
 };

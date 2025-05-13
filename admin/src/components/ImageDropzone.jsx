@@ -26,7 +26,7 @@ export const ImageDropzone = () => {
       }
 
       const result = await response.json();
-      setFiles({ type: "update_artwork", index, data: result.data });
+      setFiles({ type: "update_new_artwork", index, data: result.data });
     } catch (err) {
       console.error("Error adding new artwork", err.message);
     }
