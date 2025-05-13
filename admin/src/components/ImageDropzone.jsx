@@ -10,8 +10,7 @@ export const ImageDropzone = () => {
   const { token } = useAppContext();
   const { files, setFiles } = useNewImageContext();
 
-  const addNewArt = async (args) => {
-    console.log("addNewArt", args);
+  const addNewArt = async (args, index) => {
     try {
       const response = await fetch(`${apiURL}artwork/add`, {
         method: "POST",
@@ -27,7 +26,8 @@ export const ImageDropzone = () => {
       }
 
       const result = await response.json();
-      console.log("API response:", result);
+      // console.log("API response:", result);
+      setFiles({ type: "update_artwork", index, data: result.data });
     } catch (err) {
       console.error("Error adding new artwork", err.message);
     }
@@ -52,7 +52,7 @@ export const ImageDropzone = () => {
       setFiles({ type: "update_file", index, result });
 
       const parentMedia = result.find((item) => item.media === item.id || item.media === null);
-      addNewArt({ media: parentMedia.id });
+      addNewArt({ media: parentMedia.id }, index);
     } catch (err) {
       console.error("Upload Error", err.message);
     }

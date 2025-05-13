@@ -15,12 +15,26 @@ const filesReducer = (state, action) => {
       const newFile = {
         ...newImages[action.index],
         files: action.result,
-        loading: false,
       };
       newImages[action.index] = newFile;
       return newImages;
     }
     case "update_artwork": {
+      // console.log("update artwork");
+      // console.log(state);
+      // console.log(action);
+
+      const { index, data } = action;
+      const newArtworkData = Object.fromEntries(Object.entries(data).map(([KeyboardEvent, value]) => [KeyboardEvent, value === null ? "" : value]));
+
+      const newArtworkState = [...state];
+      newArtworkState[index] = {
+        ...newArtworkState[index],
+        ...newArtworkData,
+        loading: false,
+      };
+
+      return newArtworkState;
     }
   }
 };
