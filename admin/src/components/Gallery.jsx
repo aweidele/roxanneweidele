@@ -1,8 +1,8 @@
-import { useLoaderData } from "react-router-dom";
 import { Section } from "./Section";
+import { useGalleryContext } from "./GalleryContext";
 
 export const Gallery = () => {
-  const { gallery } = useLoaderData();
+  const { gallery } = useGalleryContext();
   const published = gallery.filter((item) => item.published);
   const unpublished = gallery.filter((item) => !item.published);
   console.log("GalleryGrid");

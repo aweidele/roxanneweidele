@@ -1,8 +1,8 @@
 import { ImageUploadCard } from "./ImageUploadCard";
-import { useNewImageContext } from "./NewImageContext";
+import { useGalleryContext } from "./GalleryContext";
 
 export const ImageUploads = () => {
-  const { files } = useNewImageContext();
+  const { files } = useGalleryContext();
 
   return (
     <>

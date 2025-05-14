@@ -1,10 +1,10 @@
 import { ImageDropzone } from "./ImageDropzone";
 import { Section } from "./Section";
 import { ImageUploads } from "./ImageUploads";
-import { useNewImageContext } from "./NewImageContext";
+import { useGalleryContext } from "./GalleryContext";
 
 export const NewImage = () => {
-  const { files } = useNewImageContext();
+  const { files } = useGalleryContext();
   return (
     <div>
       <Section>

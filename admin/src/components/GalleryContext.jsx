@@ -1,6 +1,7 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
-export const NewImageContext = createContext();
+export const GalleryContext = createContext();
 
 const filesReducer = (state, action) => {
   switch (action.type) {
@@ -39,9 +40,11 @@ const filesReducer = (state, action) => {
   }
 };
 
-export const NewImageProvider = ({ children }) => {
+export const GalleryProvider = ({ children }) => {
+  const loadedData = useLoaderData();
   const [files, setFiles] = useReducer(filesReducer, []);
-  return <NewImageContext.Provider value={{ files, setFiles }}>{children}</NewImageContext.Provider>;
+  const [gallery, setGallery] = useState(loadedData.gallery);
+  return <GalleryContext.Provider value={{ files, setFiles, gallery, setGallery }}>{children}</GalleryContext.Provider>;
 };
 
-export const useNewImageContext = () => useContext(NewImageContext);
+export const useGalleryContext = () => useContext(GalleryContext);

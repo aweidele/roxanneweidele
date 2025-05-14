@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
 import { ImageForm } from "./ImageForm";
-import { useNewImageContext } from "./NewImageContext";
+import { useGalleryContext } from "./GalleryContext";
 import { useApi } from "../functions/useApi";
 import { useAppContext } from "./AppContext";
 
 export const ImageUploadCard = ({ file }) => {
-  const { files, setFiles } = useNewImageContext();
+  const { files, setFiles } = useGalleryContext();
   const { data, loading, error, request } = useApi();
   const cardRef = useRef(null);
 

@@ -3,12 +3,12 @@ import { useDropzone } from "react-dropzone";
 
 import { useAppContext } from "./AppContext";
 import { apiURL } from "../functions/vars";
-import { useNewImageContext } from "./NewImageContext";
+import { useGalleryContext } from "./GalleryContext";
 import { uniqid } from "../functions/functions";
 
 export const ImageDropzone = () => {
   const { token } = useAppContext();
-  const { files, setFiles } = useNewImageContext();
+  const { files, setFiles } = useGalleryContext();
 
   const addNewArt = async (args, index) => {
     try {

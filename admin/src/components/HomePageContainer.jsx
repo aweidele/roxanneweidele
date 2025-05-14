@@ -1,9 +1,9 @@
 import { Gallery } from "./Gallery";
 import { NewImage } from "./NewImage";
-import { useNewImageContext } from "./NewImageContext";
+import { useGalleryContext } from "./GalleryContext";
 
 export const HomePageContainer = () => {
-  const { files } = useNewImageContext();
+  const { files } = useGalleryContext();
   return (
     <>
       <NewImage />
