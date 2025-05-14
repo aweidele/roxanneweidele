@@ -1,4 +1,4 @@
-import { GalleryGrid } from "./GalleryGrid";
+import { Gallery } from "./Gallery";
 import { NewImage } from "./NewImage";
 import { useNewImageContext } from "./NewImageContext";
 
@@ -7,7 +7,7 @@ export const HomePageContainer = () => {
   return (
     <>
       <NewImage />
-      {!files.length && <GalleryGrid />}
+      {!files.length && <Gallery />}
     </>
   );
 };

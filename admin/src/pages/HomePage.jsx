@@ -5,10 +5,6 @@ import { apiRequest } from "../functions/useApi";
 import { Await, useLoaderData } from "react-router-dom";
 
 export const HomePage = () => {
-  const { published, unpublished, gallery } = useLoaderData();
-  console.log(published);
-  console.log(unpublished);
-  console.log(gallery);
   return (
     <NewImageProvider>
       <HomePageContainer />
