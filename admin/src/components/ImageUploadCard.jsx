@@ -42,8 +42,7 @@ export const ImageUploadCard = ({ file }) => {
 
   const thumbnail = () => {
     if (file.loading) return file.preview;
-    const thumb = file.files.find((item) => item.size_key === "thumb");
-    return thumb.url;
+    return file.files.thumb.url;
   };
 
   return (

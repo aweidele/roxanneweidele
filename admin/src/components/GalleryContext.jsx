@@ -15,7 +15,7 @@ const galleryReducer = (state, action) => {
       const newImages = [...state];
       const newFile = {
         ...newImages[action.index],
-        files: action.result,
+        files: action.files,
       };
       newImages[action.index] = newFile;
       return newImages;

@@ -23,14 +23,15 @@ export const getIsAuthenticated = () => {
 
 export const uniqid = (prefix = "") => prefix + Date.now().toString(36) + Math.random().toString(36).substring(2, 8);
 
+export const sortFiles = (media) =>
+  media.reduce((acc, { size_key, ...rest }) => {
+    acc[size_key] = rest;
+    return acc;
+  }, {});
+
 export const sortGallery = (galleryData) => {
   const gallery = galleryData.artwork.map((item) => {
-    const files = galleryData.media
-      .filter((media) => media.id === item.media || media.media === item.media)
-      .reduce((acc, { size_key, ...rest }) => {
-        acc[size_key] = rest;
-        return acc;
-      }, {});
+    const files = sortFiles(galleryData.media.filter((media) => media.id === item.media || media.media === item.media));
     return { ...item, files, new: false };
   });
 

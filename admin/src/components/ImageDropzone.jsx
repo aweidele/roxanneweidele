@@ -4,7 +4,7 @@ import { useDropzone } from "react-dropzone";
 import { useAppContext } from "./AppContext";
 import { apiURL } from "../functions/vars";
 import { useGalleryContext } from "./GalleryContext";
-import { uniqid } from "../functions/functions";
+import { uniqid, sortFiles } from "../functions/functions";
 import { IconDragAndDrop } from "./elements/Icons";
 
 export const ImageDropzone = () => {
@@ -47,8 +47,9 @@ export const ImageDropzone = () => {
       });
 
       const result = await response.json();
+      const files = sortFiles(result);
       if (!response.ok) throw new Error(result.error || "Upload failed");
-      setGallery({ type: "update_file", index, result });
+      setGallery({ type: "update_file", index, files });
 
       const parentMedia = result.find((item) => item.media === item.id || item.media === null);
       addNewArt({ media: parentMedia.id }, index);
