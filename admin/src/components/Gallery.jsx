@@ -1,23 +1,24 @@
 import { Section } from "./Section";
 import { useGalleryContext } from "./GalleryContext";
 import { GalleryGrid } from "./GalleryGrid";
+import { useState } from "react";
 
 export const Gallery = () => {
   const { gallery } = useGalleryContext();
-
   const published = gallery.filter((item) => item.published);
   const unpublished = gallery.filter((item) => !item.published);
-  // console.log("GalleryGrid");
-  // console.log(published);
-  // console.log(unpublished);
+
+  const [leftColumn, setLeftColumn] = useState(published);
+  const [rightColumn, setRightColumn] = useState(`${unpublished.length} Unpublished items`);
+
   return (
     <Section>
-      <h2>Gallery Grid</h2>
+      <h2 className="mb-8">Gallery Grid</h2>
       <div className="flex gap-5">
-        <div className="flex-3/4 border">
-          <GalleryGrid />
+        <div className="flex-3/4">
+          <GalleryGrid content={leftColumn} />
         </div>
-        <div className="flex-1/4 border">{unpublished.length} Unpublished items</div>
+        <div className="flex-1/4">{rightColumn}</div>
       </div>
     </Section>
   );

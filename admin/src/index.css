@@ -24,3 +24,7 @@ h1 {
 h2 {
   @apply font-heading uppercase text-lg font-light tracking-widest;
 }
+
+h3 {
+  @apply font-sans text-lg font-medium tracking-widest;
+}

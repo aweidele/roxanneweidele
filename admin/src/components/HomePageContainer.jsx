@@ -4,8 +4,7 @@ import { useGalleryContext } from "./GalleryContext";
 
 export const HomePageContainer = () => {
   const { gallery, newArtwork } = useGalleryContext();
-  console.log(newArtwork);
-  console.log(gallery);
+
   return (
     <>
       <NewImage />
