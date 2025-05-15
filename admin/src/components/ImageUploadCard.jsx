@@ -5,7 +5,7 @@ import { useApi } from "../functions/useApi";
 import { useAppContext } from "./AppContext";
 
 export const ImageUploadCard = ({ file }) => {
-  const { files, setFiles } = useGalleryContext();
+  const { gallery, setGallery } = useGalleryContext();
   const { data, loading, error, request } = useApi();
   const cardRef = useRef(null);
 
@@ -19,10 +19,10 @@ export const ImageUploadCard = ({ file }) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const values = Object.fromEntries(formData.entries());
-    const submitValues = { ...values, sold: values.sold && values.sold === "on" ? 1 : 0, published: 1 };
+    const submitValues = { ...values, sold: values.sold && values.sold === "on" ? 1 : 0, published: 1, new: false };
 
-    const index = files.findIndex((item) => item.uniqid === file.uniqid);
-    setFiles({ type: "update_new_artwork", index, data: submitValues });
+    const index = gallery.findIndex((item) => item.uniqid === file.uniqid);
+    setGallery({ type: "update_new_artwork", index, data: submitValues });
 
     const result = await request(`artwork/${file.id}/edit`, "PUT", submitValues, token);
     if (result.success) {
@@ -32,7 +32,7 @@ export const ImageUploadCard = ({ file }) => {
 
       setTransitionStyle({ marginBottom: `-${cardHeight + marginTopValue}px`, opacity: 0, transform: "translateX(50%)" });
       setTimeout(() => {
-        setFiles({ type: "delete_file", index });
+        setGallery({ type: "delete_file", index });
       }, 400);
     }
   };

@@ -3,11 +3,12 @@ import { useGalleryContext } from "./GalleryContext";
 
 export const Gallery = () => {
   const { gallery } = useGalleryContext();
+
   const published = gallery.filter((item) => item.published);
   const unpublished = gallery.filter((item) => !item.published);
-  console.log("GalleryGrid");
-  console.log(published);
-  console.log(unpublished);
+  // console.log("GalleryGrid");
+  // console.log(published);
+  // console.log(unpublished);
   return (
     <Section>
       <h2>Gallery Grid</h2>

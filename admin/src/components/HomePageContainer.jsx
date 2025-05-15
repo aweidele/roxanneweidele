@@ -3,11 +3,13 @@ import { NewImage } from "./NewImage";
 import { useGalleryContext } from "./GalleryContext";
 
 export const HomePageContainer = () => {
-  const { files } = useGalleryContext();
+  const { gallery, newArtwork } = useGalleryContext();
+  console.log(newArtwork);
+  console.log(gallery);
   return (
     <>
       <NewImage />
-      {!files.length && <Gallery />}
+      {!newArtwork.length && <Gallery />}
     </>
   );
 };

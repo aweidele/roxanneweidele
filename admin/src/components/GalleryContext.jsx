@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 
 export const GalleryContext = createContext();
 
-const filesReducer = (state, action) => {
+const galleryReducer = (state, action) => {
   switch (action.type) {
     case "add_file": {
       const newFile = {
@@ -41,10 +41,10 @@ const filesReducer = (state, action) => {
 };
 
 export const GalleryProvider = ({ children }) => {
-  const loadedData = useLoaderData();
-  const [files, setFiles] = useReducer(filesReducer, []);
-  const [gallery, setGallery] = useState(loadedData.gallery);
-  return <GalleryContext.Provider value={{ files, setFiles, gallery, setGallery }}>{children}</GalleryContext.Provider>;
+  const { gallery: loadedGallery } = useLoaderData();
+  const [gallery, setGallery] = useReducer(galleryReducer, loadedGallery);
+  const newArtwork = gallery.filter((item) => item.new);
+  return <GalleryContext.Provider value={{ gallery, setGallery, newArtwork }}>{children}</GalleryContext.Provider>;
 };
 
 export const useGalleryContext = () => useContext(GalleryContext);

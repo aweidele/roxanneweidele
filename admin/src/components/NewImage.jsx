@@ -4,15 +4,15 @@ import { ImageUploads } from "./ImageUploads";
 import { useGalleryContext } from "./GalleryContext";
 
 export const NewImage = () => {
-  const { files } = useGalleryContext();
+  const { gallery, newArtwork } = useGalleryContext();
   return (
     <div>
       <Section>
         <div className="flex gap-5">
-          <div className={`${files.length ? "w-1/5" : "w-full"} transition-all duration-500`}>
+          <div className={`${newArtwork.length ? "w-1/5" : "w-full"} transition-all duration-500`}>
             <ImageDropzone />
           </div>
-          {files.length > 0 && (
+          {newArtwork.length > 0 && (
             <div className="grow-1">
               <ImageUploads />
             </div>

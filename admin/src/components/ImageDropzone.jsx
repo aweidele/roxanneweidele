@@ -8,7 +8,7 @@ import { uniqid } from "../functions/functions";
 
 export const ImageDropzone = () => {
   const { token } = useAppContext();
-  const { files, setFiles } = useGalleryContext();
+  const { gallery, setGallery } = useGalleryContext();
 
   const addNewArt = async (args, index) => {
     try {
@@ -26,7 +26,7 @@ export const ImageDropzone = () => {
       }
 
       const result = await response.json();
-      setFiles({ type: "update_new_artwork", index, data: result.data });
+      setGallery({ type: "update_new_artwork", index, data: result.data });
     } catch (err) {
       console.error("Error adding new artwork", err.message);
     }
@@ -47,7 +47,7 @@ export const ImageDropzone = () => {
 
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Upload failed");
-      setFiles({ type: "update_file", index, result });
+      setGallery({ type: "update_file", index, result });
 
       const parentMedia = result.find((item) => item.media === item.id || item.media === null);
       addNewArt({ media: parentMedia.id }, index);
@@ -64,8 +64,9 @@ export const ImageDropzone = () => {
           preview: URL.createObjectURL(file),
           loading: true,
           uniqid: uniqid(),
+          new: true,
         });
-        setFiles({ type: "add_file", newFile: newFile });
+        setGallery({ type: "add_file", newFile: newFile });
         return newFile;
       });
     },
@@ -82,9 +83,9 @@ export const ImageDropzone = () => {
 
   useEffect(() => {
     return () => {
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
+      gallery.forEach((file) => URL.revokeObjectURL(file.preview));
     };
-  }, [files]);
+  }, [gallery]);
 
   return (
     <div {...getRootProps()} className={`flex items-center justify-center border-2 border-dashed rounded-xl aspect-[4/3] w-full max-w-md m-auto text-center cursor-pointer transition ${isDragActive ? "border-china-rose bg-rose-quartz" : "border-gray-300"}`}>
