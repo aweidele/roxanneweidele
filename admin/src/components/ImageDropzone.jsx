@@ -5,10 +5,11 @@ import { useAppContext } from "./AppContext";
 import { apiURL } from "../functions/vars";
 import { useGalleryContext } from "./GalleryContext";
 import { uniqid } from "../functions/functions";
+import { IconDragAndDrop } from "./elements/Icons";
 
 export const ImageDropzone = () => {
   const { token } = useAppContext();
-  const { gallery, setGallery } = useGalleryContext();
+  const { gallery, setGallery, newArtwork } = useGalleryContext();
 
   const addNewArt = async (args, index) => {
     try {
@@ -88,9 +89,12 @@ export const ImageDropzone = () => {
   }, [gallery]);
 
   return (
-    <div {...getRootProps()} className={`flex items-center justify-center border-2 border-dashed rounded-xl aspect-[4/3] w-full max-w-md m-auto text-center cursor-pointer transition ${isDragActive ? "border-china-rose bg-rose-quartz" : "border-gray-300"}`}>
+    <div {...getRootProps()} className={`aspect-[5/3] p-5 flex items-center justify-center border-2 border-dashed rounded-xl w-full max-w-md m-auto text-center cursor-pointer transition ${isDragActive ? "border-china-rose bg-rose-quartz" : "border-gray-300"} ${!!newArtwork.length && "text-sm"}`}>
       <input {...getInputProps()} />
-      <div>Drop images here to upload</div>
+      <div>
+        <p>Drag and drop images here to add a new gallery item.</p>
+        <IconDragAndDrop className={`fill-cordovan ${!newArtwork.length ? "w-15 h-15" : "w-12 h-12"} block mx-auto mt-6 transition-all duration-300`} />
+      </div>
     </div>
   );
 };

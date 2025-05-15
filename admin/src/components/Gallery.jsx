@@ -1,5 +1,6 @@
 import { Section } from "./Section";
 import { useGalleryContext } from "./GalleryContext";
+import { GalleryGrid } from "./GalleryGrid";
 
 export const Gallery = () => {
   const { gallery } = useGalleryContext();
@@ -13,7 +14,9 @@ export const Gallery = () => {
     <Section>
       <h2>Gallery Grid</h2>
       <div className="flex gap-5">
-        <div className="flex-3/4 border">Gallery.</div>
+        <div className="flex-3/4 border">
+          <GalleryGrid />
+        </div>
         <div className="flex-1/4 border">{unpublished.length} Unpublished items</div>
       </div>
     </Section>
