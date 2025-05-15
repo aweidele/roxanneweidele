@@ -5,7 +5,7 @@ const bg = ["bg-sage", "bg-rose-quartz", "bg-china-rose", "bg-cordovan", "bg-ura
 
 export const Template = ({ children }) => {
   const { isAuthenticated } = useAppContext();
-  const [hoveredSquare, setHoveredSquare] = useState(0);
+  const [hoveredSquare, setHoveredSquare] = useState(null);
 
   const squareClick = (bgclass) => {
     navigator.clipboard

@@ -3,7 +3,7 @@ import { NewImage } from "./NewImage";
 import { useGalleryContext } from "./GalleryContext";
 
 export const HomePageContainer = () => {
-  const { gallery, newArtwork } = useGalleryContext();
+  const { newArtwork } = useGalleryContext();
 
   return (
     <>

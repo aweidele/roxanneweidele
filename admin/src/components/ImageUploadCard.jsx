@@ -22,7 +22,10 @@ export const ImageUploadCard = ({ file }) => {
     const submitValues = { ...values, sold: values.sold && values.sold === "on" ? 1 : 0, published: 1, new: false };
 
     const index = gallery.findIndex((item) => item.uniqid === file.uniqid);
-    setGallery({ type: "update_new_artwork", index, data: submitValues });
+
+    console.log("Submit Values", index);
+    console.log(submitValues);
+    console.log(gallery[index]);
 
     const result = await request(`artwork/${file.id}/edit`, "PUT", submitValues, token);
     if (result.success) {
@@ -32,7 +35,7 @@ export const ImageUploadCard = ({ file }) => {
 
       setTransitionStyle({ marginBottom: `-${cardHeight + marginTopValue}px`, opacity: 0, transform: "translateX(50%)" });
       setTimeout(() => {
-        setGallery({ type: "delete_file", index });
+        setGallery({ type: "update_new_artwork", index, data: submitValues });
       }, 400);
     }
   };
