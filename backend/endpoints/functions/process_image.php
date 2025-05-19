@@ -32,8 +32,9 @@ function processUploadedImage(array $file, array $sizes): array {
 
   // Base URL construction
   $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+  $siteRoot = isset($_ENV["API_ROOT"]) ? $_ENV["API_ROOT"] : "";
   $host = $_SERVER['HTTP_HOST'];
-  $baseUrl = $protocol . $host . $uploadRelPath;
+  $baseUrl = $protocol . $host . $siteRoot . $uploadRelPath;
 
   $baseFilename = "{$originalName}_{$randomTag}";
 
