@@ -1,7 +1,7 @@
-export const GalleryGridCard = ({ item }) => {
+export const GalleryGridCard = ({ item, active }) => {
   console.log("Item", item);
   return (
-    <div>
+    <div className={!active ? "sr-only" : null}>
       <div className="aspect-5/4 bg-gray-800 p-1">
         <img src={item.files.lg.url} className="w-full h-full object-contain" />
       </div>
