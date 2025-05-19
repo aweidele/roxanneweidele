@@ -12,7 +12,8 @@ export const GalleryGrid = ({ content }) => {
   const [activeFilter, setActiveFilter] = useState("all");
   return (
     <>
-      <div className="inline-grid grid-cols-3 gap-1 mb-2">
+      <div className="inline-grid grid-cols-4 gap-1 mb-4 items-center">
+        <h3>Filter: </h3>
         {medium.map((item) => (
           <Button color={activeFilter === item.id ? "bg-uranian-blue-800 hover:bg-uranian-blue text-black" : false} onClick={() => setActiveFilter(item.id)}>
             {item.name}
