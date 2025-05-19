@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { createPortal } from "react-dom";
 import { IconEdit } from "./elements/Icons";
 import { Dialog } from "./elements/Dialog";
+import { NavLink } from "react-router-dom";
 
 export const GalleryGridCard = ({ item, active }) => {
   console.log("Item", item);
-  const [editOpen, setEditOpen] = useState(false);
   return (
     <>
       <div className={!active ? "sr-only" : null}>
@@ -16,12 +15,11 @@ export const GalleryGridCard = ({ item, active }) => {
           <div className="p-1">
             <h3>{item.title}</h3>
           </div>
-          <button className="cursor-pointer text-cordovan hover:text-black" onClick={() => setEditOpen(true)}>
+          <NavLink to={`artwork/${item.slug}`} className="cursor-pointer text-cordovan hover:text-black">
             <IconEdit className="w-3 h-3 fill-current" />
-          </button>
+          </NavLink>
         </div>
       </div>
-      {editOpen && createPortal(<Dialog />, document.getElementById("dialog"))}
     </>
   );
 };

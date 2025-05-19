@@ -1,5 +1,7 @@
+import { createPortal } from "react-dom";
+
 export const Dialog = ({ onClose }) => {
-  return (
+  return createPortal(
     <dialog open className="fixed top-0 left-0 w-screen h-screen z-50 bg-popup flex justify-center items-center backdrop-blur-xs p-10">
       <div className="bg-white max-h-full overflow-auto">
         <div className="sticky top-0 bg-white text-right">
@@ -91,6 +93,7 @@ export const Dialog = ({ onClose }) => {
           consectetuer turpis ut velit. Vestibulum volutpat pretium libero. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum eu odio. Nunc interdum lacus sit amet orci. Mauris sollicitudin fermentum libero. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
         </p>
       </div>
-    </dialog>
+    </dialog>,
+    document.getElementById("dialog")
   );
 };
