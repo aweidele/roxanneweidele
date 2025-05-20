@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "./elements/Button";
 import { GalleryGridCard } from "./GalleryGridCard";
+const basename = import.meta.env.VITE_BASENAME || "/";
 
 const medium = [
   { name: "All", id: "all" },
@@ -12,6 +13,7 @@ export const GalleryGrid = ({ content }) => {
   const [activeFilter, setActiveFilter] = useState("all");
   return (
     <>
+      <div>{basename}</div>
       <div className="inline-grid grid-cols-4 gap-1 mb-4 items-center">
         <h3>Filter: </h3>
         {medium.map((item) => (

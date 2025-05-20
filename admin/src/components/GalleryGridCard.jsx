@@ -15,7 +15,7 @@ export const GalleryGridCard = ({ item, active }) => {
           <div className="p-1">
             <h3>{item.title}</h3>
           </div>
-          <NavLink to={`${basename}artwork/${item.slug}`} className="cursor-pointer text-cordovan hover:text-black">
+          <NavLink to={`${basename}/artwork/${item.slug}`} className="cursor-pointer text-cordovan hover:text-black">
             <IconEdit className="w-3 h-3 fill-current" />
           </NavLink>
         </div>
