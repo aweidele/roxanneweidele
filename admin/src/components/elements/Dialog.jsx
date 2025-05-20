@@ -1,15 +1,20 @@
+import { forwardRef } from "react";
 import { createPortal } from "react-dom";
 
-export const Dialog = ({ children }) => {
+export const Dialog = forwardRef(({ children, handleCloseButton, ...props }, ref) => {
   return createPortal(
-    <dialog open className="fixed top-0 left-0 w-screen h-screen z-50 bg-popup flex justify-center items-center backdrop-blur-xs p-10">
-      <div className="bg-white max-h-full overflow-auto">
-        <div className="sticky top-0 bg-white text-right">
-          <button className="py-2 px-4">Close</button>
+    <dialog ref={ref} className="w-screen h-screen top-0 left-0 bg-popup backdrop-blur-xs" {...props}>
+      <div className="w-full h-full flex justify-center items-center p-10">
+        <div className="bg-white max-h-full overflow-auto">
+          <div className="sticky top-0 bg-white text-right">
+            <button className="py-2 px-4" onClick={handleCloseButton}>
+              Close
+            </button>
+          </div>
+          {children}
         </div>
-        {children}
       </div>
     </dialog>,
     document.getElementById("dialog")
   );
-};
+});

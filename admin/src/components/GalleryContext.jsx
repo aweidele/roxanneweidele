@@ -44,9 +44,6 @@ export const GalleryProvider = ({ children }) => {
   const { gallery: loadedGallery } = useLoaderData();
   const [gallery, setGallery] = useReducer(galleryReducer, loadedGallery);
   const newArtwork = gallery.filter((item) => item.new);
-
-  console.log("Gallery Provider");
-  console.log(gallery);
   return <GalleryContext.Provider value={{ gallery, setGallery, newArtwork }}>{children}</GalleryContext.Provider>;
 };
 

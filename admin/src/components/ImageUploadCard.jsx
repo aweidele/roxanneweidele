@@ -9,8 +9,6 @@ export const ImageUploadCard = ({ file }) => {
   const { data, loading, error, request } = useApi();
   const cardRef = useRef(null);
 
-  // console.log(data, loading, error);
-
   const { token } = useAppContext();
 
   const [transitionStyle, setTransitionStyle] = useState({});
@@ -22,10 +20,6 @@ export const ImageUploadCard = ({ file }) => {
     const submitValues = { ...values, sold: values.sold && values.sold === "on" ? 1 : 0, published: 1, new: false };
 
     const index = gallery.findIndex((item) => item.uniqid === file.uniqid);
-
-    console.log("Submit Values", index);
-    console.log(submitValues);
-    console.log(gallery[index]);
 
     const result = await request(`artwork/${file.id}/edit`, "PUT", submitValues, token);
     if (result.success) {
