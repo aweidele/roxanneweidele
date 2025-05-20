@@ -36,12 +36,21 @@ $sql = "
   SET " . implode(', ', $data['placeholders']) . "
   WHERE id = :id
 ";
-
 $stmt = $pdo->prepare($sql);
+
+$sql = "SELECT * FROM artwork WHERE id = :id";
+
+// $stmt = $pdo->prepare("SELECT * FROM artwork WHERE id = :id");
+// $stmt->execute([':id' => $id]);
+// $updatedRow = $stmt->fetch(PDO::FETCH_ASSOC);
 try {
   $stmt->execute($data['values']);
 
-  echo json_encode(["success" => true]);
+  echo json_encode([
+    "success" => true, 
+    "data" => $data['values'],
+    "row" => $sql
+  ]);
 } catch (PDOException $e) {
   http_response_code(500);
   echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);

@@ -16,6 +16,7 @@ export const apiRequest = async (url = "", method = "GET", payload = null, token
 
   const response = await fetch(apiURL + url, options);
   const responseData = await response.json();
+  console.log("Response Data", responseData);
 
   if (!response.ok) {
     throw new Error(responseData.message || "Request failed");

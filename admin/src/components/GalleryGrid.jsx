@@ -1,4 +1,4 @@
-import { act, useState } from "react";
+import { useState } from "react";
 import { Button } from "./elements/Button";
 import { GalleryGridCard } from "./GalleryGridCard";
 
@@ -15,7 +15,7 @@ export const GalleryGrid = ({ content }) => {
       <div className="inline-grid grid-cols-4 gap-1 mb-4 items-center">
         <h3>Filter: </h3>
         {medium.map((item) => (
-          <Button color={activeFilter === item.id ? "bg-uranian-blue-800 hover:bg-uranian-blue text-black" : false} onClick={() => setActiveFilter(item.id)}>
+          <Button key={item.id} color={activeFilter === item.id ? "bg-uranian-blue-800 hover:bg-uranian-blue text-black" : false} onClick={() => setActiveFilter(item.id)}>
             {item.name}
           </Button>
         ))}
