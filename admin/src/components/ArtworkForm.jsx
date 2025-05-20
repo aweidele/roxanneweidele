@@ -3,14 +3,44 @@ import { Select } from "./elements/Select";
 import { Toggle } from "./elements/Toggle";
 import { Button } from "./elements/Button";
 import { useGalleryContext } from "./GalleryContext";
+import { useEffect, useState } from "react";
+import { IconImage } from "./elements/Icons";
 
 export const ArtworkForm = ({ slug }) => {
   const { gallery } = useGalleryContext();
-  const artwork = gallery.find((item) => item.slug === slug);
+  const [isEditImage, setIsEditImage] = useState(true);
+  const [artwork, setArtwork] = useState(gallery.find((item) => item.slug === slug));
+
+  useEffect(() => {
+    setArtwork(gallery.find((item) => item.slug === slug));
+    setIsEditImage(false);
+  }, [slug]);
+
+  console.log(artwork);
   return (
     <form className="p-4">
-      <div className="flex">
-        <div className="flex-1">image</div>
+      <h2 className="mb-2">Edit Artwork</h2>
+      <div className="flex gap-4">
+        <div className="flex-1">
+          <div className="relative">
+            {isEditImage ? (
+              <div className="absolute w-full h-full z-10 p-2 flex flex-col justify-between bg-[rgba(255,255,255,0.5)]">
+                <div>Drop image here</div>
+                <Button type="button" color="bg-uranian-blue-800 hover:bg-uranian-blue text-black" className="shadow-[0 0 3px rgba(0,0,0,0.75)]" onClick={() => setIsEditImage(false)}>
+                  Cancel
+                </Button>
+              </div>
+            ) : (
+              <button type="button" className="absolute w-full h-full z-10 p-2 flex items-end justify-end hover:bg-[rgba(0,0,0,0.5)]" onClick={() => setIsEditImage(true)}>
+                <span className="bg-uranian-blue-800 px-4 py-2 text-xs text-center rounded-lg uppercase tracking-wide">
+                  <span>Replace image</span>
+                  <IconImage className="fill-current w-10 h-10 mx-auto mt-2" />
+                </span>
+              </button>
+            )}
+            <img src={artwork.files.thumb.url} className="relative z-0 w-full" />
+          </div>
+        </div>
         <div className="flex-1">
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
@@ -22,7 +52,7 @@ export const ArtworkForm = ({ slug }) => {
             <div>
               <Input name="height" label="Height" type="number" required={true} outerClass="flex-1" defaultValue={artwork.height} step="any" />
             </div>
-            <div>
+            <div className="col-span-2">
               <Select label="Medium" name="medium" defaultValue={artwork.medium}>
                 <option value="pastels" selected={artwork.medium === "pastels"}>
                   Pastels
@@ -38,8 +68,8 @@ export const ArtworkForm = ({ slug }) => {
             <div>
               <Toggle label="Sold" name="sold" checked={artwork.sold} />
             </div>
-            <div>
-              <Button>Publish</Button>
+            <div className="col-span-2 text-center">
+              <Button>Sumbit</Button>
             </div>
           </div>
         </div>
