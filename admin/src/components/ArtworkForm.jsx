@@ -6,19 +6,23 @@ import { useGalleryContext } from "./GalleryContext";
 import { useEffect, useState } from "react";
 import { IconImage } from "./elements/Icons";
 
-export const ArtworkForm = ({ slug }) => {
+export const ArtworkForm = ({ slug, ...props }) => {
   const { gallery } = useGalleryContext();
   const [isEditImage, setIsEditImage] = useState(true);
-  const [artwork, setArtwork] = useState(gallery.find((item) => item.slug === slug));
+  const artwork = gallery.find((item) => item.slug === slug);
+  const [currentMedia, setCurrentMedia] = useState(artwork.media);
 
   useEffect(() => {
-    setArtwork(gallery.find((item) => item.slug === slug));
     setIsEditImage(false);
+    setCurrentMedia(artwork.media);
   }, [slug]);
 
+  console.log("ArtworkForm");
   console.log(artwork);
   return (
-    <form className="p-4">
+    <form className="p-4" key={slug} {...props}>
+      <input type="hidden" name="id" value={artwork.id} />
+      <input type="hidden" name="media" value={currentMedia} />
       <h2 className="mb-2">Edit Artwork</h2>
       <div className="flex gap-4">
         <div className="flex-1">
