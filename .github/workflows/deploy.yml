@@ -30,7 +30,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           # server: ${{ secrets.FTP_SERVER }}
-          server: ftp.roxanneweidele.com
+          server: roxanneweidele.com
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./admin/dist/ # Ensure this is correct
@@ -44,7 +44,7 @@ jobs:
       #   uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       #   with:
       # server: ${{ secrets.FTP_SERVER }}
-      # server: ftp.roxanneweidele.com
+      # server: roxanneweidele.com
       #     username: ${{ secrets.FTP_USERNAME }}
       #     password: ${{ secrets.FTP_PASSWORD }}
       #     local-dir: ./storybook-static/ # Ensure this is correct
@@ -71,7 +71,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           # server: ${{ secrets.FTP_SERVER }}
-          server: ftp.roxanneweidele.com
+          server: roxanneweidele.com
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./backend/ # Ensure this is correct
