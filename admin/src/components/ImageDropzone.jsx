@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone";
 
 import { useAppContext } from "./AppContext";
 import { useUpload } from "../functions/useUpload";
+import { useApi } from "../functions/useApi";
 import { apiURL } from "../functions/vars";
 import { useGalleryContext } from "./GalleryContext";
 import { uniqid, sortFiles } from "../functions/functions";
@@ -12,32 +13,15 @@ export const ImageDropzone = () => {
   const { token } = useAppContext();
   const { gallery, setGallery, newArtwork } = useGalleryContext();
   const { uploadFile, uploading, uploadError, uploadResult } = useUpload();
+  const { data, loading, error, request } = useApi();
 
   const addNewArt = async (args, index) => {
-    try {
-      const response = await fetch(`${apiURL}artwork/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ ...args, published: 0 }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! ${response.status}`);
-      }
-
-      const result = await response.json();
-      setGallery({ type: "update_new_artwork", index, data: result.data });
-    } catch (err) {
-      console.error("Error adding new artwork", err.message);
-    }
+    const result = await request(`artwork/add`, "POST", { ...args, published: 0 }, token);
+    setGallery({ type: "update_new_artwork", index, data: result.data });
   };
 
   const handleUploadFile = async (file, index) => {
     const result = await uploadFile(file, token);
-    console.log("handleUploadFile:", result);
     const files = sortFiles(result);
     setGallery({ type: "update_file", index, files });
     const parentMedia = result.find((item) => item.media === item.id || item.media === null);

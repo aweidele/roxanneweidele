@@ -17,8 +17,6 @@ export const ArtworkForm = ({ slug, ...props }) => {
     setCurrentMedia(artwork.media);
   }, [slug]);
 
-  console.log("ArtworkForm");
-  console.log(artwork);
   return (
     <form className="p-4" key={slug} {...props}>
       <input type="hidden" name="id" value={artwork.id} />
