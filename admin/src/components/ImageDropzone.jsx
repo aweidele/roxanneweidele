@@ -2,6 +2,7 @@ import { useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 
 import { useAppContext } from "./AppContext";
+import { useUpload } from "../functions/useUpload";
 import { apiURL } from "../functions/vars";
 import { useGalleryContext } from "./GalleryContext";
 import { uniqid, sortFiles } from "../functions/functions";
@@ -10,6 +11,7 @@ import { IconDragAndDrop } from "./elements/Icons";
 export const ImageDropzone = () => {
   const { token } = useAppContext();
   const { gallery, setGallery, newArtwork } = useGalleryContext();
+  const { uploadFile, uploading, uploadError, uploadResult } = useUpload();
 
   const addNewArt = async (args, index) => {
     try {
@@ -33,35 +35,19 @@ export const ImageDropzone = () => {
     }
   };
 
-  const uploadFile = async (file, index) => {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-      const response = await fetch(`${apiURL}upload`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
-
-      const result = await response.json();
-      const files = sortFiles(result);
-      if (!response.ok) throw new Error(result.error || "Upload failed");
-      setGallery({ type: "update_file", index, files });
-
-      const parentMedia = result.find((item) => item.media === item.id || item.media === null);
-      addNewArt({ media: parentMedia.id }, index);
-    } catch (err) {
-      console.error("Upload Error", err.message);
-    }
+  const handleUploadFile = async (file, index) => {
+    const result = await uploadFile(file, token);
+    console.log("handleUploadFile:", result);
+    const files = sortFiles(result);
+    setGallery({ type: "update_file", index, files });
+    const parentMedia = result.find((item) => item.media === item.id || item.media === null);
+    addNewArt({ media: parentMedia.id }, index);
   };
 
   const onDrop = useCallback(
     (acceptedFiles) => {
       const imageFiles = acceptedFiles.map((file, index) => {
-        uploadFile(file, index);
+        handleUploadFile(file, index);
         const newFile = Object.assign(file, {
           preview: URL.createObjectURL(file),
           loading: true,
