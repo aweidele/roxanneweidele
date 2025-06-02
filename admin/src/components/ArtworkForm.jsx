@@ -3,14 +3,37 @@ import { Select } from "./elements/Select";
 import { Toggle } from "./elements/Toggle";
 import { Button } from "./elements/Button";
 import { useGalleryContext } from "./GalleryContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { IconImage } from "./elements/Icons";
+import { ImageDropzone } from "./ImageDropzone";
+import { useAppContext } from "./AppContext";
+import { useUpload } from "../functions/useUpload";
+import { sortFiles } from "../functions/functions";
 
 export const ArtworkForm = ({ slug, ...props }) => {
-  const { gallery } = useGalleryContext();
+  const { gallery, setGallery } = useGalleryContext();
   const [isEditImage, setIsEditImage] = useState(true);
   const artwork = gallery.find((item) => item.slug === slug);
+  const index = gallery.findIndex((item) => item.slug === slug);
   const [currentMedia, setCurrentMedia] = useState(artwork.media);
+  const { uploadFile } = useUpload();
+  console.log("gallery", gallery, index);
+
+  const { token } = useAppContext();
+
+  const onDrop = useCallback(
+    async (acceptedFiles) => {
+      if (acceptedFiles.length > 0) {
+        const result = await uploadFile(acceptedFiles[0], token);
+        const files = sortFiles(result);
+        setCurrentMedia(files.original.id);
+        setGallery({ type: "update_file", index, files });
+        setIsEditImage(false);
+        console.log(files);
+      }
+    },
+    [token]
+  );
 
   useEffect(() => {
     setIsEditImage(false);
@@ -27,7 +50,9 @@ export const ArtworkForm = ({ slug, ...props }) => {
           <div className="relative">
             {isEditImage ? (
               <div className="absolute w-full h-full z-10 p-2 flex flex-col justify-between bg-[rgba(255,255,255,0.5)]">
-                <div>Drop image here</div>
+                <div className="opacity-80">
+                  <ImageDropzone onDrop={onDrop} />
+                </div>
                 <Button type="button" color="bg-uranian-blue-800 hover:bg-uranian-blue text-black" className="shadow-[0 0 3px rgba(0,0,0,0.75)]" onClick={() => setIsEditImage(false)}>
                   Cancel
                 </Button>
