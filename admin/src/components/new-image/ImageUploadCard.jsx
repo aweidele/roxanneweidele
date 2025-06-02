@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { ImageForm } from "./ImageForm";
-import { useGalleryContext } from "./GalleryContext";
-import { useApi } from "../functions/useApi";
-import { useAppContext } from "./AppContext";
+import { useGalleryContext } from "../GalleryContext";
+import { useApi } from "../../functions/useApi";
+import { useAppContext } from "../AppContext";
 
 export const ImageUploadCard = ({ file }) => {
   const { gallery, setGallery } = useGalleryContext();

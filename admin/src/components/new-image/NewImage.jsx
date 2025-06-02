@@ -1,7 +1,7 @@
-import { ImageDropzone } from "./ImageDropzone";
-import { Section } from "./Section";
+import { ImageDropzone } from "../ImageDropzone";
+import { Section } from "../Section";
 import { ImageUploads } from "./ImageUploads";
-import { useGalleryContext } from "./GalleryContext";
+import { useGalleryContext } from "../GalleryContext";
 
 export const NewImage = () => {
   const { gallery, newArtwork } = useGalleryContext();
