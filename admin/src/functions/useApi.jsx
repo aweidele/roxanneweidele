@@ -1,10 +1,13 @@
 import { apiURL } from "./vars";
 import { useCallback, useState } from "react";
 
-export const apiRequest = async (url = "", method = "GET", payload = null, token = null) => {
-  const headers = {
-    "Content-Type": "application/json",
-  };
+export const apiRequest = async (url = "", method = "GET", payload = null, token = null, isFormData = false) => {
+  const headers = {};
+
+  if (!isFormData) {
+    headers["Content-Type"] = "application/json";
+  }
+
   if (token) headers.Authorization = `Bearer ${token}`;
 
   const options = {
@@ -12,7 +15,7 @@ export const apiRequest = async (url = "", method = "GET", payload = null, token
     headers,
   };
 
-  if (payload && method !== "GET") options.body = JSON.stringify(payload);
+  if (payload && method !== "GET") options.body = isFormData ? payload : JSON.stringify(payload);
 
   const response = await fetch(apiURL + url, options);
   const responseData = await response.json();

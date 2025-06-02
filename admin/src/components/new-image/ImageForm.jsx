@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Button } from "./elements/Button";
-import { Input } from "./elements/Input";
-import { Toggle } from "./elements/Toggle";
-import { Select } from "./elements/Select";
+import { Button } from "../elements/Button";
+import { Input } from "../elements/Input";
+import { Toggle } from "../elements/Toggle";
+import { Select } from "../elements/Select";
 
 export const ImageForm = ({ artwork, submitAction }) => {
   const [slug, setSlug] = useState(artwork.slug);

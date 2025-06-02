@@ -35,7 +35,6 @@ export const ArtworkDialog = () => {
     const values = Object.fromEntries(formData.entries());
     const submitValues = { ...values, sold: values.sold && values.sold === "on" ? 1 : 0 };
 
-    console.log(submitValues);
     const result = await request(`artwork/${values.id}/edit`, "PUT", submitValues, token);
     if (result.success) {
       setIsClosing(true);

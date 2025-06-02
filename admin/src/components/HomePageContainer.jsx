@@ -1,5 +1,5 @@
 import { Gallery } from "./Gallery";
-import { NewImage } from "./NewImage";
+import { NewImage } from "./new-image/NewImage";
 import { useGalleryContext } from "./GalleryContext";
 
 export const HomePageContainer = () => {
