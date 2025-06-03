@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useApi } from "../functions/useApi";
+import { useApi } from "@shared";
 
 export const Temp = () => {
   const { data, loading, error, request } = useApi();

@@ -4,7 +4,7 @@ import { GalleryProvider } from "./GalleryContext";
 import { ArtworkForm } from "./ArtworkForm";
 import { useRef, useEffect, useState } from "react";
 import { useAppContext } from "./AppContext";
-import { useApi } from "../functions/useApi";
+import { useApi } from "@shared";
 
 export const ArtworkDialog = () => {
   const { slug } = useParams();

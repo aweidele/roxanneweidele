@@ -7,8 +7,7 @@ import { useEffect, useState, useCallback } from "react";
 import { IconImage } from "./elements/Icons";
 import { ImageDropzone } from "./ImageDropzone";
 import { useAppContext } from "./AppContext";
-import { useUpload } from "../functions/useUpload";
-import { sortFiles } from "../functions/functions";
+import { sortFiles, useUpload } from "@shared";
 
 export const ArtworkForm = ({ slug, ...props }) => {
   const { gallery, setGallery } = useGalleryContext();

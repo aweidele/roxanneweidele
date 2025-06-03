@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { ImageForm } from "./ImageForm";
 import { useGalleryContext } from "../GalleryContext";
-import { useApi } from "../../functions/useApi";
+import { useApi } from "@shared";
 import { useAppContext } from "../AppContext";
 
 export const ImageUploadCard = ({ file }) => {

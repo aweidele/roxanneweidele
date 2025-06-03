@@ -1,4 +1,4 @@
-import { bg } from "../functions/vars";
+import { bg } from "@shared";
 
 export const Section = ({ background = "white", children, tag = "section", className = "" }) => {
   const Tag = tag;

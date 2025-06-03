@@ -1,9 +1,9 @@
 import { useRef, useState, useEffect } from "react";
-import { isNumeric } from "../functions/functions";
 import { Template } from "./layout/Template";
 import { useAppContext } from "./AppContext";
 
-import { border, apiURL } from "../functions/vars";
+// import { border, apiURL } from "../functions/vars";
+import { border, apiURL, isNumeric } from "@shared";
 
 // --color-sage: #a8b587ff;
 // --color-rose-quartz: #af90a9ff;

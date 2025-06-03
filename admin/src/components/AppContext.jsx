@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer, useState } from "react";
-import { getIsAuthenticated } from "../functions/functions";
+import { getIsAuthenticated } from "@shared";
 
 const galleryReducer = () => {};
 
