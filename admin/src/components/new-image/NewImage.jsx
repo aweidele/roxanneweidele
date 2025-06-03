@@ -3,10 +3,8 @@ import { Section } from "../Section";
 import { ImageUploads } from "./ImageUploads";
 import { useGalleryContext } from "../GalleryContext";
 import { useAppContext } from "../AppContext";
-import { useUpload } from "../../functions/useUpload";
-import { useApi } from "../../functions/useApi";
 import { useCallback } from "react";
-import { uniqid, sortFiles } from "../../functions/functions";
+import { uniqid, sortFiles, useApi, useUpload } from "@shared";
 
 export const NewImage = () => {
   const { token } = useAppContext();

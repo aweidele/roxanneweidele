@@ -1,7 +1,7 @@
 import { HomePageContainer } from "../components/HomePageContainer";
 import { GalleryProvider } from "../components/GalleryContext";
-import { sortGallery } from "../functions/functions";
-import { apiRequest } from "../functions/useApi";
+import { sortGallery, apiRequest } from "@shared";
+
 import { Outlet } from "react-router-dom";
 
 export const HomePage = () => {

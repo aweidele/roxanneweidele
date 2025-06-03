@@ -1,4 +1,4 @@
-import { apiURL } from "./vars";
+import { apiURL } from "@shared";
 import { useCallback, useState } from "react";
 
 export const apiRequest = async (url = "", method = "GET", payload = null, token = null, isFormData = false) => {
