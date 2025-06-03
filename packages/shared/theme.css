@@ -1,0 +1,36 @@
+@theme {
+  --font-heading: calluna-sans, sans-serif;
+  --font-sans: omnes-pro, sans-serif;
+
+  --spacing-page: calc(100vh - 72px);
+  --spacing-toggle-on: calc(100% - 0.75rem - 1px);
+
+  --color-sage: oklch(0.75 0.0648 120.79);
+  --color-rose-quartz: oklch(0.69 0.0508 332.81);
+  --color-china-rose: oklch(0.56 0.0968 351.88);
+  --color-cordovan: oklch(0.5 0.1056 10.44);
+  --color-uranian-blue: oklch(0.9 0.0579 232.56);
+
+  --color-uranian-blue-800: oklch(0.8 0.0579 232.56);
+  --color-popup: rgba(0, 0, 0, 0.6);
+
+  --shadow-form: 0 0 5px oklch(0.5 0.1056 10.44);
+  --shadow-sold: 0 0 3px rgba(255, 255, 255, 0.7);
+
+  --text-xxs: 0.5625rem;
+}
+
+h1 {
+  @apply font-heading uppercase text-2xl font-light tracking-widest;
+}
+h2 {
+  @apply font-heading uppercase text-lg font-light tracking-widest;
+}
+
+h3 {
+  @apply font-sans text-lg font-medium tracking-widest;
+}
+
+button {
+  @apply cursor-pointer transition-all duration-300;
+}
