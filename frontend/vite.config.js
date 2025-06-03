@@ -12,4 +12,12 @@ export default defineConfig({
       "@shared": path.resolve(__dirname, "../packages/shared"),
     },
   },
+  css: {
+    preprocessorOptions: {
+      css: {
+        // Needed for @import aliases to resolve properly
+        additionalData: "",
+      },
+    },
+  },
 });
