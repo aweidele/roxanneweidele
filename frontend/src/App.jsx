@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { apiURL } from "./functions/vars";
+import { apiURL } from "@shared";
 import "./App.css";
 
 function App() {
