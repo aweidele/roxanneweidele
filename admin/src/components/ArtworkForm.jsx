@@ -16,7 +16,6 @@ export const ArtworkForm = ({ slug, ...props }) => {
   const index = gallery.findIndex((item) => item.slug === slug);
   const [currentMedia, setCurrentMedia] = useState(artwork.media);
   const { uploadFile } = useUpload();
-  console.log("gallery", gallery, index);
 
   const { token } = useAppContext();
 
@@ -28,7 +27,6 @@ export const ArtworkForm = ({ slug, ...props }) => {
         setCurrentMedia(files.original.id);
         setGallery({ type: "update_file", index, files });
         setIsEditImage(false);
-        console.log(files);
       }
     },
     [token]

@@ -1,8 +1,20 @@
 <?php
 require_once __DIR__ . '/../config.php';
 $pdo = getPDOConnection();
-$sql = "SELECT * FROM artwork";
-$stmt = $pdo->query($sql);
+
+$whereParts = [];
+$params = [];
+
+foreach ($_GET as $column => $value) {
+    $whereParts[] = "`$column` = ?";
+    $params[] = $value;
+}
+
+$whereClause = sizeof($whereParts) ? " WHERE " . implode(" AND ", $whereParts) : "";
+
+$sql = "SELECT * FROM artwork$whereClause";
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
 $artwork = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $media = [];
@@ -24,5 +36,7 @@ if(sizeof($artwork)) {
 
 echo json_encode([
   'artwork' => $artwork,
-  'media' => $media
+  'media' => $media,
+  'g' => $whereClause, 
+  'sql' => $sql
 ]);
