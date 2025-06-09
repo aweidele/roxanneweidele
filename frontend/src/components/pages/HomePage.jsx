@@ -4,6 +4,7 @@ import { Gallery } from "../gallery/Gallery";
 import { Container } from "../layout";
 import { Section } from "../layout/Section";
 import { Await, NavLink, useLoaderData } from "react-router-dom";
+import { Filter } from "../gallery/Filter";
 
 export const HomePage = () => {
   const { gallery } = useLoaderData();
@@ -17,6 +18,12 @@ export const HomePage = () => {
       setFilteredGallery(gallery);
     }
   }, [filter]);
+
+  const handleFilter = (term) => {
+    console.log("?");
+    setFilter(term);
+  };
+
   return (
     <>
       <header className="bg-uranian-blue pt-45.5 py-37">
@@ -27,9 +34,7 @@ export const HomePage = () => {
       <Section background="chinaRose" className="py-10">
         <Heading className="text-center">My Work</Heading>
         <div>
-          <button onClick={() => setFilter("all")}>All</button>
-          <button onClick={() => setFilter("pastels")}>Pastels</button>
-          <button onClick={() => setFilter("oils")}>Oils</button>
+          <Filter active={filter} onFilter={handleFilter} />
           {filter}
         </div>
       </Section>
