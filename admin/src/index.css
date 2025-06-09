@@ -1,2 +1,13 @@
 @import "tailwindcss";
 @import "@shared/theme.css";
+
+h1 {
+  @apply font-heading uppercase text-2xl font-light tracking-widest;
+}
+h2 {
+  @apply font-heading uppercase text-lg font-light tracking-widest;
+}
+
+h3 {
+  @apply font-sans text-base font-medium tracking-widest;
+}

@@ -10,25 +10,40 @@
   --color-china-rose: oklch(0.56 0.0968 351.88);
   --color-cordovan: oklch(0.5 0.1056 10.44);
   --color-uranian-blue: oklch(0.9 0.0579 232.56);
-
   --color-uranian-blue-800: oklch(0.8 0.0579 232.56);
   --color-popup: rgba(0, 0, 0, 0.6);
+
+  --color-rose-quartz-70: oklch(0.69 0.0508 332.81 / 0.8);
 
   --shadow-form: 0 0 5px oklch(0.5 0.1056 10.44);
   --shadow-sold: 0 0 3px rgba(255, 255, 255, 0.7);
 
+  --text-lg-sm: 1.258rem;
+  --text-xl-sm: 1.406rem;
+  --text-2xl-sm: 1.758rem;
+  --text-3xl-sm: 1.965rem;
+  --text-4xl-sm: 2.197rem;
+  --text-5xl-sm: 2.747rem;
+
+  --text-lg-md: 1.258rem;
+  --text-xl-md: 1.572rem;
+  --text-2xl-md: 1.965rem;
+  --text-3xl-md: 2.457rem;
+  --text-4xl-md: 2.747rem;
+  --text-5xl-md: 3.433em;
+
+  --text-base: 1.125rem;
+  --text-lg: 1.406rem;
+  --text-xl: 1.758rem;
+  --text-2xl: 2.197rem;
+  --text-3xl: 2.747rem;
+  --text-4xl: 3.433rem;
+  --text-5xl: 4.292rem;
+
   --text-xxs: 0.5625rem;
-}
+  --text-button: 1.25rem;
 
-h1 {
-  @apply font-heading uppercase text-2xl font-light tracking-widest;
-}
-h2 {
-  @apply font-heading uppercase text-lg font-light tracking-widest;
-}
-
-h3 {
-  @apply font-sans text-lg font-medium tracking-widest;
+  --container-7xl: 77.5rem;
 }
 
 button {
