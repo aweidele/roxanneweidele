@@ -31,17 +31,6 @@
   --container-7xl: 77.5rem;
 }
 
-h1 {
-  @apply font-heading uppercase text-2xl font-light tracking-widest;
-}
-h2 {
-  @apply font-heading uppercase text-lg font-light tracking-widest;
-}
-
-h3 {
-  @apply font-sans text-lg font-medium tracking-widest;
-}
-
 button {
   @apply cursor-pointer transition-all duration-300;
 }
