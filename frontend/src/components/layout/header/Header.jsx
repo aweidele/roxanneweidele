@@ -8,7 +8,7 @@ export const Header = ({ ...props }) => {
       <Container className="py-11">
         <div className="flex justify-between items-center gap-5">
           <NavLink to="/">
-            <Logo className="w-56.25 fill-current" />
+            <Logo className="w-28 lg:w-56.25 fill-current" />
             <span className="sr-only">Home</span>
           </NavLink>
           <Social />
