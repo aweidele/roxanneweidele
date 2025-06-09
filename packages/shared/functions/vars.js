@@ -3,4 +3,5 @@ export const bg = { sage: "bg-sage", roseQuartz: "bg-rose-quartz", chinaRose: "b
 export const apiURL = import.meta.env.VITE_API_URL || "https://api.roxanneweidele.com/";
 export const containerWidths = {
   wide: "max-w-7xl",
+  narrow: "max-w-4xl",
 };
