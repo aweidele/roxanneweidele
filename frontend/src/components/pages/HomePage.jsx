@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Heading } from "../elements/Heading";
 import { Gallery } from "../Gallery";
 import { Container } from "../layout";
@@ -6,6 +7,16 @@ import { Await, NavLink, useLoaderData } from "react-router-dom";
 
 export const HomePage = () => {
   const { gallery } = useLoaderData();
+  const [filter, setFilter] = useState("all");
+  const [filteredGallery, setFilteredGallery] = useState(gallery);
+
+  useEffect(() => {
+    if (filter !== "all") {
+      setFilteredGallery(gallery.filter((item) => item.medium === filter));
+    } else {
+      setFilteredGallery(gallery);
+    }
+  }, [filter]);
   return (
     <>
       <header className="bg-uranian-blue pt-45.5 py-37">
@@ -15,9 +26,15 @@ export const HomePage = () => {
       </header>
       <Section background="chinaRose" className="py-10">
         <Heading className="text-center">My Work</Heading>
+        <div>
+          <button onClick={() => setFilter("all")}>All</button>
+          <button onClick={() => setFilter("pastels")}>Pastels</button>
+          <button onClick={() => setFilter("oils")}>Oils</button>
+          {filter}
+        </div>
       </Section>
       <Section>
-        <Gallery gallery={gallery} />
+        <Gallery gallery={filteredGallery} />
       </Section>
     </>
   );
