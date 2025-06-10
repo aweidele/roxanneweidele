@@ -4,6 +4,8 @@
 
   --spacing-page: calc(100vh - 72px);
   --spacing-toggle-on: calc(100% - 0.75rem - 1px);
+  --spacing-g: calc(100vh - 10rem);
+  --spacing-gm: calc(100vh - 5rem);
 
   --color-sage: oklch(0.75 0.0648 120.79);
   --color-rose-quartz: oklch(0.69 0.0508 332.81);
@@ -12,6 +14,7 @@
   --color-uranian-blue: oklch(0.9 0.0579 232.56);
   --color-uranian-blue-800: oklch(0.8 0.0579 232.56);
   --color-uranian-blue-900: oklch(0.5676 0.0579 232.56);
+  --color-uranian-blue-1000: oklch(0.2824 0.0579 232.56);
   --color-popup: rgba(0, 0, 0, 0.6);
 
   --color-rose-quartz-70: oklch(0.69 0.0508 332.81 / 0.8);

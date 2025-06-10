@@ -6,3 +6,4 @@ export { About } from "./About";
 export { WhereToSee } from "./WhereToSee";
 export { Contact } from "./Contact";
 export { Artwork } from "./Artwork";
+export { Single } from "./Single";

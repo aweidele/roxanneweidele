@@ -5,14 +5,22 @@ $pdo = getPDOConnection();
 $whereParts = [];
 $params = [];
 
-foreach ($_GET as $column => $value) {
-    $whereParts[] = "`$column` = ?";
-    $params[] = $value;
+// foreach ($_GET as $column => $value) {
+//     $whereParts[] = "`$column` = ?";
+//     $params[] = $value;
+// }
+
+if( isset($_GET["endpoint"]) ) {
+  if($_GET["endpoint"] === "published") {
+    $whereParts[] = "`published` = ?";
+    $params[] = 1;
+  }
 }
 
 $whereClause = sizeof($whereParts) ? " WHERE " . implode(" AND ", $whereParts) : "";
 
 $sql = "SELECT * FROM artwork$whereClause";
+// $sql = "SELECT * FROM artwork";
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $artwork = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -37,6 +45,6 @@ if(sizeof($artwork)) {
 echo json_encode([
   'artwork' => $artwork,
   'media' => $media,
-  'g' => $whereClause, 
+  'g' => $_GET, 
   'sql' => $sql
 ]);
