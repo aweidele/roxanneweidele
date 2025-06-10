@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { RootLayout, HomePage, galleryLoader } from "../components/pages";
+import { RootLayout, HomePage, galleryLoader, Error, About, WhereToSee, Contact, Artwork } from "../components/pages";
 const basename = import.meta.env.VITE_BASENAME || "/";
 
 export const router = createBrowserRouter(
@@ -7,12 +7,29 @@ export const router = createBrowserRouter(
     {
       path: "/",
       element: <RootLayout />,
-      errorElement: <div>Error.</div>,
+      errorElement: <Error />,
       children: [
         {
           index: true,
           element: <HomePage />,
           loader: galleryLoader,
+        },
+        {
+          path: "artwork",
+          element: <Artwork />,
+          loader: galleryLoader,
+        },
+        {
+          path: "about",
+          element: <About />,
+        },
+        {
+          path: "where-to-see",
+          element: <WhereToSee />,
+        },
+        {
+          path: "contact",
+          element: <Contact />,
         },
       ],
     },

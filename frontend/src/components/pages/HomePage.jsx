@@ -21,7 +21,6 @@ export const HomePage = () => {
   }, [filter]);
 
   const handleFilter = (term) => {
-    console.log("?");
     setFilter(term);
   };
 
