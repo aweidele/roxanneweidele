@@ -4,7 +4,8 @@
 
   --spacing-page: calc(100vh - 72px);
   --spacing-toggle-on: calc(100% - 0.75rem - 1px);
-  --spacing-g: calc(100vh - 10rem);
+  /* --spacing-g: calc(100vh - 6.25rem); */
+  --spacing-g: calc(100vh - 8.25rem);
   --spacing-gm: calc(100vh - 5rem);
 
   --color-sage: oklch(0.75 0.0648 120.79);
@@ -20,6 +21,7 @@
   --color-rose-quartz-70: oklch(0.69 0.0508 332.81 / 0.8);
   --color-china-rose-80: oklch(0.56 0.0968 351.88 / 0.8);
   --color-uranian-blue-900-80: oklch(0.5676 0.0579 232.56 / 0.8);
+  --color-sage-0: oklch(0.75 0.0648 120.79 / 0);
 
   --color-overlay-40: rgba(0, 0, 0, 0.2);
 
@@ -65,4 +67,11 @@
 button,
 a {
   @apply cursor-pointer transition-all duration-300;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

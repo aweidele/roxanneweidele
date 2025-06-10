@@ -13,7 +13,6 @@ export const Gallery = ({ gallery }) => {
     height: item.files.lg.height,
     item: { ...item },
   }));
-  console.log("photos", photos);
   return (
     <div>
       {hover}

@@ -17,7 +17,6 @@ export const apiRequest = async (url = "", method = "GET", payload = null, token
 
   if (payload && method !== "GET") options.body = isFormData ? payload : JSON.stringify(payload);
   const endpoint = apiURL + url;
-  console.log(endpoint);
 
   const response = await fetch(endpoint, options);
   const responseData = await response.json();

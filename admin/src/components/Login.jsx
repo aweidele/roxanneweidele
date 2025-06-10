@@ -47,7 +47,6 @@ export const Login = () => {
   };
 
   const handleLogin = async (newPin) => {
-    console.log(handleLogin);
     const response = await fetch(`${apiURL}login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
