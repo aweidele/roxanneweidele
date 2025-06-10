@@ -41,7 +41,7 @@ export const Header = ({ ...props }) => {
               <span className="sr-only">Menu</span>
             </button>
             <div className={`fixed top-0 left-0 px-5 py-10 w-screen h-screen bg-uranian-blue-900-80 z-30 flex flex-col items-stretch backdrop-blur-sm transition-all duration-500${menuOpen ? "" : " translate-x-full"} md:contents`}>
-              <Nav className="max-md:grow-1 max-md:flex max-md:items-center" handleClose={() => setMenuOpen(false)} />
+              <Nav className={`max-md:grow-1 max-md:flex max-md:items-center md:py-4 md:px-6 transition-all duration-500${scrolled ? " md:bg-uranian-blue-900-80 md:rounded-2xl" : ""}`} handleClose={() => setMenuOpen(false)} />
               <Social handleClose={() => setMenuOpen(false)} />
             </div>
           </div>

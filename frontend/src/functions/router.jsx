@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { RootLayout, HomePage, galleryLoader, Error, About, WhereToSee, Contact, Artwork } from "../components/pages";
+import { RootLayout, HomePage, galleryLoader, Error, About, WhereToSee, Contact, Artwork, Single } from "../components/pages";
 const basename = import.meta.env.VITE_BASENAME || "/";
 
 export const router = createBrowserRouter(
@@ -17,6 +17,12 @@ export const router = createBrowserRouter(
         {
           path: "artwork",
           element: <Artwork />,
+          loader: galleryLoader,
+        },
+
+        {
+          path: "artwork/:slug",
+          element: <Single />,
           loader: galleryLoader,
         },
         {

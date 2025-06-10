@@ -3,26 +3,15 @@ import { Heading } from "../elements/Heading";
 import { Gallery } from "../gallery/Gallery";
 import { Container } from "../layout";
 import { Section } from "../layout/Section";
-import { Await, NavLink, useLoaderData } from "react-router-dom";
+import { Await, useLoaderData } from "react-router-dom";
 import { Filter } from "../gallery/Filter";
 import bg from "/hp-bg.jpg";
 
+import { useGallery } from "@functions";
+
 export const HomePage = () => {
   const { gallery } = useLoaderData();
-  const [filter, setFilter] = useState("all");
-  const [filteredGallery, setFilteredGallery] = useState(gallery);
-
-  useEffect(() => {
-    if (filter !== "all") {
-      setFilteredGallery(gallery.filter((item) => item.medium === filter));
-    } else {
-      setFilteredGallery(gallery);
-    }
-  }, [filter]);
-
-  const handleFilter = (term) => {
-    setFilter(term);
-  };
+  const { filter, filteredGallery, handleFilter } = useGallery(gallery);
 
   return (
     <>

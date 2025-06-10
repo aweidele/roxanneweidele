@@ -51,3 +51,10 @@ export const getTextColor = (backgroundColor, format = "class") => {
   if (format === "class") return luminance > 0.5 ? "text-black" : "text-white";
   return luminance > 0.5 ? "#3f3f47" : "#FFFFFF";
 };
+
+export const stringToLines = (str) => {
+  return str
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line);
+};
