@@ -1,5 +1,47 @@
+import { useEffect, useRef } from "react";
 import { useParams, useLoaderData, NavLink } from "react-router-dom";
 import { Container } from "../layout";
+import { ThumbnailScroller } from "../gallery/ThumbnailScroller";
+
+const InfiniteThumbnailRow = ({ thumbnails }) => {
+  const scrollRef = useRef(null);
+  const loopedThumbnails = [...thumbnails, ...thumbnails]; // 2x for looping
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const scrollWidth = container.scrollWidth / 2;
+
+    // Set initial scroll to middle
+    container.scrollLeft = scrollWidth;
+
+    const handleScroll = () => {
+      if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
+        // Reached near end — reset to middle
+        container.scrollLeft = scrollWidth;
+      } else if (container.scrollLeft <= 0) {
+        // Reached near start — reset to middle
+        container.scrollLeft = scrollWidth;
+      }
+    };
+
+    container.addEventListener("scroll", handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div ref={scrollRef} className="w-screen h-[6.25rem] overflow-x-scroll whitespace-nowrap scroll-smooth no-scrollbar">
+      <div className="flex gap-0.5 h-full">
+        {loopedThumbnails.map((src, i) => (
+          <img key={i} src={src.files.thumb.url} alt={src.title} className="h-full aspect-auto object-cover flex-shrink-0" />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default InfiniteThumbnailRow;
 
 export const Single = () => {
   const { gallery } = useLoaderData();
@@ -43,7 +85,8 @@ export const Single = () => {
           </Container>
         </div>
       </div>
-      <div>thumbnails</div>
+      <ThumbnailScroller gallery={gallery} current={slug} />
+      {/* <InfiniteThumbnailRow thumbnails={gallery} /> */}
     </div>
   );
 };
