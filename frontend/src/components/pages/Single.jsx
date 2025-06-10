@@ -1,4 +1,5 @@
 import { useParams, useLoaderData, NavLink } from "react-router-dom";
+import { Container } from "../layout";
 
 export const Single = () => {
   const { gallery } = useLoaderData();
@@ -15,7 +16,7 @@ export const Single = () => {
   console.log("Previous", previous);
   return (
     <div>
-      <div className="h-g bg-uranian-blue-1000">
+      <div className="h-g mb-8 bg-uranian-blue-1000 relative">
         <div className="flex gap-2 h-full">
           <div className="grow-1 order-2">
             <img src={files.original.url} className="w-full h-full object-contain object-center" />
@@ -27,9 +28,20 @@ export const Single = () => {
             Next
           </NavLink>
         </div>
-      </div>
-      <div>
-        <h1>{title}</h1>
+
+        <div className="bg-cordovan text-white py-1 absolute bottom-0 w-full translate-y-8">
+          <Container w="full">
+            <div className="flex gap-3.5">
+              <div className="grow-1 flex gap-3.5 justify-center">
+                <h1 className="uppercase tracking-wider">{title}</h1>
+                <div className="tracking-wider">
+                  {width}in. x {height}in.
+                </div>
+              </div>
+              <div>Share</div>
+            </div>
+          </Container>
+        </div>
       </div>
       <div>thumbnails</div>
     </div>

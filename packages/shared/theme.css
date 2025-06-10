@@ -4,7 +4,7 @@
 
   --spacing-page: calc(100vh - 72px);
   --spacing-toggle-on: calc(100% - 0.75rem - 1px);
-  --spacing-g: calc(100vh - 10rem);
+  --spacing-g: calc(100vh - 6.25rem);
   --spacing-gm: calc(100vh - 5rem);
 
   --color-sage: oklch(0.75 0.0648 120.79);
