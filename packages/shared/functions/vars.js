@@ -19,6 +19,7 @@ const headingClasses = ["text-5xl-sm md:text-5xl-md lg:text-5xl", "text-4xl-sm m
 export const headingClass = (l, extraClasses) => ["font-heading font-light", headingClasses[l - 1], extraClasses].join(" ");
 
 export const containerWidths = {
+  full: "max-w-full",
   wide: "max-w-7xl",
   narrow: "max-w-4xl",
 };
