@@ -51,6 +51,14 @@
   --container-7xl: 77.5rem;
 }
 
+@layer utilities {
+  @media (min-width: 640px) and (max-width: 767px) {
+    .sm-md\:bg-blue-500 {
+      background-color: #3b82f6; /* Tailwind's blue-500 */
+    }
+  }
+}
+
 button,
 a {
   @apply cursor-pointer transition-all duration-300;

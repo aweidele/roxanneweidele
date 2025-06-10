@@ -10,6 +10,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@shared": path.resolve(__dirname, "../packages/shared"),
+      "@functions": path.resolve(__dirname, "./src/functions"),
     },
   },
   css: {
