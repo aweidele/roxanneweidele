@@ -26,19 +26,19 @@ export const HomePage = () => {
 
   return (
     <>
-      <header className="bg-uranian-blue pt-45.5 py-37">
+      <header className="bg-white pt-47.5 py-35 sticky top-0 w-full z-0">
         <Container w="narrow">
           <p className="text-center text-2xl-sm md:text-2xl-md lg:text-2xl font-heading font-light">Roxanne is a lifelong artist and art educator whose expressive landscapes in chalk pastels and oils capture emotional responses to nature. She lives in Maryland and is active in local artist communities and galleries.</p>
         </Container>
       </header>
-      <Section background="chinaRose" className="py-10">
+      <Section background="chinaRose80" className="py-10 relative z-10 backdrop-blur-xs">
         <Heading className="text-center">My Work</Heading>
         <div>
           <Filter active={filter} onFilter={handleFilter} />
           {filter}
         </div>
       </Section>
-      <Section>
+      <Section background="white" className="relative z-10">
         <Gallery gallery={filteredGallery} />
       </Section>
     </>

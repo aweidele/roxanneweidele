@@ -10,6 +10,7 @@ export const themeColors = {
   cordovan: { bg: "bg-cordovan", border: "border-cordovan", text: getTextColor("#974856") },
   uranianBlue: { bg: "bg-uranian-blue", border: "border-uranian-blue", text: getTextColor("#bce5fa") },
   white: { bg: "bg-white", border: "border-white", text: getTextColor("#99c5de") },
+  chinaRose80: { bg: "bg-china-rose-80", border: "border-china-rose-80", text: getTextColor("#a05c7c") },
 };
 
 export const apiURL = import.meta.env.VITE_API_URL || "https://api.roxanneweidele.com/";
