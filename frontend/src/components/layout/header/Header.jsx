@@ -4,7 +4,7 @@ import { Social } from "./Social";
 import { useEffect, useState } from "react";
 import { Nav } from "./Nav";
 
-export const Header = ({ ...props }) => {
+export const Header = ({ hasSlug = false, ...props }) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -29,7 +29,7 @@ export const Header = ({ ...props }) => {
     <>
       <header {...props}>
         <h1 className="sr-only">Portfolio of Roxanne Weidele, Maryland-based artist specializing in calm, natural landscape paintings in bold, lush colors.</h1>
-        <Container w={scrolled ? "full" : "wide"} className={`py-4${scrolled ? "" : " md:py-11"} transition-all duration-500`}>
+        <Container w={scrolled || hasSlug ? "full" : "wide"} className={`py-4${scrolled || hasSlug ? "" : " md:py-11"} transition-all duration-500`}>
           <div className="flex justify-between items-center gap-5">
             <NavLink to="/" className="text-uranian-blue hover:text-white max-md:relative max-md:z-40" onClick={() => setMenuOpen(false)}>
               <Logo className="w-28 lg:w-56.25 fill-current" />

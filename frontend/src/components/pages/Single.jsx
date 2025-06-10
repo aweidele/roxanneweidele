@@ -52,10 +52,6 @@ export const Single = () => {
   const next = gallery[currentIndex < gallery.length - 1 ? currentIndex + 1 : 0];
   const previous = gallery[currentIndex > 0 ? currentIndex - 1 : gallery.length - 1];
 
-  console.log(currentIndex, gallery.length);
-  // console.log("Current", current);
-  console.log("Next", next);
-  console.log("Previous", previous);
   return (
     <div>
       <div className="h-g mb-8 bg-uranian-blue-1000 relative">

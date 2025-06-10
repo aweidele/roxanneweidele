@@ -2,7 +2,6 @@ import { stringToLines } from "@shared";
 
 export const Paragraphs = ({ content, ...props }) => {
   const paragraphs = stringToLines(content);
-  console.log(paragraphs);
   return (
     <>
       {paragraphs.map((paragraph) => (

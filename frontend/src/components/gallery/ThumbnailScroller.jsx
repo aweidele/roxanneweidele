@@ -15,7 +15,6 @@ export const ThumbnailScroller = ({ gallery, current }) => {
     container.scrollLeft = scrollWidth;
 
     const handleScroll = () => {
-      console.log("shrimp");
       // if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
       //   // Reached near end — reset to middle
       //   container.scrollLeft = scrollWidth;
