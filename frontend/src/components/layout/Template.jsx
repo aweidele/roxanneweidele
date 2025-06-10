@@ -1,4 +1,5 @@
 import { Colors } from "../tmp/Colors";
+import { Footer } from "./footer/Footer";
 import { Header } from "./index";
 
 export const Template = ({ children }) => {
@@ -6,9 +7,8 @@ export const Template = ({ children }) => {
     <>
       <Header className="w-full absolute top-0 left-0 z-50" />
       <main>{children}</main>
-      <footer>
-        <Colors />
-      </footer>
+      <Footer />
+      <Colors />
     </>
   );
 };
