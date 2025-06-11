@@ -60,10 +60,10 @@ export const Single = () => {
             <img src={files.original.url} className="w-full h-full object-contain object-center" />
           </div>
           <NavLink className="order-1 flex items-center text-center text-white p-2" to={`/artwork/${previous.slug}`}>
-            Previous
+            <span>Previous</span>
           </NavLink>
           <NavLink className="order-3 flex items-center text-center text-white p-2" to={`/artwork/${next.slug}`}>
-            Next
+            <span>Next</span>
           </NavLink>
         </div>
 

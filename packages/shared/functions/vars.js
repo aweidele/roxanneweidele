@@ -15,11 +15,12 @@ export const themeColors = {
 
 export const apiURL = import.meta.env.VITE_API_URL || "https://api.roxanneweidele.com/";
 
-const headingClasses = ["text-5xl-sm md:text-5xl-md lg:text-5xl", "text-4xl-sm md:text-4xl-md lg:text-4xl uppercase", "text-3xl", "text-2xl", "text-xl", "text-lg"];
+const headingClasses = ["text-5xl-sm md:text-5xl-md lg:text-5xl", "text-4xl-sm md:text-4xl-md lg:text-4xl uppercase", "text-2xl", "text-2xl", "text-xl", "text-lg"];
 export const headingClass = (l, extraClasses) => ["font-heading font-light", headingClasses[l - 1], extraClasses].join(" ");
 
 export const containerWidths = {
   full: "max-w-full",
   wide: "max-w-7xl",
   narrow: "max-w-4xl",
+  xnarrow: "max-w-2xl",
 };

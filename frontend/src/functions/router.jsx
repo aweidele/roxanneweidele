@@ -30,7 +30,7 @@ export const router = createBrowserRouter(
           element: <About />,
         },
         {
-          path: "where-to-see",
+          path: "currently-on-view",
           element: <WhereToSee />,
         },
         {

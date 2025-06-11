@@ -8,8 +8,8 @@ export const navigation = [
     to: "/about",
   },
   {
-    label: "Visit My Work In Person",
-    to: "/where-to-see",
+    label: "Currently on View",
+    to: "/currently-on-view",
   },
   {
     label: "Contact",
