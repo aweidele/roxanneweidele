@@ -29,10 +29,10 @@ export const Header = ({ hasSlug = false, ...props }) => {
     <>
       <header {...props}>
         <h1 className="sr-only">Portfolio of Roxanne Weidele, Maryland-based artist specializing in calm, natural landscape paintings in bold, lush colors.</h1>
-        <Container w={scrolled || hasSlug ? "full" : "wide"} className={`py-4${scrolled || hasSlug ? "" : " md:py-11"} transition-all duration-500`}>
+        <Container w="full" className={`py-4 transition-all duration-500`}>
           <div className="flex justify-between items-center gap-5">
             <NavLink to="/" className="text-uranian-blue hover:text-white max-md:relative max-md:z-40" onClick={() => setMenuOpen(false)}>
-              <Logo className="w-28 lg:w-56.25 fill-current" />
+              <Logo className="w-28 lg:w-40 fill-current" />
               <span className="sr-only">Home</span>
             </NavLink>
             <button className="md:hidden relative z-40 text-white w-8 h-8" onClick={toggleMenuOpen}>

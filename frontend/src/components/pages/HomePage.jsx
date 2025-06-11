@@ -5,7 +5,7 @@ import { Container } from "../layout";
 import { Section } from "../layout/Section";
 import { Await, useLoaderData } from "react-router-dom";
 import { Filter } from "../gallery/Filter";
-import bg from "/hp-bg.jpg";
+import bg from "/cover.jpg";
 
 import { useGallery } from "@functions";
 
