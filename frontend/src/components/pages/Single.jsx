@@ -74,9 +74,8 @@ export const Single = () => {
   return (
     <div>
       <div className="h-g mb-8 bg-uranian-blue-1000 relative">
-        <div className="flex items-center h-full relative">
+        <div className="flex items-center h-full relative overflow-hidden">
           <img src={files.original.url} className="w-full h-full object-contain object-center relative z-0" />
-
           <NextPrev dir="prev" to={`/artwork/${previous.slug}`}>
             Previous
           </NextPrev>
