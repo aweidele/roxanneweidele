@@ -81,3 +81,7 @@ a {
 main > section a {
   @apply text-china-rose underline decoration-china-rose-0 hover:text-cordovan hover:decoration-cordovan;
 }
+
+.transition-300 {
+  @apply transition-all duration-300;
+}

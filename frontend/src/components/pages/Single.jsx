@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useLoaderData, NavLink } from "react-router-dom";
 import { Container } from "../layout";
 import { ThumbnailScroller } from "../gallery/ThumbnailScroller";
+import { Arrow } from "../layout/Icons";
 
 const InfiniteThumbnailRow = ({ thumbnails }) => {
   const scrollRef = useRef(null);
@@ -43,6 +44,24 @@ const InfiniteThumbnailRow = ({ thumbnails }) => {
 
 export default InfiniteThumbnailRow;
 
+const NextPrev = ({ dir = "prev", to, children }) => {
+  const [hovered, setHovered] = useState(false);
+  // const unhoveredClass = dir === hovered ? "-translate-x-[calc(100%-2.5rem)]" : "translate-x-[calc(100%-2.5rem)]";
+  const unhoveredClass = () => {
+    if (dir === "prev") return !hovered ? "-translate-x-[calc(100%-2.5rem)]" : "";
+    return !hovered ? "translate-x-[calc(100%-2.5rem)]" : "";
+  };
+
+  return (
+    <NavLink className={`${dir === "prev" ? "left-0" : "right-0"} flex items-center absolute z-10 h-full top-0 opacity-50 hover:opacity-100`} to={to} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+      <span className={`p-2 bg-white flex gap-1 items-center transition-300 ${dir === "prev" ? "flex-row-reverse" : ""} ${unhoveredClass()}`}>
+        <Arrow className={`fill-current w-7  ${dir === "prev" ? "rotate-180" : ""}`} />
+        {children}
+      </span>
+    </NavLink>
+  );
+};
+
 export const Single = () => {
   const { gallery } = useLoaderData();
   const { slug } = useParams();
@@ -55,16 +74,15 @@ export const Single = () => {
   return (
     <div>
       <div className="h-g mb-8 bg-uranian-blue-1000 relative">
-        <div className="flex gap-2 h-full">
-          <div className="grow-1 order-2">
-            <img src={files.original.url} className="w-full h-full object-contain object-center" />
-          </div>
-          <NavLink className="order-1 flex items-center text-center text-white p-2" to={`/artwork/${previous.slug}`}>
-            <span>Previous</span>
-          </NavLink>
-          <NavLink className="order-3 flex items-center text-center text-white p-2" to={`/artwork/${next.slug}`}>
-            <span>Next</span>
-          </NavLink>
+        <div className="flex items-center h-full relative">
+          <img src={files.original.url} className="w-full h-full object-contain object-center relative z-0" />
+
+          <NextPrev dir="prev" to={`/artwork/${previous.slug}`}>
+            Previous
+          </NextPrev>
+          <NextPrev dir="next" to={`/artwork/${next.slug}`}>
+            Next
+          </NextPrev>
         </div>
 
         <div className="bg-cordovan text-white py-1 absolute bottom-0 w-full translate-y-8">
