@@ -64,6 +64,7 @@ const NextPrev = ({ dir = "prev", to, children }) => {
 
 export const Single = () => {
   const { gallery } = useLoaderData();
+  console.log(gallery);
   const { slug } = useParams();
   const { files, title, width, height, sold } = gallery.find((item) => item.slug === slug);
   const currentIndex = gallery.findIndex((item) => item.slug === slug);

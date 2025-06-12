@@ -31,10 +31,11 @@ export const Header = ({ hasSlug = false, ...props }) => {
         <h1 className="sr-only">Portfolio of Roxanne Weidele, Maryland-based artist specializing in calm, natural landscape paintings in bold, lush colors.</h1>
         <Container w="full" className={`py-4 transition-all duration-500`}>
           <div className="flex justify-between items-center gap-5">
-            <NavLink to="/" className="text-uranian-blue hover:text-white max-md:relative max-md:z-40" onClick={() => setMenuOpen(false)}>
-              <Logo className="w-28 lg:w-40 fill-current" />
-              <span className="sr-only">Home</span>
-            </NavLink>
+            <h1>
+              <NavLink to="/" className="text-white hover:text-uranian-blue max-md:relative max-md:z-40 text-2xl uppercase tracking-widest" onClick={() => setMenuOpen(false)}>
+                Roxanne Weidele
+              </NavLink>
+            </h1>
             <button className="md:hidden relative z-40 text-white w-8 h-8" onClick={toggleMenuOpen}>
               <span className={line1Class}></span>
               <span className={line2Class}></span>
