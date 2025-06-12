@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20 # Use your Node.js version
-      - run: npm install
+      - run: npm ci
 
       - name: 🔨 Build React App
         run: npm run build-staging # Change this if your build command is different
