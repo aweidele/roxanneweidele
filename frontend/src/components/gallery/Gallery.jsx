@@ -14,10 +14,10 @@ export const Gallery = ({ gallery }) => {
     item: { ...item },
   }));
   return (
-    <div>
+    <div className="py-2.5">
       {hover}
       <RowsPhotoAlbum
-        spacing={5}
+        spacing={10}
         photos={photos}
         targetRowHeight={520}
         render={{
