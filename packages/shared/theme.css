@@ -87,3 +87,8 @@ main > section a:not(.no-underline) {
 .transition-300 {
   @apply transition-all duration-300;
 }
+
+.menu {
+  @apply max-md:fixed max-md:top-0 max-md:left-0 max-md:px-5 max-md:py-10 max-md:w-screen max-md:h-screen max-md:bg-uranian-blue-900-80 max-md:z-30 max-md:flex max-md:flex-col max-md:items-stretch max-md:backdrop-blur-sm max-md:transition-all max-md:duration-500
+          md:grid md:grid-cols-subgrid md:col-span-2;
+}
