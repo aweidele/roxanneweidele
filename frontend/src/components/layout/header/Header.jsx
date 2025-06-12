@@ -32,7 +32,7 @@ export const Header = ({ hasSlug = false, ...props }) => {
         <Container w="full" className={`py-4 transition-all duration-500`}>
           <div className="flex justify-between items-center gap-5 md:grid md:grid-cols-(--cols-header)">
             <h1>
-              <NavLink to="/" className="text-white hover:text-uranian-blue max-md:relative max-md:z-40 text-xl-sm lg:text-2xl uppercase tracking-widest" onClick={() => setMenuOpen(false)}>
+              <NavLink to="/" className="text-white hover:text-uranian-blue max-md:relative max-md:z-40 text-xl-sm xl:text-xl 2xl:text-2xl uppercase tracking-widest" onClick={() => setMenuOpen(false)}>
                 Roxanne Weidele
               </NavLink>
             </h1>
