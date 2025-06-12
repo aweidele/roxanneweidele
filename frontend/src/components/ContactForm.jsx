@@ -1,3 +1,4 @@
+import { Button } from "@shared";
 import { Input } from "./elements/Input";
 
 export const ContactForm = () => {
@@ -14,6 +15,9 @@ export const ContactForm = () => {
       </div>
       <div className="col-span-2">
         <Input label="Message" type="textarea" name="message" />
+      </div>
+      <div className="col-span-2 text-center">
+        <Button>Submit</Button>
       </div>
     </form>
   );

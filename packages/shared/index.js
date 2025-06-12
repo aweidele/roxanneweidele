@@ -2,3 +2,4 @@ export { border, bg, apiURL, containerWidths, themeColors, headingClass } from "
 export { isNumeric, getIsAuthenticated, uniqid, sortFiles, sortGallery, stringToLines } from "./functions/functions";
 export { apiRequest, useApi } from "./hooks/useApi";
 export { useUpload } from "./hooks/useUpload";
+export { Button } from "./components/Button";

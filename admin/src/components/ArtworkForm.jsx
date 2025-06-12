@@ -1,7 +1,7 @@
 import { Input } from "./elements/Input";
 import { Select } from "./elements/Select";
 import { Toggle } from "./elements/Toggle";
-import { Button } from "./elements/Button";
+import { Button } from "@shared";
 import { useGalleryContext } from "./GalleryContext";
 import { useEffect, useState, useCallback } from "react";
 import { IconImage } from "./elements/Icons";

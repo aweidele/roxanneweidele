@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "./elements/Button";
+import { Button } from "@shared";
 import { GalleryGridCard } from "./GalleryGridCard";
 
 const medium = [

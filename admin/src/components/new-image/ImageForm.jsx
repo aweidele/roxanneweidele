@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "../elements/Button";
+import { Button } from "@shared";
 import { Input } from "../elements/Input";
 import { Toggle } from "../elements/Toggle";
 import { Select } from "../elements/Select";
