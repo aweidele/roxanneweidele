@@ -30,17 +30,18 @@ export const Header = ({ hasSlug = false, ...props }) => {
       <header {...props}>
         <h1 className="sr-only">Portfolio of Roxanne Weidele, Maryland-based artist specializing in calm, natural landscape paintings in bold, lush colors.</h1>
         <Container w="full" className={`py-4 transition-all duration-500`}>
-          <div className="flex justify-between items-center gap-5">
-            <NavLink to="/" className="text-uranian-blue hover:text-white max-md:relative max-md:z-40" onClick={() => setMenuOpen(false)}>
-              <Logo className="w-28 lg:w-40 fill-current" />
-              <span className="sr-only">Home</span>
-            </NavLink>
+          <div className="flex justify-between items-center gap-5 md:grid md:grid-cols-(--cols-header)">
+            <h1>
+              <NavLink to="/" className="text-white hover:text-uranian-blue max-md:relative max-md:z-40 text-xl-sm xl:text-xl 2xl:text-2xl uppercase tracking-widest" onClick={() => setMenuOpen(false)}>
+                Roxanne Weidele
+              </NavLink>
+            </h1>
             <button className="md:hidden relative z-40 text-white w-8 h-8" onClick={toggleMenuOpen}>
               <span className={line1Class}></span>
               <span className={line2Class}></span>
               <span className="sr-only">Menu</span>
             </button>
-            <div className={`fixed top-0 left-0 px-5 py-10 w-screen h-screen bg-uranian-blue-900-80 z-30 flex flex-col items-stretch backdrop-blur-sm transition-all duration-500${menuOpen ? "" : " translate-x-full"} md:contents`}>
+            <div className={`menu ${menuOpen ? "" : " max-md:translate-x-full"}`}>
               <Nav className={`max-md:grow-1 max-md:flex max-md:items-center md:py-4 md:px-6 transition-all duration-500${scrolled ? " md:bg-uranian-blue-900-80 md:rounded-2xl" : ""}`} handleClose={() => setMenuOpen(false)} />
               <Social handleClose={() => setMenuOpen(false)} />
             </div>
