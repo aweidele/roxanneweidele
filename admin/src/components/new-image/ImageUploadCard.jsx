@@ -41,8 +41,11 @@ export const ImageUploadCard = ({ file }) => {
 
   return (
     <div ref={cardRef} className="w-full mt-2 mb-9 p-4 border border-rose-quartz flex gap-2 transition-all duration-300" style={transitionStyle}>
-      <div className="w-50 aspect-[533/300] shrink-0">
-        <img src={thumbnail()} alt={file.name} className={`w-full h-full object-cover ${file.loading ? " opacity-50" : ""} transition-all duration-500`} />
+      <div className="w-50  shrink-0">
+        <div className="aspect-[533/300]">
+          <img src={thumbnail()} alt={file.name} className={`w-full h-full object-cover ${file.loading ? " opacity-50" : ""} transition-all duration-500`} />
+        </div>
+        <p className="text-xs">{file.path}</p>
       </div>
       <div className="grow-1">{!file.loading ? <ImageForm artwork={file} submitAction={handleDoneSubmit} /> : <div className="w-full h-full flex justify-center items-center">Uploading</div>}</div>
     </div>
