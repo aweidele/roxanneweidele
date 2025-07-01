@@ -3,11 +3,12 @@ import { NavLink } from "react-router-dom";
 import "react-photo-album/rows.css";
 import { useState } from "react";
 import { GalleryItem } from "./GalleryItem";
+import { imageURL } from "@shared";
 
 export const Gallery = ({ gallery }) => {
   const [hover, setHover] = useState(null);
   const photos = gallery.map((item) => ({
-    src: item.files.lg.url,
+    src: imageURL(item.files.lg),
     alt: item.title,
     width: item.files.lg.width,
     height: item.files.lg.height,

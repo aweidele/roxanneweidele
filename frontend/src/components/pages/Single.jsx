@@ -3,6 +3,7 @@ import { useParams, useLoaderData, NavLink } from "react-router-dom";
 import { Container } from "../layout";
 import { ThumbnailScroller } from "../gallery/ThumbnailScroller";
 import { Arrow } from "../layout/Icons";
+import { imageURL } from "@shared";
 
 const InfiniteThumbnailRow = ({ thumbnails }) => {
   const scrollRef = useRef(null);
@@ -35,7 +36,7 @@ const InfiniteThumbnailRow = ({ thumbnails }) => {
     <div ref={scrollRef} className="w-screen h-[6.25rem] overflow-x-scroll whitespace-nowrap scroll-smooth no-scrollbar">
       <div className="flex gap-0.5 h-full">
         {loopedThumbnails.map((src, i) => (
-          <img key={i} src={src.files.thumb.url} alt={src.title} className="h-full aspect-auto object-cover flex-shrink-0" />
+          <img key={i} src={imageURL(src.files.thumb)} alt={src.title} className="h-full aspect-auto object-cover flex-shrink-0" />
         ))}
       </div>
     </div>
@@ -46,7 +47,6 @@ export default InfiniteThumbnailRow;
 
 const NextPrev = ({ dir = "prev", to, children }) => {
   const [hovered, setHovered] = useState(false);
-  // const unhoveredClass = dir === hovered ? "-translate-x-[calc(100%-2.5rem)]" : "translate-x-[calc(100%-2.5rem)]";
   const unhoveredClass = () => {
     if (dir === "prev") return !hovered ? "-translate-x-[calc(100%-2.5rem)]" : "";
     return !hovered ? "translate-x-[calc(100%-2.5rem)]" : "";
@@ -64,7 +64,6 @@ const NextPrev = ({ dir = "prev", to, children }) => {
 
 export const Single = () => {
   const { gallery } = useLoaderData();
-  console.log(gallery);
   const { slug } = useParams();
   const { files, title, width, height, sold } = gallery.find((item) => item.slug === slug);
   const currentIndex = gallery.findIndex((item) => item.slug === slug);
@@ -76,7 +75,7 @@ export const Single = () => {
     <div>
       <div className="h-g mb-8 bg-uranian-blue-1000 relative">
         <div className="flex items-center h-full relative overflow-hidden">
-          <img src={files.original.url} className="w-full h-full object-contain object-center relative z-0" />
+          <img src={imageURL(files.original)} className="w-full h-full object-contain object-center relative z-0" />
           <NextPrev dir="prev" to={`/artwork/${previous.slug}`}>
             Previous
           </NextPrev>

@@ -15,7 +15,6 @@ const ArtInfo = ({ title, width, height }) => {
 
 export const GalleryItem = ({ item, index }) => {
   const { slug, sold } = item;
-  console.log(sold);
   return (
     <>
       {!!sold && <div className="absolute right-[3%] bottom-[3%] bg-cordovan aspect-square p-3 leading-0 text-white uppercase text-xs rounded-full opacity-90 flex items-center tracking-wide -rotate-45">Sold</div>}

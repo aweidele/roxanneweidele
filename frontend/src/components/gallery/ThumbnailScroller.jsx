@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { imageURL } from "@shared";
 
 export const ThumbnailScroller = ({ gallery, current }) => {
   const scrollRef = useRef(null);
@@ -34,7 +35,7 @@ export const ThumbnailScroller = ({ gallery, current }) => {
         {loopedThumbnails.map((src, i) => (
           <div style={{ aspectRatio: `${src.files.thumb.width} / ${src.files.thumb.height}` }}>
             <NavLink to={`/artwork/${src.slug}`}>
-              <img key={i} src={src.files.thumb.url} alt={src.title} className="h-full object-cover flex-shrink-0" />
+              <img key={i} src={imageURL(src.files.thumb)} alt={src.title} className="h-full object-cover flex-shrink-0" />
             </NavLink>
           </div>
         ))}

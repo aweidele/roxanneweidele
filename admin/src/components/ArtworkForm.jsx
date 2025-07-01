@@ -1,13 +1,12 @@
 import { Input } from "./elements/Input";
 import { Select } from "./elements/Select";
 import { Toggle } from "./elements/Toggle";
-import { Button } from "@shared";
+import { Button, imageURL, sortFiles, useUpload } from "@shared";
 import { useGalleryContext } from "./GalleryContext";
 import { useEffect, useState, useCallback } from "react";
 import { IconImage } from "./elements/Icons";
 import { ImageDropzone } from "./ImageDropzone";
 import { useAppContext } from "./AppContext";
-import { sortFiles, useUpload } from "@shared";
 
 export const ArtworkForm = ({ slug, ...props }) => {
   const { gallery, setGallery } = useGalleryContext();
@@ -62,7 +61,7 @@ export const ArtworkForm = ({ slug, ...props }) => {
                 </span>
               </button>
             )}
-            <img src={artwork.files.thumb.url} className="relative z-0 w-full" />
+            <img src={imageURL(artwork.files.thumb)} className="relative z-0 w-full" />
           </div>
         </div>
         <div className="flex-1">

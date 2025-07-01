@@ -1,3 +1,5 @@
+import { apiURL } from "./vars";
+
 export const isNumeric = (str) => /^\d+$/.test(str);
 
 export const getIsAuthenticated = () => {
@@ -58,3 +60,5 @@ export const stringToLines = (str) => {
     .map((line) => line.trim())
     .filter((line) => line);
 };
+
+export const imageURL = (image) => `${apiURL}${image.upload_path_rel}${image.filename}?hi=hello`;

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { ImageForm } from "./ImageForm";
 import { useGalleryContext } from "../GalleryContext";
-import { useApi } from "@shared";
+import { useApi, imageURL } from "@shared";
 import { useAppContext } from "../AppContext";
 
 export const ImageUploadCard = ({ file }) => {
@@ -36,7 +36,7 @@ export const ImageUploadCard = ({ file }) => {
 
   const thumbnail = () => {
     if (file.loading) return file.preview;
-    return file.files.thumb.url;
+    return imageURL(file.files.thumb);
   };
 
   return (
