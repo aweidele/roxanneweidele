@@ -1,0 +1,94 @@
+@theme {
+  --font-heading: calluna-sans, sans-serif;
+  --font-sans: omnes-pro, sans-serif;
+
+  --spacing-page: calc(100vh - 72px);
+  --spacing-toggle-on: calc(100% - 0.75rem - 1px);
+  /* --spacing-g: calc(100vh - 6.25rem); */
+  --spacing-g: calc(100vh - 8.25rem);
+  --spacing-gm: calc(100vh - 5rem);
+
+  --color-sage: oklch(0.75 0.0648 120.79);
+  --color-rose-quartz: oklch(0.69 0.0508 332.81);
+  --color-china-rose: oklch(0.56 0.0968 351.88);
+  --color-cordovan: oklch(0.5 0.1056 10.44);
+  --color-uranian-blue: oklch(0.9 0.0579 232.56);
+  --color-uranian-blue-800: oklch(0.8 0.0579 232.56);
+  --color-uranian-blue-900: oklch(0.5676 0.0579 232.56);
+  --color-uranian-blue-1000: oklch(0.2824 0.0579 232.56);
+  --color-popup: rgba(0, 0, 0, 0.6);
+
+  --color-rose-quartz-70: oklch(0.69 0.0508 332.81 / 0.8);
+  --color-china-rose-80: oklch(0.56 0.0968 351.88 / 0.8);
+  --color-uranian-blue-900-80: oklch(0.5676 0.0579 232.56 / 0.8);
+  --color-sage-0: oklch(0.75 0.0648 120.79 / 0);
+
+  --color-china-rose-0: oklch(0.56 0.0968 351.88 / 0);
+
+  --color-overlay-40: rgba(0, 0, 0, 0.5);
+
+  --shadow-form: 0 0 5px oklch(0.5 0.1056 10.44);
+  --shadow-sold: 0 0 3px rgba(255, 255, 255, 0.7);
+
+  --text-lg-sm: 1.258rem;
+  --text-xl-sm: 1.406rem;
+  --text-2xl-sm: 1.758rem;
+  --text-3xl-sm: 1.965rem;
+  --text-4xl-sm: 2.197rem;
+  --text-5xl-sm: 2.747rem;
+
+  --text-lg-md: 1.258rem;
+  --text-xl-md: 1.572rem;
+  --text-2xl-md: 1.965rem;
+  --text-3xl-md: 2.457rem;
+  --text-4xl-md: 2.747rem;
+  --text-5xl-md: 3.433em;
+
+  --text-base: 1.125rem;
+  --text-lg: 1.406rem;
+  --text-xl: 1.758rem;
+  --text-2xl: 2.197rem;
+  --text-3xl: 2.747rem;
+  --text-4xl: 3.433rem;
+  --text-5xl: 4.292rem;
+
+  --text-xxs: 0.5625rem;
+  --text-button: 1.25rem;
+
+  --container-7xl: 77.5rem;
+
+  --cols-header: 1fr auto 1fr;
+}
+
+@layer utilities {
+  @media (min-width: 640px) and (max-width: 767px) {
+    .sm-md\:bg-blue-500 {
+      background-color: #3b82f6; /* Tailwind's blue-500 */
+    }
+  }
+}
+
+button,
+a {
+  @apply cursor-pointer transition-all duration-300;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+main > section a:not(.no-underline) {
+  @apply text-china-rose underline decoration-china-rose-0 hover:text-cordovan hover:decoration-cordovan;
+}
+
+.transition-300 {
+  @apply transition-all duration-300;
+}
+
+.menu {
+  @apply max-md:fixed max-md:top-0 max-md:left-0 max-md:px-5 max-md:py-10 max-md:w-screen max-md:h-screen max-md:bg-uranian-blue-900-80 max-md:z-30 max-md:flex max-md:flex-col max-md:items-stretch max-md:backdrop-blur-sm max-md:transition-all max-md:duration-500
+          md:contents xl:grid xl:grid-cols-subgrid xl:col-span-2;
+}
