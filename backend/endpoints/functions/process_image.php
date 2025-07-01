@@ -42,6 +42,7 @@ function processUploadedImage(array $file, array $sizes): array {
     [
       'filename' => "$baseFilename.$ext",
       'upload_path' => $uploadAbsPath,
+      'upload_path_rel' => $uploadRelPath,
       'url' => $baseUrl . "$baseFilename.$ext",
       'size_key' => "original",
       'width' => $srcWidth,
@@ -98,6 +99,7 @@ function processUploadedImage(array $file, array $sizes): array {
     $response[] = [
       'filename' => "$filenameBase",
       'upload_path' => $uploadAbsPath,
+      'upload_path_rel' => $uploadRelPath,
       'url' => $urlBase,
       'size_key' => $key,
       'width' => $width,
