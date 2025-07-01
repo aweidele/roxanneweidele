@@ -61,4 +61,4 @@ export const stringToLines = (str) => {
     .filter((line) => line);
 };
 
-export const imageURL = (image) => `${apiURL}${image.upload_path_rel}${image.filename}?hi=hello`;
+export const imageURL = (image) => `${apiURL}${image.upload_path_rel}${image.filename}`;
