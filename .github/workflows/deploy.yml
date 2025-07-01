@@ -62,7 +62,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./admin/dist/ # Ensure this is correct
-          server-dir: /public_html/website_1b10d507
+          server-dir: /public_html/website_1b10d507/
           protocol: ftps # Adjust your deployment path
 
       # - name: 📚 Build Storybook
@@ -103,5 +103,5 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./backend/ # Ensure this is correct
-          server-dir: /public_html/website_db8020f2
+          server-dir: /public_html/website_db8020f2/
           protocol: ftps # Adjust your deployment path
