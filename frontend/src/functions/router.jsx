@@ -12,7 +12,6 @@ export const router = createBrowserRouter(
         {
           index: true,
           element: <HomePage />,
-          loader: galleryLoader,
         },
         {
           path: "artwork",

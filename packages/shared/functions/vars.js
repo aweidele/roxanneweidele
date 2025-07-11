@@ -24,3 +24,5 @@ export const containerWidths = {
   narrow: "max-w-4xl",
   xnarrow: "max-w-2xl",
 };
+
+export const buttonClasses = ["cursor-pointer uppercase font-heading tracking-wide py-2 px-6 rounded-lg transition-all duration-300"];

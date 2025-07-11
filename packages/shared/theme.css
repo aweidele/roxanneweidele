@@ -9,6 +9,7 @@
   --spacing-gm: calc(100vh - 5rem);
 
   --color-sage: oklch(0.75 0.0648 120.79);
+  --color-sage-200: oklch(0.9283 0.0648 120.79);
   --color-rose-quartz: oklch(0.69 0.0508 332.81);
   --color-china-rose: oklch(0.56 0.0968 351.88);
   --color-cordovan: oklch(0.5 0.1056 10.44);
