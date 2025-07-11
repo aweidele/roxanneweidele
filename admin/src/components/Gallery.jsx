@@ -2,7 +2,7 @@ import { Section } from "./Section";
 import { useGalleryContext } from "./GalleryContext";
 import { GalleryGrid } from "./GalleryGrid";
 import { useState } from "react";
-import { IconUnpublished } from "./elements/Icons";
+import { IconUnpublished, IconPublished } from "./elements/Icons";
 import { Button } from "@shared/components/Button";
 
 export const Gallery = () => {
@@ -25,6 +25,9 @@ export const Gallery = () => {
             <div className="aspect-5/4 border-2 border-dashed rounded-xl border-gray-300 flex flex-col justify-center items-center text-center p-10">
               <IconUnpublished className="fill-cordovan w-18 h-18 block mx-auto mt-6 transition-300" />
               <p>Drag images from the gallery to set to unpublished</p>
+            </div>
+            <div className="text-center py-5">
+              <Button>Open Unpublished</Button>
             </div>
           </div>
         </div>
