@@ -1,18 +1,16 @@
-import { useEffect, useState } from "react";
 import { Heading } from "../elements/Heading";
-import { Gallery } from "../gallery/Gallery";
 import { Container } from "../layout";
 import { Section } from "../layout/Section";
-import { Await, useLoaderData } from "react-router-dom";
-import { Filter } from "../gallery/Filter";
+import { Button } from "@shared/components/Button";
+import { buttonClasses } from "@shared/functions/vars";
 import bg from "/materials.jpg";
+import oils from "/oils.jpg";
+import pastels from "/pastels.jpg";
 
-import { useGallery } from "@functions";
+import { ArtworkLink } from "../elements/ArtworkLink";
+import { NavLink } from "react-router-dom";
 
 export const HomePage = () => {
-  const { gallery } = useLoaderData();
-  const { filter, filteredGallery, handleFilter } = useGallery(gallery);
-
   return (
     <>
       <header className="bg-white text-white pt-28 pb-20 md:pt-47.5 md:pb-35 sticky top-0 w-full z-0 bg-cover bg-center before:content-[''] before:w-full before:h-full before:absolute before:top-0 before:left-0 before:backdrop-saturate-75 before:bg-overlay-40 before:z-0" style={{ backgroundImage: `url("${bg}")` }}>
@@ -22,12 +20,19 @@ export const HomePage = () => {
       </header>
       <Section background="chinaRose80" className="py-10 px-5 relative z-10 backdrop-blur-xs">
         <Heading className="text-center">My Work</Heading>
-        <div>
-          <Filter active={filter} onFilter={handleFilter} />
+        <div className="py-10 sm:flex gap-5 max-w-4xl m-auto flex-wrap">
+          <div className="flex-1">
+            <ArtworkLink img={oils} label="Oils" link="/artwork" />
+          </div>
+          <div className="flex-1">
+            <ArtworkLink img={pastels} label="Pastels" link="/artwork" />
+          </div>
+          <div className="basis-full flex justify-center">
+            <NavLink to="/artwork" className={[...buttonClasses, "bg-sage hover:bg-sage-200 text-uranian-blue-1000 no-underline"].join(" ")}>
+              All Artwork
+            </NavLink>
+          </div>
         </div>
-      </Section>
-      <Section background="white" className="relative z-10">
-        <Gallery gallery={filteredGallery} />
       </Section>
     </>
   );

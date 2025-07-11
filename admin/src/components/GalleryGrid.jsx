@@ -9,6 +9,7 @@ const medium = [
 ];
 
 export const GalleryGrid = ({ content }) => {
+  console.log(content);
   const [activeFilter, setActiveFilter] = useState("all");
   return (
     <>
@@ -21,8 +22,8 @@ export const GalleryGrid = ({ content }) => {
         ))}
       </div>
       <div className="grid grid-cols-4 gap-x-2 gap-y-5">
-        {content.map((item) => (
-          <GalleryGridCard key={item.slug} item={item} active={item.medium === activeFilter || activeFilter === "all"} />
+        {content.map((item, index) => (
+          <GalleryGridCard key={`gallery-item-${index}`} item={item} active={item.medium === activeFilter || activeFilter === "all"} />
         ))}
       </div>
     </>
