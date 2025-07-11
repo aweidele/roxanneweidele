@@ -16,9 +16,9 @@ export const GalleryGridCard = ({ item, active }) => {
         </div>
         <div className="flex justify-between">
           <div className="p-1">
-            <h3>{item.title}</h3>
+            <h3>{item.title || "Untitled"}</h3>
           </div>
-          <NavLink to={`/artwork/${item.slug}`} className="block cursor-pointer text-cordovan hover:text-black py-3">
+          <NavLink to={`/artwork/${item.slug || item.id}`} className="block cursor-pointer text-cordovan hover:text-black py-3">
             <IconEdit className="w-3 h-3 fill-current" />
           </NavLink>
         </div>
