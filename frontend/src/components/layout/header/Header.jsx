@@ -28,11 +28,11 @@ export const Header = ({ hasSlug = false, ...props }) => {
   return (
     <>
       <header {...props}>
-        <h1 className="sr-only">Portfolio of Roxanne Weidele, Maryland-based artist specializing in calm, natural landscape paintings in bold, lush colors.</h1>
+        {/* <h1 className="sr-only">Portfolio of Roxanne Weidele, Maryland-based artist specializing in calm, natural landscape paintings in bold, lush colors.</h1> */}
         <Container w="full" className={`py-4 transition-all duration-500`}>
-          <div className="flex justify-between items-center gap-5 md:grid md:grid-cols-(--cols-header)">
-            <h1>
-              <NavLink to="/" className="text-white hover:text-uranian-blue max-md:relative max-md:z-40 text-xl-sm xl:text-xl 2xl:text-2xl uppercase tracking-widest" onClick={() => setMenuOpen(false)}>
+          <div className="max-md:flex justify-between items-center gap-5 relative">
+            <h1 className="md:text-center">
+              <NavLink to="/" className="text-white hover:text-uranian-blue max-md:relative max-md:z-40 text-xl-sm md:text-2xl uppercase tracking-widest" onClick={() => setMenuOpen(false)}>
                 Roxanne Weidele
               </NavLink>
             </h1>
@@ -42,7 +42,7 @@ export const Header = ({ hasSlug = false, ...props }) => {
               <span className="sr-only">Menu</span>
             </button>
             <div className={`menu ${menuOpen ? "" : " max-md:translate-x-full"}`}>
-              <Nav className={`max-md:grow-1 max-md:flex max-md:items-center md:py-4 md:px-6 transition-all duration-500${scrolled ? " md:bg-uranian-blue-900-80 md:rounded-2xl" : ""}`} handleClose={() => setMenuOpen(false)} />
+              <Nav className={`max-md:grow-1 max-md:flex max-md:items-center md:py-2 md:px-6  transition-all duration-500${scrolled ? " md:bg-uranian-blue-900-80 md:rounded-2xl" : ""}`} handleClose={() => setMenuOpen(false)} />
               <Social handleClose={() => setMenuOpen(false)} />
             </div>
           </div>

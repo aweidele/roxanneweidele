@@ -6,9 +6,9 @@ const navClasses = `text-white hover:text-uranian-blue tracking-wide inline-bloc
 export const Nav = ({ handleClose, ...props }) => {
   return (
     <nav {...props}>
-      <ul className="flex gap-8 md:gap-5 max-md:flex-col max-md:w-full text-center">
+      <ul className="flex justify-center gap-8 md:gap-5 max-md:flex-col max-md:w-full text-center">
         {navigation.map((item) => (
-          <li key={item.to} className="text-xl md:text-sm lg:text-button uppercase">
+          <li key={item.to} className="text-xl md:text-sm lg:text-base uppercase">
             <NavLink to={item.to} className={({ isActive }) => `${navClasses} ${isActive ? "after:h-1" : "after:h-0 after:opacity-0"}`} onClick={handleClose}>
               {item.label}
             </NavLink>
