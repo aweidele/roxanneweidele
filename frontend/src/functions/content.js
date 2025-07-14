@@ -1,5 +1,9 @@
 export const navigation = [
   {
+    label: "Home",
+    to: "/",
+  },
+  {
     label: "Artwork",
     to: "/artwork",
   },

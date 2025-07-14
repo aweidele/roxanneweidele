@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 
+import { useParams } from "react-router-dom";
+
 export const useGallery = (gallery) => {
-  const [filter, setFilter] = useState("all");
+  const { medium } = useParams();
+  const [filter, setFilter] = useState(medium ? medium : "all");
   const [filteredGallery, setFilteredGallery] = useState(gallery || []);
 
   useEffect(() => {

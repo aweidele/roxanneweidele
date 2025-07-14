@@ -12,14 +12,17 @@ export const router = createBrowserRouter(
         {
           index: true,
           element: <HomePage />,
-          loader: galleryLoader,
         },
         {
           path: "artwork",
           element: <Artwork />,
           loader: galleryLoader,
         },
-
+        {
+          path: "artwork/medium/:medium",
+          element: <Artwork />,
+          loader: galleryLoader,
+        },
         {
           path: "artwork/:slug",
           element: <Single />,

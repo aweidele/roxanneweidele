@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => {
   if (mode === "development") {
     base = "/"; // Local dev server
   } else if (mode === "staging") {
-    base = "/admin/";
+    base = "/";
   } else if (mode === "admin-prod") {
     base = "/"; // Hosted on admin.xyz.com
   }
