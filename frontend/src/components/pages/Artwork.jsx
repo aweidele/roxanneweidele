@@ -5,7 +5,7 @@ import { Gallery } from "../gallery/Gallery";
 import { Section } from "../layout/Section";
 import { useGallery } from "@functions";
 
-import { Await, useLoaderData } from "react-router-dom";
+import { Await, useLoaderData, useParams } from "react-router-dom";
 
 export const Artwork = () => {
   const { gallery } = useLoaderData();

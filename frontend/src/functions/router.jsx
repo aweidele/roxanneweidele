@@ -18,7 +18,11 @@ export const router = createBrowserRouter(
           element: <Artwork />,
           loader: galleryLoader,
         },
-
+        {
+          path: "artwork/medium/:medium",
+          element: <Artwork />,
+          loader: galleryLoader,
+        },
         {
           path: "artwork/:slug",
           element: <Single />,

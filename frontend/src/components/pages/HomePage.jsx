@@ -22,10 +22,10 @@ export const HomePage = () => {
         <Heading className="text-center">My Work</Heading>
         <div className="py-10 sm:flex gap-5 max-w-4xl m-auto flex-wrap">
           <div className="flex-1">
-            <ArtworkLink img={oils} label="Oils" link="/artwork" />
+            <ArtworkLink img={oils} label="Oils" link="/artwork/medium/oils" />
           </div>
           <div className="flex-1">
-            <ArtworkLink img={pastels} label="Pastels" link="/artwork" />
+            <ArtworkLink img={pastels} label="Pastels" link="/artwork/medium/pastels" />
           </div>
           <div className="basis-full flex justify-center">
             <NavLink to="/artwork" className={[...buttonClasses, "bg-sage hover:bg-sage-200 text-uranian-blue-1000 no-underline"].join(" ")}>
