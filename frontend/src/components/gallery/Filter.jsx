@@ -1,3 +1,5 @@
+import { NavLink, useParams } from "react-router-dom";
+
 const FilterButton = ({ p, active, children, ...props }) => {
   const classes = ["text-button uppercase py-2 px-7.5 transition-all duration-300"];
 
@@ -9,22 +11,23 @@ const FilterButton = ({ p, active, children, ...props }) => {
     classes.push("rounded-r-lg");
   }
   return (
-    <button className={classes.join(" ")} {...props}>
+    <NavLink className={classes.join(" ")} {...props}>
       {children}
-    </button>
+    </NavLink>
   );
 };
 
-export const Filter = ({ active = "all", onFilter }) => {
+export const Filter = () => {
+  const { medium } = useParams();
   return (
     <div className="flex items-center justify-center gap-0.5 mt-4">
-      <FilterButton onClick={() => onFilter("all")} active={active === "all"} p="left">
+      <FilterButton to="/artwork" active={!medium} p="left">
         All
       </FilterButton>
-      <FilterButton onClick={() => onFilter("pastels")} active={active === "pastels"}>
+      <FilterButton to="/artwork/medium/pastels" active={medium === "pastels"}>
         Pastels
       </FilterButton>
-      <FilterButton onClick={() => onFilter("oils")} active={active === "oils"} p="right">
+      <FilterButton to="/artwork/medium/oils" active={medium === "oils"} p="right">
         Oils
       </FilterButton>
     </div>
