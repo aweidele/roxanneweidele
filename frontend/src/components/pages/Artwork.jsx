@@ -9,14 +9,14 @@ import { Await, useLoaderData, useParams } from "react-router-dom";
 
 export const Artwork = () => {
   const { gallery } = useLoaderData();
-  const { filter, filteredGallery, handleFilter } = useGallery(gallery);
+  const { filteredGallery } = useGallery(gallery);
 
   return (
     <>
       <Hero>
         <Heading>My Work</Heading>
         <div>
-          <Filter active={filter} onFilter={handleFilter} />
+          <Filter />
         </div>
       </Hero>
       <Section background="white" className="relative z-10">
