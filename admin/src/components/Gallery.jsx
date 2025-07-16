@@ -4,9 +4,11 @@ import { GalleryGrid } from "./GalleryGrid";
 import { useState } from "react";
 import { IconUnpublished, IconPublished } from "./elements/Icons";
 import { Button } from "@shared/components/Button";
+import { GalleryGridCard } from "./GalleryGridCard";
 
 export const Gallery = () => {
   const { gallery } = useGalleryContext();
+
   const published = gallery.filter((item) => item.published);
   const unpublished = gallery.filter((item) => !item.published);
 
@@ -20,10 +22,15 @@ export const Gallery = () => {
 
   return (
     <Section>
+      {/* <GalleryGrid content={viewingPublished ? published : unpublished} /> */}
       <h2 className="mb-8">Gallery Grid</h2>
       <div className="flex gap-15">
         <div className="flex-3/4">
-          <GalleryGrid content={viewingPublished ? published : unpublished} />
+          <div className="grid grid-cols-4 gap-x-2 gap-y-5">
+            {(viewingPublished ? published : unpublished).map((item, index) => (
+              <GalleryGridCard key={`gallery-item-${item.slug}-${index}`} item={item} />
+            ))}
+          </div>
         </div>
         <div className="flex-1/4">
           <div className="sticky top-0">
