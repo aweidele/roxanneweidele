@@ -5,14 +5,14 @@ import { IconUnpublished, IconPublished } from "./elements/Icons";
 import { Button } from "@shared/components/Button";
 import { GalleryGridCard } from "./GalleryGridCard";
 
-import { DndContext, closestCenter, PointerSensor, useSensor, useSensors, DragOverlay } from "@dnd-kit/core";
+import { DndContext, closestCenter, PointerSensor, useSensor, useSensors, DragOverlay, useDroppable } from "@dnd-kit/core";
 import { SortableContext, useSortable, arrayMove, rectSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useApi } from "@shared";
 import { useAppContext } from "./AppContext";
 
 export const Gallery = () => {
-  const { gallery, reorderItems } = useGalleryContext();
+  const { gallery, reorderItems, togglePublished } = useGalleryContext();
   const [viewingPublished, setViewingPublished] = useState(true);
   const [activeId, setActiveId] = useState(null);
 
@@ -33,12 +33,18 @@ export const Gallery = () => {
 
   const handleDragEnd = async (event) => {
     const { active, over } = event;
+    // console.log("over", over.id);
+    // console.log("active", active.id);
     setActiveId(null);
 
     if (!over) return;
 
     if (over.id === "dropzone") {
-      //   togglePublished(active.id);
+      console.log("MOVING TO PUBLISHED/NOT PUBLISHED!!");
+      togglePublished(active.id);
+      const item = gallery.find((item) => item.id === active.id);
+      console.log(item);
+      await request(`artwork/${active.id}/edit`, "PUT", { published: item.published ? 0 : 1 }, token);
     } else if (active.id !== over.id) {
       const all = [...published, ...unpublished];
       const oldIndex = all.findIndex((item) => item.id === active.id);
@@ -78,12 +84,12 @@ export const Gallery = () => {
                 {viewingPublished ? "Unpublished" : "Published"} Items ({viewingPublished ? unpublished.length : published.length})
               </h3>
               {/* DROPZONE */}
-              <div id="dropzone" className={`aspect-5/4 border-2 border-dashed rounded-xl ${viewingPublished ? "border-cordovan" : "border-sage"} flex flex-col justify-center items-center text-center p-10`}>
+              <Dropzone id="dropzone" viewingPublished={viewingPublished}>
                 <Icon className={`${viewingPublished ? "fill-cordovan" : "fill-sage"} w-18 h-18 block mx-auto mt-6 transition-300`} />
                 <p>
                   Drag images from the gallery to set to <strong>{viewingPublished ? "unpublished" : "published"}</strong>
                 </p>
-              </div>
+              </Dropzone>
               {/* END DROPZONE */}
               <div className="text-center py-5">
                 <Button color={viewingPublished ? "bg-cordovan hover:bg-cordovan-800 text-white" : "bg-sage hover:bg-sage-200 text-uranian-blue-1000"} onClick={handleToggleView}>
@@ -116,6 +122,18 @@ const SortableGalleryCard = ({ item }) => {
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
       <GalleryGridCard item={item} />
+    </div>
+  );
+};
+
+const Dropzone = ({ id, viewingPublished, children }) => {
+  const { setNodeRef, isOver } = useDroppable({
+    id,
+  });
+
+  return (
+    <div ref={setNodeRef} className={`aspect-5/4 border-2 border-dashed rounded-xl ${viewingPublished ? "border-cordovan" : "border-sage"} flex flex-col justify-center items-center text-center p-10 ${isOver ? "bg-gray-100" : ""}`}>
+      {children}
     </div>
   );
 };
