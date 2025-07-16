@@ -30,12 +30,14 @@ const galleryReducer = (state, action) => {
         ...newArtworkData,
         loading: false,
       };
-
       return newArtworkState;
     }
     case "delete_file": {
       const { index } = action;
       return [...state.slice(0, index), ...state.slice(index + 1)];
+    }
+    case "reorder": {
+      return action.newOrder;
     }
   }
 };
@@ -44,7 +46,8 @@ export const GalleryProvider = ({ children }) => {
   const { gallery: loadedGallery } = useLoaderData();
   const [gallery, setGallery] = useReducer(galleryReducer, loadedGallery);
   const newArtwork = gallery.filter((item) => item.new);
-  return <GalleryContext.Provider value={{ gallery, setGallery, newArtwork }}>{children}</GalleryContext.Provider>;
+  const reorderItems = (newOrder) => setGallery({ type: "reorder", newOrder });
+  return <GalleryContext.Provider value={{ gallery, setGallery, newArtwork, reorderItems }}>{children}</GalleryContext.Provider>;
 };
 
 export const useGalleryContext = () => useContext(GalleryContext);
