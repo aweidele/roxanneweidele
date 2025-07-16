@@ -8,11 +8,16 @@ import { GalleryGridCard } from "./GalleryGridCard";
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors, DragOverlay } from "@dnd-kit/core";
 import { SortableContext, useSortable, arrayMove, rectSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useApi } from "@shared";
+import { useAppContext } from "./AppContext";
 
 export const Gallery = () => {
   const { gallery, reorderItems } = useGalleryContext();
   const [viewingPublished, setViewingPublished] = useState(true);
   const [activeId, setActiveId] = useState(null);
+
+  const { data, loading, error, request } = useApi();
+  const { token } = useAppContext();
 
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
 
@@ -26,7 +31,7 @@ export const Gallery = () => {
     setViewingPublished(!viewingPublished);
   };
 
-  const handleDragEnd = (event) => {
+  const handleDragEnd = async (event) => {
     const { active, over } = event;
     setActiveId(null);
 
@@ -40,6 +45,14 @@ export const Gallery = () => {
       const newIndex = all.findIndex((item) => item.id === over.id);
       const reordered = arrayMove(all, oldIndex, newIndex);
       reorderItems(reordered);
+
+      const order = reordered.map((item, index) => ({
+        id: item.id,
+        art_order: index + 1,
+      }));
+
+      const result = await request(`artwork/reorder`, "PUT", { new_order: order }, token);
+      console.log(result);
     }
   };
 
@@ -49,7 +62,7 @@ export const Gallery = () => {
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragStart={(e) => setActiveId(e.active.id)} onDragEnd={handleDragEnd} onDragCancel={() => setActiveId(null)}>
         <div className="flex gap-15">
           <div className="flex-3/4">
-            {/* THIS IS THE SORTABLE GRID */}
+            {/* SORTABLE GRID */}
             <SortableContext items={currentItems.map((item) => item.id)} strategy={rectSortingStrategy}>
               <div className="grid grid-cols-4 gap-x-2 gap-y-5">
                 {currentItems.map((item) => (

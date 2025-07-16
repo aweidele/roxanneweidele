@@ -47,12 +47,17 @@ switch ($method) {
     }
     break;
   case "PUT":
-    if($route[0] === "artwork" && $route[2] === "edit") {
+    if ($route[0] === "artwork" && isset($route[2]) && $route[2] === "edit") {
       require_once("endpoints/edit_artwork.php");
+    }
+    elseif ($route[0] === "artwork" && isset($route[1]) && $route[1] === "reorder") {
+      require_once("endpoints/reorder_artwork.php");
+    }
+    else {
+      echo json_encode(["message" => "Invalid endpoint", "route" => $route]);
     }
     break;
   default:
     require_once("endpoints/get_artwork.php");
-    // echo json_encode($route);
     break;
 }

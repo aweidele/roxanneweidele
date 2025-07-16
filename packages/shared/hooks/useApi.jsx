@@ -16,7 +16,9 @@ export const apiRequest = async (url = "", method = "GET", payload = null, token
   };
 
   if (payload && method !== "GET") options.body = isFormData ? payload : JSON.stringify(payload);
+  console.log(options);
   const endpoint = apiURL + url;
+  console.log(endpoint);
 
   const response = await fetch(endpoint, options);
   const responseData = await response.json();
@@ -24,7 +26,6 @@ export const apiRequest = async (url = "", method = "GET", payload = null, token
   if (!response.ok) {
     throw new Error(responseData.message || "Request failed");
   }
-
   return responseData;
 };
 
