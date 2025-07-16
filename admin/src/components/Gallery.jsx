@@ -33,17 +33,13 @@ export const Gallery = () => {
 
   const handleDragEnd = async (event) => {
     const { active, over } = event;
-    // console.log("over", over.id);
-    // console.log("active", active.id);
     setActiveId(null);
 
     if (!over) return;
 
     if (over.id === "dropzone") {
-      console.log("MOVING TO PUBLISHED/NOT PUBLISHED!!");
       togglePublished(active.id);
       const item = gallery.find((item) => item.id === active.id);
-      console.log(item);
       await request(`artwork/${active.id}/edit`, "PUT", { published: item.published ? 0 : 1 }, token);
     } else if (active.id !== over.id) {
       const all = [...published, ...unpublished];
@@ -58,7 +54,6 @@ export const Gallery = () => {
       }));
 
       const result = await request(`artwork/reorder`, "PUT", { new_order: order }, token);
-      console.log(result);
     }
   };
 
