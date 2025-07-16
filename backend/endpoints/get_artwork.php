@@ -19,7 +19,7 @@ if( isset($_GET["endpoint"]) ) {
 
 $whereClause = sizeof($whereParts) ? " WHERE " . implode(" AND ", $whereParts) : "";
 
-$sql = "SELECT * FROM artwork$whereClause";
+$sql = "SELECT * FROM artwork$whereClause ORDER BY art_order ASC";
 // $sql = "SELECT * FROM artwork";
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
