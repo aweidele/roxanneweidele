@@ -44,6 +44,11 @@ switch ($method) {
       require_once("endpoints/upload_nocompress.php");
     } elseif($endpoint === "artwork/add") {
       require_once("endpoints/add_artwork.php");
+    } elseif($endpoint === "contact") {  
+      require_once("endpoints/contact.php");
+    }
+    else {
+      echo json_encode(["message" => "Invalid endpoint", "route" => $route, "endpoint" => $endpoint]);
     }
     break;
   case "PUT":
@@ -54,7 +59,7 @@ switch ($method) {
       require_once("endpoints/reorder_artwork.php");
     }
     else {
-      echo json_encode(["message" => "Invalid endpoint", "route" => $route]);
+      echo json_encode(["message" => "Invalid endpoint", "route" => $route, "endpoint" => $endpoint]);
     }
     break;
   default:
