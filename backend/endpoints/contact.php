@@ -9,10 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Validate input
-$name = trim($_POST['name'] ?? '');
-$email = trim($_POST['email'] ?? '');
-$subject = trim($_POST['subject'] ?? '');
-$message = trim($_POST['message'] ?? '');
+$data = json_decode(file_get_contents('php://input'), true);
+
+$name = trim($data['name'] ?? '');
+$email = trim($data['email'] ?? '');
+$subject = trim($data['subject'] ?? '');
+$message = trim($data['message'] ?? '');
 
 // Simple validation
 if (empty($name) || empty($email) || empty($message) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {

@@ -7,11 +7,8 @@ export const ContactForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    console.log(formData);
     const values = Object.fromEntries(formData.entries());
-    console.log(values);
     const result = await request(`contact`, "POST", values);
-    console.log(result);
   };
   return (
     <>
