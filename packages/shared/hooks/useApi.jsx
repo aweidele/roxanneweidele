@@ -2,6 +2,8 @@ import { apiURL } from "@shared";
 import { useCallback, useState } from "react";
 
 export const apiRequest = async (url = "", method = "GET", payload = null, token = null, isFormData = false) => {
+  console.log(payload);
+  console.log(method);
   const headers = {};
 
   if (!isFormData) {
@@ -17,11 +19,14 @@ export const apiRequest = async (url = "", method = "GET", payload = null, token
 
   if (payload && method !== "GET") options.body = isFormData ? payload : JSON.stringify(payload);
   const endpoint = apiURL + url;
+  console.log(options);
+  console.log(endpoint);
 
   const response = await fetch(endpoint, options);
 
   if (!response.ok) {
     const errorBody = await response.json().catch(() => ({}));
+    console.log("ERROR?");
     console.error(errorBody);
     const error = new Error(errorBody.message || "API request failed");
     error.status = response.status;
@@ -29,7 +34,9 @@ export const apiRequest = async (url = "", method = "GET", payload = null, token
     throw error;
   }
 
+  console.log("Here?", response);
   const responseData = await response.json();
+  console.log("Here?", responseData);
   return responseData;
 };
 
