@@ -2,6 +2,7 @@
 require_once 'vendor/autoload.php';
 require_once 'jwt-auth.php';
 require_once __DIR__ . '/../config.php';
+require_once 'functions/slugify.php';
 
 $user = authenticate_request();
 if (!$user) {
@@ -21,6 +22,8 @@ $allowed = ['title', 'width', 'height', 'price', 'sold', 'published', 'slug', 'm
 $fields = [];
 $placeholders = [];
 $values = [];
+
+$data['slug'] = isset($data['title']) && $data['title'] !== "" ? slugify($data['title']) : uniqid();
 
 foreach ($data as $key => $value) {
   if (in_array($key, $allowed)) {
