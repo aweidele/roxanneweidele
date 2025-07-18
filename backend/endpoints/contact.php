@@ -38,8 +38,8 @@ try {
   $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
   $mail->Port = 587;
 
-  $mail->setFrom('no-reply@example.com', 'Contact API');
-  $mail->addAddress('you@example.com');  // Change this
+  $mail->setFrom('noreply@roxanneweidele.com', "$name via roxanneweidele.com");
+  $mail->addAddress('aweidele@gmail.com');  // Change this
   $mail->addReplyTo($email, $name);
 
   $mail->isHTML(false);
