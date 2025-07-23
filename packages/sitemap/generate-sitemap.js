@@ -1,6 +1,8 @@
 const fs = require("fs");
 const axios = require("axios");
 const path = require("path");
+const ftp = require("basic-ftp");
+require("dotenv").config();
 
 const BASE_URL = "https://roxanneweidele.com"; // Change to your site's base URL
 const API_URL = "https://api.roxanneweidele.com/published";
@@ -30,6 +32,29 @@ function generateUrlEntry(loc, lastmod = new Date()) {
   </url>`;
 }
 
+async function uploadViaFtp(localFilePath, remoteFileName) {
+  const client = new ftp.Client();
+  client.ftp.verbose = true;
+
+  try {
+    await client.access({
+      host: process.env.FTP_HOST,
+      user: process.env.FTP_USER,
+      password: process.env.FTP_PASSWORD,
+      secure: false,
+    });
+
+    console.log("📡 Connected to FTP server.");
+
+    await client.uploadFrom(localFilePath, `/public_html/${remoteFileName}`);
+    console.log("✅ Uploaded sitemap.xml to server as", remoteFileName);
+  } catch (err) {
+    console.error("❌ FTP upload failed:", err.message);
+  }
+
+  client.close();
+}
+
 async function generateSitemap() {
   const artworkRoutes = await fetchArtworkSlugs();
   const allRoutes = [...staticRoutes, ...artworkRoutes];
@@ -49,6 +74,8 @@ async function generateSitemap() {
 
   fs.writeFileSync(OUTPUT_PATH, sitemap.trim());
   console.log(`✅ Sitemap generated at ${OUTPUT_PATH}`);
+
+  await uploadViaFtp(OUTPUT_PATH, "/sitemap.xml");
 }
 
 generateSitemap();
