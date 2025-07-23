@@ -63,3 +63,12 @@ export const stringToLines = (str) => {
 
 // export const imageURL = (image) => `${apiURL}${image.upload_path_rel}${image.filename}`;
 export const imageURL = (image) => `${apiURL}${image.upload_path_rel}${image.filename}`;
+
+export const slugify = (str) => {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-") // Replace spaces with -
+    .replace(/[^a-z0-9\-]/g, "") // Remove all non-alphanumeric except -
+    .replace(/\-+/g, "-"); // Collapse multiple - into single -
+};

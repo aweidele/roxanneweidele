@@ -19,7 +19,7 @@ if (!$user) {
 }
 
 $inputs = json_decode(file_get_contents("php://input"), true);
-$allowed = ["title","width","height","price","sold","published","slug","media","medium"];
+$allowed = ["title","width","height","sold","published","slug","media","medium"];
 $data = getFieldsFromInput($allowed, $inputs);
 
 if (empty($data['fields'])) {
@@ -37,12 +37,10 @@ $sql = "
   WHERE id = :id
 ";
 $stmt = $pdo->prepare($sql);
+// echo json_encode(["sql" => $sql, "data" => $data]);
 
-$sql = "SELECT * FROM artwork WHERE id = :id";
+// $sql = "SELECT * FROM artwork WHERE id = :id";
 
-// $stmt = $pdo->prepare("SELECT * FROM artwork WHERE id = :id");
-// $stmt->execute([':id' => $id]);
-// $updatedRow = $stmt->fetch(PDO::FETCH_ASSOC);
 try {
   $stmt->execute($data['values']);
 
@@ -53,28 +51,5 @@ try {
   ]);
 } catch (PDOException $e) {
   http_response_code(500);
-  echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+  echo json_encode(['error' => 'Database error: ' . $e->getMessage(), 'stmt' => $stmt]);
 }
-// $stmt->execute([$title, $width, $height, $price, $sold, $published, $id]);
-
-/*
-$stmt = $pdo->prepare("UPDATE artworks SET title = ?, width = ?, height = ?, description = ?, price = ?, sold = ? WHERE id = ?");
-$stmt->execute([$title, $width, $height, $description, $price, $sold, $id]);
-
-[
-"description" => "dsf;lksdf;lks",
-"height" => "345",
-"price" => "324",
-"sold" => 0,
-"title" => "Title of Work",
-"width" => "123"
-]
-*/
-
-// echo json_encode([
-//   "endpoint" => $route, 
-//   "inputs" => $inputs,
-//   "data" => $data,
-//   "sql" => $sql
-//   // "values" => [$title, $width, $height, $description, $price, $sold, $id]
-// ]);

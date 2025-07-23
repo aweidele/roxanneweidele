@@ -39,6 +39,9 @@ const galleryReducer = (state, action) => {
     case "reorder": {
       return action.newOrder;
     }
+    case "toggle_publish": {
+      return state.map((item) => (item.id === action.id ? { ...item, published: !item.published } : item));
+    }
   }
 };
 
@@ -47,7 +50,8 @@ export const GalleryProvider = ({ children }) => {
   const [gallery, setGallery] = useReducer(galleryReducer, loadedGallery);
   const newArtwork = gallery.filter((item) => item.new);
   const reorderItems = (newOrder) => setGallery({ type: "reorder", newOrder });
-  return <GalleryContext.Provider value={{ gallery, setGallery, newArtwork, reorderItems }}>{children}</GalleryContext.Provider>;
+  const togglePublished = (id) => setGallery({ type: "toggle_publish", id });
+  return <GalleryContext.Provider value={{ gallery, setGallery, newArtwork, reorderItems, togglePublished }}>{children}</GalleryContext.Provider>;
 };
 
 export const useGalleryContext = () => useContext(GalleryContext);

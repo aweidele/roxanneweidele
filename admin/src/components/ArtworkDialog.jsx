@@ -36,6 +36,7 @@ export const ArtworkDialog = () => {
     const submitValues = { ...values, sold: values.sold && values.sold === "on" ? 1 : 0 };
 
     const result = await request(`artwork/${values.id}/edit`, "PUT", submitValues, token);
+
     if (result.success) {
       setIsClosing(true);
       setTimeout(() => {

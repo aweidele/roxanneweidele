@@ -7,7 +7,6 @@ export const useGallery = (gallery) => {
   const [filteredGallery, setFilteredGallery] = useState(gallery || []);
 
   useEffect(() => {
-    console.log(medium);
     if (medium) {
       setFilteredGallery(gallery.filter((item) => item.medium === medium));
     } else {

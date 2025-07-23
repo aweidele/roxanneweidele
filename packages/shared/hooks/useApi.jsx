@@ -16,16 +16,20 @@ export const apiRequest = async (url = "", method = "GET", payload = null, token
   };
 
   if (payload && method !== "GET") options.body = isFormData ? payload : JSON.stringify(payload);
-  console.log(options);
   const endpoint = apiURL + url;
-  console.log(endpoint);
 
   const response = await fetch(endpoint, options);
-  const responseData = await response.json();
 
   if (!response.ok) {
-    throw new Error(responseData.message || "Request failed");
+    const errorBody = await response.json().catch(() => ({}));
+    console.error(errorBody);
+    const error = new Error(errorBody.message || "API request failed");
+    error.status = response.status;
+    error.body = errorBody;
+    throw error;
   }
+
+  const responseData = await response.json();
   return responseData;
 };
 
@@ -43,6 +47,7 @@ export const useApi = () => {
       setData(result);
       return result;
     } catch (err) {
+      console.error(err);
       setError(err);
       return null;
     } finally {
