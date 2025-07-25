@@ -40,7 +40,6 @@ try {
 
   $mail->setFrom('noreply@roxanneweidele.com', "$name via roxanneweidele.com");
   $mail->addAddress('roxanneweidele@gmail.com');
-  $mail->addAddress('aaronweidele@gmail.com');
   
   $mail->addBCC('aweidele@gmail.com');  // Change this
   $mail->addReplyTo($email, $name);
