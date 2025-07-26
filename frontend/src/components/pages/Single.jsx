@@ -5,6 +5,7 @@ import { ThumbnailScroller } from "../gallery/ThumbnailScroller";
 import { Arrow } from "../layout/Icons";
 import { imageURL } from "@shared";
 import { useMetaTags } from "@functions";
+import { Share } from "../gallery/Share";
 
 const InfiniteThumbnailRow = ({ thumbnails }) => {
   const scrollRef = useRef(null);
@@ -98,7 +99,9 @@ export const Single = () => {
                     {width}in. x {height}in.
                   </div>
                 </div>
-                <div>Share</div>
+                {/* <div>
+                  <Share />
+                </div> */}
               </div>
             </Container>
           </div>

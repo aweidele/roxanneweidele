@@ -1,0 +1,107 @@
+name: Deploy Dev
+
+on:
+  push:
+    branches:
+      - feature/seo-and-share
+
+jobs:
+  build-and-deploy-frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Install Node.js and Dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.14.0 # Use your Node.js version
+      - run: npm install
+
+      - name: 🔨 Build React App
+        run: npm run build-staging # Change this if your build command is different
+
+      - name: 🚀 Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          # server: roxanneweidele.com
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./frontend/dist/ # Ensure this is correct
+          server-dir: /public_html/website_6568a1f7/sub/share/
+          protocol: ftps # Adjust your deployment path
+  build-and-deploy-admin:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: admin
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Install Node.js and Dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.14.0 # Use your Node.js version
+      - run: npm install
+
+      - name: 🔨 Build React App
+        run: npm run build-share # Change this if your build command is different
+
+      - name: 🚀 Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          # server: roxanneweidele.com
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./admin/dist/ # Ensure this is correct
+          server-dir: /public_html/website_6568a1f7/admin/
+          protocol: ftps # Adjust your deployment path
+
+      # - name: 📚 Build Storybook
+      #   run: npm run build-storybook # Change this if your build command is different
+
+      # - name: 📚🚀 Deploy Storybook via FTP
+      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      #   with:
+      # server: ${{ secrets.FTP_SERVER }}
+      # server: roxanneweidele.com
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     local-dir: ./storybook-static/ # Ensure this is correct
+      #     server-dir: /storybook.aaronweidele.com/ # Adjust your deployment path
+  deploy-api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🔧 Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1" # Adjust based on your PHP version
+          tools: composer:v2
+
+      - name: 📦 Install Composer Dependencies
+        run: |
+          cd backend
+          composer install --no-dev --optimize-autoloader
+
+      - name: 🚀 Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          # server: roxanneweidele.com
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./backend/ # Ensure this is correct
+          server-dir: /public_html/website_6568a1f7/api/
+          protocol: ftps # Adjust your deployment path
