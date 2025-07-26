@@ -4,6 +4,8 @@ import { Container } from "../layout";
 import { ThumbnailScroller } from "../gallery/ThumbnailScroller";
 import { Arrow } from "../layout/Icons";
 import { imageURL } from "@shared";
+import { useMetaTags } from "@functions";
+import { Share } from "../gallery/Share";
 
 const InfiniteThumbnailRow = ({ thumbnails }) => {
   const scrollRef = useRef(null);
@@ -71,35 +73,42 @@ export const Single = () => {
   const next = gallery[currentIndex < gallery.length - 1 ? currentIndex + 1 : 0];
   const previous = gallery[currentIndex > 0 ? currentIndex - 1 : gallery.length - 1];
 
-  return (
-    <div>
-      <div className="h-g mb-8 bg-uranian-blue-1000 relative">
-        <div className="flex items-center h-full relative overflow-hidden">
-          <img src={imageURL(files.original)} className="w-full h-full object-contain object-center relative z-0" />
-          <NextPrev dir="prev" to={`/artwork/${previous.slug}`}>
-            Previous
-          </NextPrev>
-          <NextPrev dir="next" to={`/artwork/${next.slug}`}>
-            Next
-          </NextPrev>
-        </div>
+  useMetaTags({ title: `${title}—Roxanne Weidele`, image: imageURL(files.original) });
 
-        <div className="bg-cordovan text-white py-1 absolute bottom-0 w-full translate-y-8">
-          <Container w="full">
-            <div className="flex gap-3.5">
-              <div className="grow-1 flex gap-3.5 justify-center">
-                <h1 className="uppercase tracking-wider">{title}</h1>
-                <div className="tracking-wider">
-                  {width}in. x {height}in.
+  return (
+    <>
+      <title>{`${title}—Roxanne Weidele`}</title>
+      <div>
+        <div className="h-g mb-8 bg-uranian-blue-1000 relative">
+          <div className="flex items-center h-full relative overflow-hidden">
+            <img src={imageURL(files.original)} className="w-full h-full object-contain object-center relative z-0" />
+            <NextPrev dir="prev" to={`/artwork/${previous.slug}`}>
+              Previous
+            </NextPrev>
+            <NextPrev dir="next" to={`/artwork/${next.slug}`}>
+              Next
+            </NextPrev>
+          </div>
+
+          <div className="bg-cordovan text-white py-1 absolute bottom-0 w-full translate-y-8">
+            <Container w="full">
+              <div className="flex gap-3.5">
+                <div className="grow-1 flex gap-3.5 justify-center">
+                  <h1 className="uppercase tracking-wider">{title}</h1>
+                  <div className="tracking-wider">
+                    {width}in. x {height}in.
+                  </div>
                 </div>
+                {/* <div>
+                  <Share />
+                </div> */}
               </div>
-              <div>Share</div>
-            </div>
-          </Container>
+            </Container>
+          </div>
         </div>
+        <ThumbnailScroller gallery={gallery} current={slug} />
+        {/* <InfiniteThumbnailRow thumbnails={gallery} /> */}
       </div>
-      <ThumbnailScroller gallery={gallery} current={slug} />
-      {/* <InfiniteThumbnailRow thumbnails={gallery} /> */}
-    </div>
+    </>
   );
 };
