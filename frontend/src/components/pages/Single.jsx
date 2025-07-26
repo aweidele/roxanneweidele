@@ -99,9 +99,9 @@ export const Single = () => {
                     {width}in. x {height}in.
                   </div>
                 </div>
-                <div>
+                {/* <div>
                   <Share />
-                </div>
+                </div> */}
               </div>
             </Container>
           </div>

@@ -52,7 +52,7 @@ jobs:
       - run: npm install
 
       - name: 🔨 Build React App
-        run: npm run build-staging # Change this if your build command is different
+        run: npm run build-share # Change this if your build command is different
 
       - name: 🚀 Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
