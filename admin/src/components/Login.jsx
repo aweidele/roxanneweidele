@@ -71,13 +71,12 @@ export const Login = () => {
 
   return (
     <Template>
-      {apiURL}
       <div className="p-32 min-h-page flex justify-center items-center">
         <div className="relative">
           {/* {token && <p>you are logged in</p>} */}
           <h2 className="text-center mb-6">Please enter your passcode</h2>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 justify-center">
             {pin.map((d, i) => (
               <input key={i} maxLength="1" type="password" className={`border-b-4 w-12 h-12 text-center text-lg ${border[i % 5]} ${d ? "opacity-50" : ""} focus:shadow-form outline-0 transition-all duration-500`} value={d} ref={(ref) => (inputRefs.current[i] = ref)} onChange={(e) => handleChange(i, e.target.value)} onKeyDown={(e) => handleKeyDown(i, e)} />
             ))}
