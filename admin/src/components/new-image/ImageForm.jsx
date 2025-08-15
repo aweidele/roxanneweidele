@@ -31,13 +31,10 @@ export const ImageForm = ({ artwork, submitAction }) => {
             </Select>
           </div>
         </div>
-        <div className="flex flex-col justify-between">
-          <Input type="number" name="price" label="Price" defaultValue={artwork.price} step="any" />
-          <div className="flex justify-between gap-2">
-            <Toggle label="Sold" name="sold" checked={artwork.sold} />
-            <input type="hidden" name="slug" value={slug} />
-            <Button>Publish</Button>
-          </div>
+        <div className="flex flex-col justify-between gap-2">
+          <Toggle label="Sold" name="sold" checked={artwork.sold} />
+          <input type="hidden" name="slug" value={slug} />
+          <Button>Publish</Button>
         </div>
       </div>
     </form>
